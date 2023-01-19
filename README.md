@@ -1,3 +1,13 @@
+
+Welcome to the Space Dock!
+
+The goal of this webpage is to provide a utility for managing Stars Without Number spaceships. It is not even remotely finished.
+It should have capabilities for managing a parties ship sheet, including a character sheet for the ship, as well as running cost calculators.
+
+It should also have a random ship generator, with filters for generating ships of specific hull weights or following a theme, like free traders, pirates, yachts, or governmental cutters.
+
+Maybe it will eventually have an ship map editor, even more ambitiously it will have a map generator for different kinds of ships.
+
 # Getting Started with Create React App and Redux
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
