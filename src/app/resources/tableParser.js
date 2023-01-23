@@ -5,7 +5,6 @@ function readTable (path) {
     //https://nodejs.org/api/fs.html#fsreadfilesyncpath-options
     strData = data.toString();
     return strData;
-  
 };
 
 const assignTTO = (imp, keys) => {
@@ -26,23 +25,18 @@ const assignTTO = (imp, keys) => {
       obj[entries[i][0]][titles[j]] = entries[i][j];
     }
   }
-  // for(let i = 0; i < titles.length; i++) {
-  //     newObj[titles[i]] = entry[i];
-  // }
   return obj;
 };
 
-const hullClasses = readTable('./HullClasses.txt');
-var hullClassKeys = readTable('./hullClassKeys.txt');
-const hulls = assignTTO(hullClasses, hullClassKeys);
-console.log(hulls.StrikeFighter);
-
 var json = JSON.stringify(hulls);
-fs.writeFile('hull.json', json, (err) => {
-  if (err) throw err;
-  console.log('File has been saved!');
-});
 
+//Writes a JSON file with the name of your choice. Defaults to current date.
+function JSONWrite (filename = Date().toLocalDateString()) {
+  fs.writeFile(filename, json, (err) => {
+    if (err) throw err;
+    console.log(filename, ' has been saved!');
+  });
+}
 
 
 
