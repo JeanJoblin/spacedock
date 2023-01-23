@@ -12,6 +12,7 @@ const assignTTO = (imp, keys) => {
   const titles = keys.split(' ');
   const lineEntries = imp.split(/\r/);
   //Map table entries (obj values) to new array split by newlines
+  //TODO!!! Remove newlines from string before writing to array                     TODO!!!!
   const entries = lineEntries.map( (entry) => {
     //splitting table entries by spaces
     const newEntry = entry.split(' ');
