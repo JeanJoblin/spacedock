@@ -1,0 +1,324 @@
+{
+  "AdvancedLab": {
+    "Cost": "10k*",
+    "Power": "1#",
+    "Mass": "2",
+    "Class": "Frigate",
+    "Effect": "Skill bonus for analysis and research"
+  },
+  "AdvancedNavComputer": {
+    "Cost": "10k*",
+    "Power": "1#",
+    "Mass": "0",
+    "Class": "Frigate",
+    "Effect": "Adds +2 for traveling familiar spike courses"
+  },
+  "AmphibiousOperation": {
+    "Cost": "25k*",
+    "Power": "1",
+    "Mass": "1#",
+    "Class": "Fighter",
+    "Effect": "Can land and can operate under water"
+  },
+  "Armory": {
+    "Cost": "10k*",
+    "Power": "0",
+    "Mass": "0",
+    "Class": "Frigate",
+    "Effect": "Weapons and armor for the crew"
+  },
+  "AtmosphericConfiguration": {
+    "Cost": "5k*",
+    "Power": "0",
+    "Mass": "1#",
+    "Class": "Fighter",
+    "Effect": "Can land: frigates and fighters only."
+  },
+  "Auto-targetingSystem": {
+    "Cost": "50k",
+    "Power": "1",
+    "Mass": "0",
+    "Class": "Fighter",
+    "Effect": "Fires one weapon system without a gunner"
+  },
+  "AutomationSupport": {
+    "Cost": "10k*",
+    "Power": "2",
+    "Mass": "1",
+    "Class": "Fighter",
+    "Effect": "Ship can use simple robots as crew"
+  },
+  "BoardingTubes": {
+    "Cost": "5k*",
+    "Power": "0",
+    "Mass": "1",
+    "Class": "Frigate",
+    "Effect": "Allows boarding of a hostile disabled ship"
+  },
+  "CargoLighter": {
+    "Cost": "25k",
+    "Power": "0",
+    "Mass": "2",
+    "Class": "Frigate",
+    "Effect": "Orbit-to-surface cargo shuttle"
+  },
+  "CargoSpace": {
+    "Cost": "0",
+    "Power": "0",
+    "Mass": "1",
+    "Class": "Fighter",
+    "Effect": "Pressurized cargo space"
+  },
+  "ColdSleepPods": {
+    "Cost": "5k*",
+    "Power": "1",
+    "Mass": "1",
+    "Class": "Frigate",
+    "Effect": "Keeps occupants in stasis"
+  },
+  "ColonyCore": {
+    "Cost": "100k*",
+    "Power": "4",
+    "Mass": "2#",
+    "Class": "Frigate",
+    "Effect": "Ship can be deconstructed into a colony base"
+  },
+  "DrillCourseRegulator": {
+    "Cost": "25k*",
+    "Power": "1#",
+    "Mass": "1",
+    "Class": "Frigate",
+    "Effect": "Common drill routes become auto-successes"
+  },
+  "SpikeDrive-1": {
+    "Cost": "0",
+    "Power": "0",
+    "Mass": "0",
+    "Class": "Fighter",
+    "Effect": "All hulls come with this by default"
+  },
+  "SpikeDrive-2": {
+    "Cost": "10k*",
+    "Power": "1#",
+    "Mass": "1#",
+    "Class": "Fighter",
+    "Effect": "Upgrade a spike drive to drive-2 rating"
+  },
+  "SpikeDrive-3": {
+    "Cost": "20k*",
+    "Power": "2#",
+    "Mass": "2#",
+    "Class": "Fighter",
+    "Effect": "Upgrade a spike drive to drive-3 rating"
+  },
+  "SpikeDrive-4": {
+    "Cost": "40k*",
+    "Power": "2#",
+    "Mass": "3#",
+    "Class": "Frigate",
+    "Effect": "Upgrade a spike drive to drive-4 rating"
+  },
+  "SpikeDrive-5": {
+    "Cost": "100k*",
+    "Power": "3#",
+    "Mass": "3#",
+    "Class": "Frigate",
+    "Effect": "Upgrade a spike drive to drive-5 rating"
+  },
+  "SpikeDrive-6": {
+    "Cost": "500k*",
+    "Power": "3#",
+    "Mass": "4#",
+    "Class": "Cruiser",
+    "Effect": "Upgrade a spike drive to drive-6 rating"
+  },
+  "DropPod": {
+    "Cost": "300k",
+    "Power": "0",
+    "Mass": "2",
+    "Class": "Frigate",
+    "Effect": "Stealthed landing pod for troops"
+  },
+  "EmissionsDampers": {
+    "Cost": "25k*",
+    "Power": "1#",
+    "Mass": "1#",
+    "Class": "Fighter",
+    "Effect": "Adds +2 to skill checks to avoid detection"
+  },
+  "ExodusBay": {
+    "Cost": "50k*",
+    "Power": "1#",
+    "Mass": "2#",
+    "Class": "Cruiser",
+    "Effect": "House vast numbers of cold sleep passengers"
+  },
+  "ExtendedLifeSupport": {
+    "Cost": "5k*",
+    "Power": "1#",
+    "Mass": "1#",
+    "Class": "Fighter",
+    "Effect": "Doubles maximum crew size"
+  },
+  "ExtendedMedbay": {
+    "Cost": "5k*",
+    "Power": "1",
+    "Mass": "1",
+    "Class": "Frigate",
+    "Effect": "Can provide medical care to more patients"
+  },
+  "ExtendedStores": {
+    "Cost": "2.5k*",
+    "Power": "0",
+    "Mass": "1#",
+    "Class": "Fighter",
+    "Effect": "Maximum life support duration is doubled"
+  },
+  "FuelBunkers": {
+    "Cost": "2.5k*",
+    "Power": "0",
+    "Mass": "1",
+    "Class": "Fighter",
+    "Effect": "Adds fuel for one more drill between fuelings"
+  },
+  "FuelScoops": {
+    "Cost": "5k*",
+    "Power": "2",
+    "Mass": "1#",
+    "Class": "Frigate",
+    "Effect": "Ship can scoop fuel from a gas giant or star"
+  },
+  "HydroponicProduction": {
+    "Cost": "10k*",
+    "Power": "1#",
+    "Mass": "2#",
+    "Class": "Cruiser",
+    "Effect": "Ship produces life support resources"
+  },
+  "Lifeboats": {
+    "Cost": "2.5k*",
+    "Power": "0",
+    "Mass": "1",
+    "Class": "Frigate",
+    "Effect": "Emergency escape craft for a ship's crew"
+  },
+  "LuxuryCabins": {
+    "Cost": "10k*",
+    "Power": "1",
+    "Mass": "1#",
+    "Class": "Frigate",
+    "Effect": "10% of the max crew get luxurious quarters"
+  },
+  "MobileExtractor": {
+    "Cost": "50k",
+    "Power": "2",
+    "Mass": "1",
+    "Class": "Frigate",
+    "Effect": "Space mining and refinery fittings"
+  },
+  "MobileFactory": {
+    "Cost": "50k*",
+    "Power": "3",
+    "Mass": "2#",
+    "Class": "Cruiser",
+    "Effect": "Self-sustaining factory and repair facilities"
+  },
+  "PrecognitiveNavChamber": {
+    "Cost": "100k*",
+    "Power": "1",
+    "Mass": "0",
+    "Class": "Frigate",
+    "Effect": "Allows a precog to assist in navigation"
+  },
+  "PsionicAnchorpoint": {
+    "Cost": "!Special",
+    "Power": "3",
+    "Mass": "0",
+    "Class": "Frigate",
+    "Effect": "Focal point for allied psychics' powers"
+  },
+  "SensorMask": {
+    "Cost": "10k*",
+    "Power": "1#",
+    "Mass": "0",
+    "Class": "Frigate",
+    "Effect": "At long distances, disguise ship as another"
+  },
+  "ShipBay/fighter": {
+    "Cost": "200k",
+    "Power": "0",
+    "Mass": "2",
+    "Class": "Cruiser",
+    "Effect": "Carrier housing for a fighter"
+  },
+  "ShipBay/frigate": {
+    "Cost": "1m",
+    "Power": "1",
+    "Mass": "4",
+    "Class": "Capital",
+    "Effect": "Carrier housing for a frigate"
+  },
+  "ShipssLocker": {
+    "Cost": "2k*",
+    "Power": "0",
+    "Mass": "0",
+    "Class": "Frigate",
+    "Effect": "General equipment for the crew"
+  },
+  "ShiptenderMount": {
+    "Cost": "25k*",
+    "Power": "1",
+    "Mass": "1",
+    "Class": "Frigate",
+    "Effect": "Allow another ship to hitch on a spike drive"
+  },
+  "Smuggler'sHold": {
+    "Cost": "2.5k*",
+    "Power": "0",
+    "Mass": "1",
+    "Class": "Fighter",
+    "Effect": "Small amount of well-hidden cargo space"
+  },
+  "SurveySensorArray": {
+    "Cost": "5k*",
+    "Power": "2",
+    "Mass": "1",
+    "Class": "Frigate",
+    "Effect": "Improved planetary sensory array"
+  },
+  "SystemDrive": {
+    "Cost": "!Special",
+    "Power": "+1#",
+    "Mass": "+2#",
+    "Class": "Fighter",
+    "Effect": "Replace spike drive with small system drive"
+  },
+  "TeleportationPads": {
+    "Cost": "!Special",
+    "Power": "1",
+    "Mass": "1",
+    "Class": "Frigate",
+    "Effect": "Pretech teleportation to and from ship"
+  },
+  "TractorBeams": {
+    "Cost": "10k*",
+    "Power": "2",
+    "Mass": "1",
+    "Class": "Frigate",
+    "Effect": "Manipulate objects in space at a distance"
+  },
+  "VehicleTransportFittings": {
+    "Cost": "2.5k*",
+    "Power": "0",
+    "Mass": "1#",
+    "Class": "Frigate",
+    "Effect": "Halve tonnage space of carried vehicles"
+  },
+  "Workshop": {
+    "Cost": "500*",
+    "Power": "1",
+    "Mass": "0.5#",
+    "Class": "Frigate",
+    "Effect": "Automated tech workshops for maintenance"
+  }
+}
