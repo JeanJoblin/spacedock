@@ -1,0 +1,65 @@
+{
+  "AblativeHullCompartments": {
+    "Cost": "100k*",
+    "Power": "5",
+    "Mass": "2#",
+    "Class": "Capital",
+    "Effect": "+1 AC, +20 maximum hit points"
+  },
+  "AugmentedPlating": {
+    "Cost": "25k*",
+    "Power": "0",
+    "Mass": "1#",
+    "Class": "Fighter",
+    "Effect": "+2 AC, -1 Speed"
+  },
+  "BoardingCountermeasures": {
+    "Cost": "25k*",
+    "Power": "2",
+    "Mass": "1#",
+    "Class": "Frigate",
+    "Effect": "Makes enemy boarding more difficult"
+  },
+  "BurstECMGenerator": {
+    "Cost": "25k*",
+    "Power": "2",
+    "Mass": "1#",
+    "Class": "Frigate",
+    "Effect": "Negate one successful hit"
+  },
+  "FoxerDrones": {
+    "Cost": "10k*",
+    "Power": "2",
+    "Mass": "1#",
+    "Class": "Cruiser",
+    "Effect": "+2 AC for one round when fired, Ammo 5"
+  },
+  "GravEddyDisplacer": {
+    "Cost": "50k*",
+    "Power": "5",
+    "Mass": "2#",
+    "Class": "Frigate",
+    "Effect": "1/6 chance of any given attack missing."
+  },
+  "HardenedPolyceramicOverlay": {
+    "Cost": "25k*",
+    "Power": "0",
+    "Mass": "1#",
+    "Class": "Fighter",
+    "Effect": "AP quality of attacking weapons reduced by 5"
+  },
+  "PlanetaryDefenseArray": {
+    "Cost": "50k*",
+    "Power": "4",
+    "Mass": "2#",
+    "Class": "Frigate",
+    "Effect": "Anti-impact and anti-nuke surface defenses"
+  },
+  "PointDefenseLasers": {
+    "Cost": "10k*",
+    "Power": "3",
+    "Mass": "2#",
+    "Class": "Frigate",
+    "Effect": "+2 AC versus weapons that use ammo"
+  }
+}

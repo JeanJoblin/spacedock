@@ -1,0 +1,63 @@
+.Ship {
+  max-width: 44%;
+  padding: 3%;
+  border: 1px solid black;
+}
+.ShipTitle {
+  width: 100%;
+  display: inline-flex;
+}
+
+.Name {
+  text-align: left;
+  flex: 3 1 0;
+  background-color: lightgray;
+  padding-left: .5rem;
+}
+
+.Hull {
+  flex: 1 1 0;
+  text-align: right;
+  padding-right: .5rem;
+}
+
+.ShipStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content;
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+
+.Stat {
+  grid-column: 1;
+  display: flex;
+  height: 1.5rem;
+}
+
+.StatRight {
+  grid-column: 2;
+  display: flex;
+}
+
+.StatKey {
+  flex: 1 1 0;
+  text-align: right;
+}
+
+.StatValue {
+  flex: 1 1 0;
+}
+
+.ShipWeapons, .ShipDefenses, .ShipFittings{
+  display: flex;
+}
+
+.Fitting {
+  flex: 1 1 0;
+  text-align: right;
+}
+
+.FittingValWrapper {
+  flex: 3 1 0;
+}
