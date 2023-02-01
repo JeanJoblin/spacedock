@@ -1,34 +1,32 @@
 import React, { useState } from 'react';
 import './ship.css';
+import { getFittingType } from '../ShipBuilder/shipBuilderSlice';
 
 const hulls = require('../../app/resources/hulls.json');
-const stats = ['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'CP', 'Skill',];
-
 const fittings = require('../../app/resources/fittings.json');
 const weapons = require('../../app/resources/weapons.json')
 const defenses = require('../../app/resources/defenses.json');
-const currentHull = hulls.FreeMerchant;
-let freeMass = currentHull.Mass;
+const stats = ['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'CP', 'Skill',];
 
-const currentWeapons = ['MultifocalLaser', 'ReaperBattery'];
-const currentDefenses = null;
-let currentFittings = ['FuelScoops'];
-// currentFittings.forEach((fitting) => {
-//   if(fittings[fitting].Mass.includes('#')) {
-//     switch (currentHull.Class) {
-//       case 'Frigate': freeMass -= 2*fittings[fitting].Mass;
-//         break;
-//       case 'Cruiser': freeMass -= 3*fittings[fitting].Mass;
-//         break;
-//       case 'Capital': freeMass -= 4*fittings[fitting].Mass;
-//         break;
-//     }
-//     return;
-//   }
-// freeMass -= fittings[fitting].Mass
-// });
+export function Ship(props) {
 
-export function Ship() {
+  const currentHull = hulls.FreeMerchant;
+  const { curFittings } = props;
+  console.log(curFittings);
+  let currentDefenses = [];
+  let currentWeapons = [];
+  let currentFittings = [];
+  curFittings.forEach((fitting) => {
+    const type = getFittingType(fitting);
+    if(type == defenses) {
+      currentDefenses.push(fitting);
+    } else if( type == weapons) {
+      currentWeapons.push(fitting);
+    } else if( type == fittings) {
+      currentFittings.push(fitting);
+    }
+  });
+
   return (
     <div className='Ship'>
       <div className='ShipTitle'>
@@ -51,20 +49,20 @@ export function Ship() {
         </div>
         <div className='ShipParts'>
           <div className='ShipWeapons'>
-            <span className='Fitting'>Weapons:</span>
+            <span className='Fitting'>Weapons: </span>
             <div className='FittingValWrapper'>
-              {currentWeapons ? currentWeapons.map((weapon) => {
+              {currentWeapons.length > 0 ? currentWeapons.map((weapon) => {
                 return (
-                  <span> {weapon}({weapons[weapon].Dmg}, {weapons[weapon].Qualities})</span>
+                  <span>{weapon}({weapons[weapon].Dmg}, {weapons[weapon].Qualities})</span>
                 )
               }) : <span>None</span>
             }
             </div>  
           </div>
           <div className='ShipDefenses'>
-            <span className='Fitting'>Defenses:</span>
+            <span className='Fitting'>Defenses: </span>
             <div className='FittingValWrapper'>
-              {currentDefenses ? currentDefenses.map((defense) => {
+              {currentDefenses.length > 0 ? currentDefenses.map((defense) => {
                 return (
                   <span>{defense}</span>
                 )
@@ -74,9 +72,9 @@ export function Ship() {
             </div>
           </div>
           <div className='ShipFittings'>
-            <span className='Fitting'>Fittings:</span>
+            <span className='Fitting'>Fittings: </span>
             <div className='FittingValWrapper'>
-              {currentFittings ? currentFittings.map((fitting) => {
+              {currentFittings.length > 0 ? currentFittings.map((fitting) => {
                 return (
                   <span>{fitting}</span>
                 )

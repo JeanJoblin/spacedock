@@ -2,6 +2,7 @@
   max-width: 44%;
   padding: 3%;
   border: 1px solid black;
+  min-width: min-content;
 }
 .ShipTitle {
   width: 100%;
@@ -51,6 +52,10 @@
 
 .ShipWeapons, .ShipDefenses, .ShipFittings{
   display: flex;
+}
+
+.ShipDefenses {
+  background-color: lightgray;
 }
 
 .Fitting {

@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import './App.css';
-import { Ship } from './features/Ships/Ship';
+import { Ship } from './features/Ships/Ship.js';
+import { ShipBuilder } from './features/ShipBuilder/ShipBuilder';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <header>
       </header>
       <body>
-        <Ship />
+        <ShipBuilder />
       </body>
     </div>
   );
