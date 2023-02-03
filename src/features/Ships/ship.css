@@ -17,9 +17,10 @@
 }
 
 .Hull {
-  flex: 1 1 0;
+  flex: 1 1 min-content;
   text-align: right;
   padding-right: .5rem;
+  flex-wrap: nowrap;
 }
 
 .ShipStats {

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const hulls = require('../../app/resources/hulls.json');
 const fittings = require('../../app/resources/fittings.json');
@@ -8,7 +8,7 @@ const weapons = require('../../app/resources/weapons.json');
 const costMulitpliers = [1, 10, 25, 100];
 const massMulitpliers = [1, 2, 3, 4];
 
-export const getFittingType = (fitting) => {
+export const getFittingList = (fitting) => {
   if(Object.keys(defenses).includes(fitting)) {
     return defenses;
   };
@@ -21,43 +21,30 @@ export const getFittingType = (fitting) => {
 };
 
 const initialState = {
-  Class: 'Frigate',
-  HP: 20,
-  Power: 10,
-  freePower: 10,
-  AC: 14,  
-  curAc: 14,
-  Mass: 15,
-  freeMass: 15,
-  Armor: 2,
-  curArmor: 2,
-  Crew: '1/6',
-  curCrew: 1,
-  Speed: 3,
-  curSpeed: 3,
-  CP: 4,
-  curCP: 4,
-  Skill: 1,
-  Weapons: null,
-  Defenses: null,
-  Fittings: ['SpikeDrive-1'],
+  hulls: require('../../app/resources/hulls.json'),
+  weapons: require('../../app/resources/weapons.json'),
+  defenses: require('../../app/resources/defenses.json'),
+  fittings: require('../../app/resources/fittings.json'),
+  equippedFittings: ['SpikeDrive1'],
   isInvalid: false,
-  Cost: 500000,
+  cost: 500000,
 };
 
-const correctCostForClass = (fitting) => {
-  const type = getFittingType(fitting);
+const correctCostsForClass = (fitting) => {
+  console.log(fitting)
+  const type = getFittingList(fitting);
+  console.log(type);
   const curFitting = type[fitting];
-  let mass = curFitting.Mass;
-  let power = curFitting.Power;
-  let cost = curFitting.Cost;
-  if(cost != 'Special') {
-    cost = curFitting.Cost.match(/^\d*/);
+  let mass = curFitting.mass;
+  let power = curFitting.power;
+  let cost = curFitting.cost;
+  if(cost !== 'Special') {
+    cost = curFitting.cost.match(/^\d*/)[0];
     console.log(cost);
   }
-  let massMult = curFitting.Mass.includes('#');
-  let powMult = curFitting.Power.includes('#');
-  let costMult = curFitting.Cost.includes('*');
+  let massMult = curFitting.mass.includes('#');
+  let powMult = curFitting.power.includes('#');
+  let costMult = curFitting.cost.includes('*');
   let multSel;
   switch(initialState.Class) {
     case 'Fighter':
@@ -72,16 +59,19 @@ const correctCostForClass = (fitting) => {
     case 'Capital':
       multSel = 3;
       break;
+    default:
+      multSel = 0;
+      break;
   }
   if(massMult) {
-    mass = curFitting.Mass.replace('#', '') * massMulitpliers[multSel];
+    mass = curFitting.mass.replace('#', '') * massMulitpliers[multSel];
   };
   if(powMult) {
-    power = curFitting.Power.replace('#', '') * massMulitpliers[multSel];
+    power = curFitting.power.replace('#', '') * massMulitpliers[multSel];
   };
   if(costMult) {
-    let flag = curFitting.Cost.replace('*', '');
-    flag = flag.replaceAll(/\d/, '');
+    let flag = curFitting.cost.replace('*', '');
+    flag = flag.replaceAll(/\d/g, '');
     if(flag === 'k') {
       cost = cost * 1000;
     }
@@ -100,20 +90,26 @@ export const shipBuilderSlice = createSlice({
   name: 'shipBuilder',
   initialState,
   reducers: {
-    addFitting: (state, fitting) => {
-      const {fittingMass, fittingPower, fittingCost} = correctCostForClass(fitting);
-      state.freeMass -= fittingMass;
-      state.freePower -= fittingPower;
-      state.Cost += fittingCost;
-      if(state.freeMass > state.Mass || state.freePower > state.Power) {
-        state.isInvalid = true;
+    addFitting: (state, action) => {
+      const fitting = action.payload;
+      let fittingObj;
+      if(typeof fitting === 'string') {
+        fittingObj = getFittingList(fitting)[fitting];
+      } else {
+        fittingObj = fitting;
       }
+      const type = 'equipped' + fittingObj.type + 's';
+      state.equippedFittings = [...state.equippedFittings, fitting];
     },
   } 
 });
 
-export const {addFitting} = shipBuilderSlice.actions;
-export const selectFittings = (state) => state.shipBuilder.Fittings;
+export const {addFitting, addFittingArr} = shipBuilderSlice.actions;
+export const selectFittings = (state) => state.shipBuilder.fittings;
+export const selectWeapons = (state) => state.shipBuilder.weapons;
+export const selectDefenses = (state) => state.shipBuilder.defenses;
+export const selectHulls = (state) => state.shipBuilder.hulls;
+export const selectEquippedFittings = (state) => state.shipBuilder.equippedFittings;
 export default shipBuilderSlice.reducer;
 
 

@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
 import './ship.css';
-import { getFittingType } from '../ShipBuilder/shipBuilderSlice';
+import { getFittingList } from '../ShipBuilder/shipBuilderSlice';
+import { useSelector } from 'react-redux';
+import { selectDefenses, selectWeapons, selectFittings, selectHulls, selectEquippedFittings } from '../ShipBuilder/shipBuilderSlice';
 
-const hulls = require('../../app/resources/hulls.json');
-const fittings = require('../../app/resources/fittings.json');
-const weapons = require('../../app/resources/weapons.json')
-const defenses = require('../../app/resources/defenses.json');
-const stats = ['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'CP', 'Skill',];
+const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'CP', 'Class', 'Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
 
 export function Ship(props) {
-
+  const hulls = useSelector(selectHulls);
+  const fittings = useSelector(selectFittings);
+  const weapons = useSelector(selectWeapons)
+  const defenses = useSelector(selectDefenses);
   const currentHull = hulls.FreeMerchant;
-  const { curFittings } = props;
-  console.log(curFittings);
+  const { allFittings } = props;
   let currentDefenses = [];
   let currentWeapons = [];
   let currentFittings = [];
-  curFittings.forEach((fitting) => {
-    const type = getFittingType(fitting);
-    if(type == defenses) {
+  allFittings.forEach((input) => {
+    const fitting = getFittingList(input)[input];
+    const type = fitting.type + 's';
+    if(type === 'defenses') {
       currentDefenses.push(fitting);
-    } else if( type == weapons) {
+    } else if( type === 'weapons') {
       currentWeapons.push(fitting);
-    } else if( type == fittings) {
+    } else if( type === 'fittings') {
       currentFittings.push(fitting);
+    } else {
+      throw(Error)
     }
   });
 
@@ -31,29 +34,29 @@ export function Ship(props) {
     <div className='Ship'>
       <div className='ShipTitle'>
         <span className='Name'>SHIPNAME</span>
-        <span className='Hull'>HULLTYPE</span>
+        <span className='Hull'>{currentHull.name}</span>
       </div>
       <hr/>
       <div className='ShipBody'>
         <div className='ShipStats'>
-          {stats.map((key, ind) => {
+          {stats[0].map((key, ind) => {
             return (
               <div 
               key={key} 
               className={ind %2 === 0 ? 'Stat' : 'StatRight'}
               >
                   <span key={key + 'Key'} className='StatKey'>{key}:</span>
-                  <span key={key + 'Value'} className='StatValue'>{currentHull[key]}</span>
+                  <span key={key + 'Value'} className='StatValue'>{currentHull[stats[1][ind]]}</span>
               </div>
           )})}
         </div>
         <div className='ShipParts'>
           <div className='ShipWeapons'>
-            <span className='Fitting'>Weapons: </span>
+            <span className='Fitting'>Weapons:</span>
             <div className='FittingValWrapper'>
-              {currentWeapons.length > 0 ? currentWeapons.map((weapon) => {
+              {currentWeapons.length > 0 ? currentWeapons.map((weapon, ind) => {
                 return (
-                  <span>{weapon}({weapons[weapon].Dmg}, {weapons[weapon].Qualities})</span>
+                  <span key={weapon.name}> {weapon.name}({weapon.dmg}, {weapon.qualities}){ind + 1  !== currentWeapons.length ? ', ' : null }</span>
                 )
               }) : <span>None</span>
             }
@@ -62,9 +65,9 @@ export function Ship(props) {
           <div className='ShipDefenses'>
             <span className='Fitting'>Defenses: </span>
             <div className='FittingValWrapper'>
-              {currentDefenses.length > 0 ? currentDefenses.map((defense) => {
+              {currentDefenses.length > 0 ? currentDefenses.map((defense, ind) => {
                 return (
-                  <span>{defense}</span>
+                  <span key={defense.name}>{defense.name}{ind + 1  !== currentDefenses.length ? ', ' : null }</span>
                 )
               }) 
               : <span>None</span>
@@ -74,9 +77,9 @@ export function Ship(props) {
           <div className='ShipFittings'>
             <span className='Fitting'>Fittings: </span>
             <div className='FittingValWrapper'>
-              {currentFittings.length > 0 ? currentFittings.map((fitting) => {
+              {currentFittings.length > 0 ? currentFittings.map((fitting, ind) => {
                 return (
-                  <span>{fitting}</span>
+                  <span key={fitting.name}>{fitting.name}{ind + 1  !== currentFittings.length ? ', ' : null }</span>
                 )
               })
             : <span>None</span>
