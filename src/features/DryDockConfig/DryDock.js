@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import './dryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
-import { changeHull, changeSelectedItem } from './dryDockSlice';
+import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList } from './dryDockSlice';
 
 export function DryDock() {
 
@@ -10,13 +10,21 @@ export function DryDock() {
   const handleHullChange = (e) => {
     dispatch(changeHull(e.target.value));
   };
+  const shoppingList = useSelector(selectShoppingList);
+
   const addAnyFitting = (e) => {
     dispatch(changeSelectedItem(e.target.value));
   };
   const addWeapon = (e) => {
+    console.log(e);
     e.preventDefault();
     alert('this is not finished yet');
-  }
+  };
+  const handleAddShopping = (e) => {
+    e.preventDefault();
+    dispatch(addSelectedToShoppingList(e.target.value));
+  };
+
 
   return (
     <div>
@@ -47,7 +55,7 @@ export function DryDock() {
               )
             })}
           </select>
-          <button onClick={addWeapon}>
+          <button onClick={handleAddShopping} value='weapon'>
             Add Weapon
           </button>
         </label>
@@ -64,7 +72,7 @@ export function DryDock() {
               )
             })}
           </select>
-          <button onClick={addWeapon}>
+          <button onClick={handleAddShopping} value='defense'>
             Add Defense
           </button>
         </label>
@@ -81,11 +89,20 @@ export function DryDock() {
               )
             })}
           </select>
-          <button onClick={addWeapon}>
+          <button onClick={handleAddShopping} value='fitting'>
             Add Fitting
           </button>
         </label>
       </form>
+      {shoppingList.length > 0 ? 
+        <div className='Shopping'>
+          {shoppingList.map((item) => {
+            return (
+              <p>{item.name}</p>
+            )
+          })}
+        </div>
+      : null}
     </div>
 
 

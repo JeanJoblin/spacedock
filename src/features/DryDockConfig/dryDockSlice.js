@@ -10,6 +10,7 @@ const initialState = {
     fitting: fittings[Object.keys(fittings)[0]],
     defense: defenses[Object.keys(defenses)[0]],
   },
+  shoppingList: [],
 };
 
 export const dryDockSlice = createSlice({
@@ -23,8 +24,13 @@ export const dryDockSlice = createSlice({
       const item = getFittingObj(action.payload);
       state.selected[item.type] = item;
     },
+    addSelectedToShoppingList: (state, action) => {
+      console.log(action.payload)
+      state.shoppingList = [...state.shoppingList, state.selected[action.payload]];
+    }
   }
 });
 
-export const { changeHull, changeSelectedItem, } = dryDockSlice.actions;
+export const { changeHull, changeSelectedItem, addSelectedToShoppingList} = dryDockSlice.actions;
+export const selectShoppingList = (state) => state.dryDock.shoppingList;
 export default dryDockSlice.reducer
