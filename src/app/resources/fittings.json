@@ -1,324 +1,416 @@
 {
   "AdvancedLab": {
-    "Cost": "10k*",
-    "Power": "1#",
-    "Mass": "2",
-    "Class": "Frigate",
-    "Effect": "Skill bonus for analysis and research"
+    "name": "Advanced Lab",
+    "type": "fitting",
+    "cost": "10k*",
+    "power": "1#",
+    "mass": "2",
+    "class": "Frigate",
+    "effect": "Skill bonus for analysis and research"
   },
   "AdvancedNavComputer": {
-    "Cost": "10k*",
-    "Power": "1#",
-    "Mass": "0",
-    "Class": "Frigate",
-    "Effect": "Adds +2 for traveling familiar spike courses"
+    "name": "Advanced Nav Computer",
+    "type": "fitting",
+    "cost": "10k*",
+    "power": "1#",
+    "mass": "0",
+    "class": "Frigate",
+    "effect": "Adds +2 for traveling familiar spike courses"
   },
   "AmphibiousOperation": {
-    "Cost": "25k*",
-    "Power": "1",
-    "Mass": "1#",
-    "Class": "Fighter",
-    "Effect": "Can land and can operate under water"
+    "name": "Amphibious Operation",
+    "type": "fitting",
+    "cost": "25k*",
+    "power": "1",
+    "mass": "1#",
+    "class": "Fighter",
+    "effect": "Can land and can operate under water"
   },
   "Armory": {
-    "Cost": "10k*",
-    "Power": "0",
-    "Mass": "0",
-    "Class": "Frigate",
-    "Effect": "Weapons and armor for the crew"
+    "name": "Armory",
+    "type": "fitting",
+    "cost": "10k*",
+    "power": "0",
+    "mass": "0",
+    "class": "Frigate",
+    "effect": "Weapons and armor for the crew"
   },
   "AtmosphericConfiguration": {
-    "Cost": "5k*",
-    "Power": "0",
-    "Mass": "1#",
-    "Class": "Fighter",
-    "Effect": "Can land: frigates and fighters only."
+    "name": "Atmospheric Configuration",
+    "type": "fitting",
+    "cost": "5k*",
+    "power": "0",
+    "mass": "1#",
+    "class": "Fighter",
+    "effect": "Can land: frigates and fighters only."
   },
-  "Auto-targetingSystem": {
-    "Cost": "50k",
-    "Power": "1",
-    "Mass": "0",
-    "Class": "Fighter",
-    "Effect": "Fires one weapon system without a gunner"
+  "AutotargetingSystem": {
+    "name": "Auto-targeting System",
+    "type": "fitting",
+    "cost": "50k",
+    "power": "1",
+    "mass": "0",
+    "class": "Fighter",
+    "effect": "Fires one weapon system without a gunner"
   },
   "AutomationSupport": {
-    "Cost": "10k*",
-    "Power": "2",
-    "Mass": "1",
-    "Class": "Fighter",
-    "Effect": "Ship can use simple robots as crew"
+    "name": "Automation Support",
+    "type": "fitting",
+    "cost": "10k*",
+    "power": "2",
+    "mass": "1",
+    "class": "Fighter",
+    "effect": "Ship can use simple robots as crew"
   },
   "BoardingTubes": {
-    "Cost": "5k*",
-    "Power": "0",
-    "Mass": "1",
-    "Class": "Frigate",
-    "Effect": "Allows boarding of a hostile disabled ship"
+    "name": "Boarding Tubes",
+    "type": "fitting",
+    "cost": "5k*",
+    "power": "0",
+    "mass": "1",
+    "class": "Frigate",
+    "effect": "Allows boarding of a hostile disabled ship"
   },
   "CargoLighter": {
-    "Cost": "25k",
-    "Power": "0",
-    "Mass": "2",
-    "Class": "Frigate",
-    "Effect": "Orbit-to-surface cargo shuttle"
+    "name": "Cargo Lighter",
+    "type": "fitting",
+    "cost": "25k",
+    "power": "0",
+    "mass": "2",
+    "class": "Frigate",
+    "effect": "Orbit-to-surface cargo shuttle"
   },
   "CargoSpace": {
-    "Cost": "0",
-    "Power": "0",
-    "Mass": "1",
-    "Class": "Fighter",
-    "Effect": "Pressurized cargo space"
+    "name": "Cargo Space",
+    "type": "fitting",
+    "cost": "0",
+    "power": "0",
+    "mass": "1",
+    "class": "Fighter",
+    "effect": "Pressurized cargo space"
   },
   "ColdSleepPods": {
-    "Cost": "5k*",
-    "Power": "1",
-    "Mass": "1",
-    "Class": "Frigate",
-    "Effect": "Keeps occupants in stasis"
+    "name": "Cold Sleep Pods",
+    "type": "fitting",
+    "cost": "5k*",
+    "power": "1",
+    "mass": "1",
+    "class": "Frigate",
+    "effect": "Keeps occupants in stasis"
   },
   "ColonyCore": {
-    "Cost": "100k*",
-    "Power": "4",
-    "Mass": "2#",
-    "Class": "Frigate",
-    "Effect": "Ship can be deconstructed into a colony base"
+    "name": "Colony Core",
+    "type": "fitting",
+    "cost": "100k*",
+    "power": "4",
+    "mass": "2#",
+    "class": "Frigate",
+    "effect": "Ship can be deconstructed into a colony base"
   },
   "DrillCourseRegulator": {
-    "Cost": "25k*",
-    "Power": "1#",
-    "Mass": "1",
-    "Class": "Frigate",
-    "Effect": "Common drill routes become auto-successes"
+    "name": "Drill Course Regulator",
+    "type": "fitting",
+    "cost": "25k*",
+    "power": "1#",
+    "mass": "1",
+    "class": "Frigate",
+    "effect": "Common drill routes become auto-successes"
   },
-  "SpikeDrive-1": {
-    "Cost": "0",
-    "Power": "0",
-    "Mass": "0",
-    "Class": "Fighter",
-    "Effect": "All hulls come with this by default"
+  "SpikeDrive1": {
+    "name": "Spike Drive-1",
+    "type": "fitting",
+    "cost": "0",
+    "power": "0",
+    "mass": "0",
+    "class": "Fighter",
+    "effect": "All hulls come with this by default"
   },
-  "SpikeDrive-2": {
-    "Cost": "10k*",
-    "Power": "1#",
-    "Mass": "1#",
-    "Class": "Fighter",
-    "Effect": "Upgrade a spike drive to drive-2 rating"
+  "SpikeDrive2": {
+    "name": "Spike Drive-2",
+    "type": "fitting",
+    "cost": "10k*",
+    "power": "1#",
+    "mass": "1#",
+    "class": "Fighter",
+    "effect": "Upgrade a spike drive to drive-2 rating"
   },
-  "SpikeDrive-3": {
-    "Cost": "20k*",
-    "Power": "2#",
-    "Mass": "2#",
-    "Class": "Fighter",
-    "Effect": "Upgrade a spike drive to drive-3 rating"
+  "SpikeDrive3": {
+    "name": "Spike Drive-3",
+    "type": "fitting",
+    "cost": "20k*",
+    "power": "2#",
+    "mass": "2#",
+    "class": "Fighter",
+    "effect": "Upgrade a spike drive to drive-3 rating"
   },
-  "SpikeDrive-4": {
-    "Cost": "40k*",
-    "Power": "2#",
-    "Mass": "3#",
-    "Class": "Frigate",
-    "Effect": "Upgrade a spike drive to drive-4 rating"
+  "SpikeDrive4": {
+    "name": "Spike Drive-4",
+    "type": "fitting",
+    "cost": "40k*",
+    "power": "2#",
+    "mass": "3#",
+    "class": "Frigate",
+    "effect": "Upgrade a spike drive to drive-4 rating"
   },
-  "SpikeDrive-5": {
-    "Cost": "100k*",
-    "Power": "3#",
-    "Mass": "3#",
-    "Class": "Frigate",
-    "Effect": "Upgrade a spike drive to drive-5 rating"
+  "SpikeDrive5": {
+    "name": "Spike Drive-5",
+    "type": "fitting",
+    "cost": "100k*",
+    "power": "3#",
+    "mass": "3#",
+    "class": "Frigate",
+    "effect": "Upgrade a spike drive to drive-5 rating"
   },
-  "SpikeDrive-6": {
-    "Cost": "500k*",
-    "Power": "3#",
-    "Mass": "4#",
-    "Class": "Cruiser",
-    "Effect": "Upgrade a spike drive to drive-6 rating"
+  "SpikeDrive6": {
+    "name": "Spike Drive-6",
+    "type": "fitting",
+    "cost": "500k*",
+    "power": "3#",
+    "mass": "4#",
+    "class": "Cruiser",
+    "effect": "Upgrade a spike drive to drive-6 rating"
   },
   "DropPod": {
-    "Cost": "300k",
-    "Power": "0",
-    "Mass": "2",
-    "Class": "Frigate",
-    "Effect": "Stealthed landing pod for troops"
+    "name": "Drop Pod",
+    "type": "fitting",
+    "cost": "300k",
+    "power": "0",
+    "mass": "2",
+    "class": "Frigate",
+    "effect": "Stealthed landing pod for troops"
   },
   "EmissionsDampers": {
-    "Cost": "25k*",
-    "Power": "1#",
-    "Mass": "1#",
-    "Class": "Fighter",
-    "Effect": "Adds +2 to skill checks to avoid detection"
+    "name": "Emissions Dampers",
+    "type": "fitting",
+    "cost": "25k*",
+    "power": "1#",
+    "mass": "1#",
+    "class": "Fighter",
+    "effect": "Adds +2 to skill checks to avoid detection"
   },
   "ExodusBay": {
-    "Cost": "50k*",
-    "Power": "1#",
-    "Mass": "2#",
-    "Class": "Cruiser",
-    "Effect": "House vast numbers of cold sleep passengers"
+    "name": "Exodus Bay",
+    "type": "fitting",
+    "cost": "50k*",
+    "power": "1#",
+    "mass": "2#",
+    "class": "Cruiser",
+    "effect": "House vast numbers of cold sleep passengers"
   },
   "ExtendedLifeSupport": {
-    "Cost": "5k*",
-    "Power": "1#",
-    "Mass": "1#",
-    "Class": "Fighter",
-    "Effect": "Doubles maximum crew size"
+    "name": "Extended Life Support",
+    "type": "fitting",
+    "cost": "5k*",
+    "power": "1#",
+    "mass": "1#",
+    "class": "Fighter",
+    "effect": "Doubles maximum crew size"
   },
   "ExtendedMedbay": {
-    "Cost": "5k*",
-    "Power": "1",
-    "Mass": "1",
-    "Class": "Frigate",
-    "Effect": "Can provide medical care to more patients"
+    "name": "Extended Medbay",
+    "type": "fitting",
+    "cost": "5k*",
+    "power": "1",
+    "mass": "1",
+    "class": "Frigate",
+    "effect": "Can provide medical care to more patients"
   },
   "ExtendedStores": {
-    "Cost": "2.5k*",
-    "Power": "0",
-    "Mass": "1#",
-    "Class": "Fighter",
-    "Effect": "Maximum life support duration is doubled"
+    "name": "Extended Stores",
+    "type": "fitting",
+    "cost": "2.5k*",
+    "power": "0",
+    "mass": "1#",
+    "class": "Fighter",
+    "effect": "Maximum life support duration is doubled"
   },
   "FuelBunkers": {
-    "Cost": "2.5k*",
-    "Power": "0",
-    "Mass": "1",
-    "Class": "Fighter",
-    "Effect": "Adds fuel for one more drill between fuelings"
+    "name": "Fuel Bunkers",
+    "type": "fitting",
+    "cost": "2.5k*",
+    "power": "0",
+    "mass": "1",
+    "class": "Fighter",
+    "effect": "Adds fuel for one more drill between fuelings"
   },
   "FuelScoops": {
-    "Cost": "5k*",
-    "Power": "2",
-    "Mass": "1#",
-    "Class": "Frigate",
-    "Effect": "Ship can scoop fuel from a gas giant or star"
+    "name": "Fuel Scoops",
+    "type": "fitting",
+    "cost": "5k*",
+    "power": "2",
+    "mass": "1#",
+    "class": "Frigate",
+    "effect": "Ship can scoop fuel from a gas giant or star"
   },
   "HydroponicProduction": {
-    "Cost": "10k*",
-    "Power": "1#",
-    "Mass": "2#",
-    "Class": "Cruiser",
-    "Effect": "Ship produces life support resources"
+    "name": "Hydroponic Production",
+    "type": "fitting",
+    "cost": "10k*",
+    "power": "1#",
+    "mass": "2#",
+    "class": "Cruiser",
+    "effect": "Ship produces life support resources"
   },
   "Lifeboats": {
-    "Cost": "2.5k*",
-    "Power": "0",
-    "Mass": "1",
-    "Class": "Frigate",
-    "Effect": "Emergency escape craft for a ship's crew"
+    "name": "Lifeboats",
+    "type": "fitting",
+    "cost": "2.5k*",
+    "power": "0",
+    "mass": "1",
+    "class": "Frigate",
+    "effect": "Emergency escape craft for a ship's crew"
   },
   "LuxuryCabins": {
-    "Cost": "10k*",
-    "Power": "1",
-    "Mass": "1#",
-    "Class": "Frigate",
-    "Effect": "10% of the max crew get luxurious quarters"
+    "name": "Luxury Cabins",
+    "type": "fitting",
+    "cost": "10k*",
+    "power": "1",
+    "mass": "1#",
+    "class": "Frigate",
+    "effect": "10% of the max crew get luxurious quarters"
   },
   "MobileExtractor": {
-    "Cost": "50k",
-    "Power": "2",
-    "Mass": "1",
-    "Class": "Frigate",
-    "Effect": "Space mining and refinery fittings"
+    "name": "Mobile Extractor",
+    "type": "fitting",
+    "cost": "50k",
+    "power": "2",
+    "mass": "1",
+    "class": "Frigate",
+    "effect": "Space mining and refinery fittings"
   },
   "MobileFactory": {
-    "Cost": "50k*",
-    "Power": "3",
-    "Mass": "2#",
-    "Class": "Cruiser",
-    "Effect": "Self-sustaining factory and repair facilities"
+    "name": "Mobile Factory",
+    "type": "fitting",
+    "cost": "50k*",
+    "power": "3",
+    "mass": "2#",
+    "class": "Cruiser",
+    "effect": "Self-sustaining factory and repair facilities"
   },
   "PrecognitiveNavChamber": {
-    "Cost": "100k*",
-    "Power": "1",
-    "Mass": "0",
-    "Class": "Frigate",
-    "Effect": "Allows a precog to assist in navigation"
+    "name": "Precognitive Nav Chamber",
+    "type": "fitting",
+    "cost": "100k*",
+    "power": "1",
+    "mass": "0",
+    "class": "Frigate",
+    "effect": "Allows a precog to assist in navigation"
   },
   "PsionicAnchorpoint": {
-    "Cost": "!Special",
-    "Power": "3",
-    "Mass": "0",
-    "Class": "Frigate",
-    "Effect": "Focal point for allied psychics' powers"
+    "name": "Psionic Anchorpoint",
+    "type": "fitting",
+    "cost": "!Special",
+    "power": "3",
+    "mass": "0",
+    "class": "Frigate",
+    "effect": "Focal point for allied psychics' powers"
   },
   "SensorMask": {
-    "Cost": "10k*",
-    "Power": "1#",
-    "Mass": "0",
-    "Class": "Frigate",
-    "Effect": "At long distances, disguise ship as another"
+    "name": "Sensor Mask",
+    "type": "fitting",
+    "cost": "10k*",
+    "power": "1#",
+    "mass": "0",
+    "class": "Frigate",
+    "effect": "At long distances, disguise ship as another"
   },
-  "ShipBay/fighter": {
-    "Cost": "200k",
-    "Power": "0",
-    "Mass": "2",
-    "Class": "Cruiser",
-    "Effect": "Carrier housing for a fighter"
+  "ShipBayFighter": {
+    "name": "Ship Bay: Fighter",
+    "type": "fitting",
+    "cost": "200k",
+    "power": "0",
+    "mass": "2",
+    "class": "Cruiser",
+    "effect": "Carrier housing for a fighter"
   },
-  "ShipBay/frigate": {
-    "Cost": "1m",
-    "Power": "1",
-    "Mass": "4",
-    "Class": "Capital",
-    "Effect": "Carrier housing for a frigate"
+  "ShipBayFrigate": {
+    "name": "Ship Bay: Frigate",
+    "type": "fitting",
+    "cost": "1m",
+    "power": "1",
+    "mass": "4",
+    "class": "Capital",
+    "effect": "Carrier housing for a frigate"
   },
-  "ShipssLocker": {
-    "Cost": "2k*",
-    "Power": "0",
-    "Mass": "0",
-    "Class": "Frigate",
-    "Effect": "General equipment for the crew"
+  "ShipLocker": {
+    "name": "Ship's Locker",
+    "type": "fitting",
+    "cost": "2k*",
+    "power": "0",
+    "mass": "0",
+    "class": "Frigate",
+    "effect": "General equipment for the crew"
   },
   "ShiptenderMount": {
-    "Cost": "25k*",
-    "Power": "1",
-    "Mass": "1",
-    "Class": "Frigate",
-    "Effect": "Allow another ship to hitch on a spike drive"
+    "name": "Shiptender Mount",
+    "type": "fitting",
+    "cost": "25k*",
+    "power": "1",
+    "mass": "1",
+    "class": "Frigate",
+    "effect": "Allow another ship to hitch on a spike drive"
   },
-  "Smuggler'sHold": {
-    "Cost": "2.5k*",
-    "Power": "0",
-    "Mass": "1",
-    "Class": "Fighter",
-    "Effect": "Small amount of well-hidden cargo space"
+  "SmugglersHold": {
+    "name": "Smuggler's Hold",
+    "type": "fitting",
+    "cost": "2.5k*",
+    "power": "0",
+    "mass": "1",
+    "class": "Fighter",
+    "effect": "Small amount of well-hidden cargo space"
   },
   "SurveySensorArray": {
-    "Cost": "5k*",
-    "Power": "2",
-    "Mass": "1",
-    "Class": "Frigate",
-    "Effect": "Improved planetary sensory array"
+    "name": "Survey Sensor Array",
+    "type": "fitting",
+    "cost": "5k*",
+    "power": "2",
+    "mass": "1",
+    "class": "Frigate",
+    "effect": "Improved planetary sensory array"
   },
   "SystemDrive": {
-    "Cost": "!Special",
-    "Power": "+1#",
-    "Mass": "+2#",
-    "Class": "Fighter",
-    "Effect": "Replace spike drive with small system drive"
+    "name": "System Drive",
+    "type": "fitting",
+    "cost": "!Special",
+    "power": "+1#",
+    "mass": "+2#",
+    "class": "Fighter",
+    "effect": "Replace spike drive with small system drive"
   },
   "TeleportationPads": {
-    "Cost": "!Special",
-    "Power": "1",
-    "Mass": "1",
-    "Class": "Frigate",
-    "Effect": "Pretech teleportation to and from ship"
+    "name": "Teleportation Pads",
+    "type": "fitting",
+    "cost": "!Special",
+    "power": "1",
+    "mass": "1",
+    "class": "Frigate",
+    "effect": "Pretech teleportation to and from ship"
   },
   "TractorBeams": {
-    "Cost": "10k*",
-    "Power": "2",
-    "Mass": "1",
-    "Class": "Frigate",
-    "Effect": "Manipulate objects in space at a distance"
+    "name": "Tractor Beams",
+    "type": "fitting",
+    "cost": "10k*",
+    "power": "2",
+    "mass": "1",
+    "class": "Frigate",
+    "effect": "Manipulate objects in space at a distance"
   },
   "VehicleTransportFittings": {
-    "Cost": "2.5k*",
-    "Power": "0",
-    "Mass": "1#",
-    "Class": "Frigate",
-    "Effect": "Halve tonnage space of carried vehicles"
+    "name": "Vehicle Transport Fittings",
+    "type": "fitting",
+    "cost": "2.5k*",
+    "power": "0",
+    "mass": "1#",
+    "class": "Frigate",
+    "effect": "Halve tonnage space of carried vehicles"
   },
   "Workshop": {
-    "Cost": "500*",
-    "Power": "1",
-    "Mass": "0.5#",
-    "Class": "Frigate",
-    "Effect": "Automated tech workshops for maintenance"
+    "name": "Workshop",
+    "type": "fitting",
+    "cost": "500*",
+    "power": "1",
+    "mass": "0.5#",
+    "class": "Frigate",
+    "effect": "Automated tech workshops for maintenance"
   }
 }

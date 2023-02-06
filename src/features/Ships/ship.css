@@ -1,7 +1,8 @@
 .Ship {
-  max-width: 44%;
+  max-width: 95%;
   padding: 3%;
   border: 1px solid black;
+  min-width: min-content;
 }
 .ShipTitle {
   width: 100%;
@@ -16,9 +17,10 @@
 }
 
 .Hull {
-  flex: 1 1 0;
+  flex: 1 1 min-content;
   text-align: right;
   padding-right: .5rem;
+  flex-wrap: nowrap;
 }
 
 .ShipStats {
@@ -51,6 +53,10 @@
 
 .ShipWeapons, .ShipDefenses, .ShipFittings{
   display: flex;
+}
+
+.ShipDefenses {
+  background-color: lightgray;
 }
 
 .Fitting {
