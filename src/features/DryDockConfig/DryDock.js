@@ -2,20 +2,21 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 // import './dryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
-import { changeHull, } from './dryDockSlice';
+import { changeHull, changeSelectedItem } from './dryDockSlice';
 
 export function DryDock() {
 
   const dispatch = useDispatch();
   const handleHullChange = (e) => {
-    console.log(e);
     dispatch(changeHull(e.target.value));
-    e.preventDefault();
-  }
+  };
+  const addAnyFitting = (e) => {
+    dispatch(changeSelectedItem(e.target.value));
+  };
   const addWeapon = (e) => {
     e.preventDefault();
-    alert('This is not finished yet');
-  };
+    alert('this is not finished yet');
+  }
 
   return (
     <div>
@@ -37,7 +38,7 @@ export function DryDock() {
       <form>
         <label>
           Weapon:
-          <select>
+          <select onInput={addAnyFitting}>
             {Object.keys(weapons).map((key) => {
               return (
                 <option key={key}>
@@ -54,10 +55,10 @@ export function DryDock() {
       <form>
         <label>
           Defense:
-          <select>
+          <select onInput={addAnyFitting}>
             {Object.keys(defenses).map((key) => {
               return (
-                <option key={key}>
+                <option value={key}>
                   {defenses[key].name}
                 </option>
               )
@@ -71,10 +72,10 @@ export function DryDock() {
       <form>
         <label>
           Fitting:
-          <select>
+          <select onInput={addAnyFitting}>
             {Object.keys(fittings).map((key) => {
               return (
-                <option key={key}>
+                <option value={key}>
                   {fittings[key].name}
                 </option>
               )
