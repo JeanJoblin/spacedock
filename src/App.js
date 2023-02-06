@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Ship } from './features/Ships/Ship.js';
 import { ShipBuilder } from './features/ShipBuilder/ShipBuilder';
+import { DryDock } from './features/DryDockConfig/DryDock';
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
     <div className="App">
       <header>
       </header>
+        <DryDock />
         <ShipBuilder />
     </div>
   );

@@ -27,63 +27,7 @@ const initialState = {
   fittings: require('../../app/resources/fittings.json'),
   equippedFittings: ['SpikeDrive1'],
   isInvalid: false,
-  cost: 500000,
 };
-
-const correctCostsForClass = (fitting) => {
-  console.log(fitting)
-  const type = getFittingList(fitting);
-  console.log(type);
-  const curFitting = type[fitting];
-  let mass = curFitting.mass;
-  let power = curFitting.power;
-  let cost = curFitting.cost;
-  if(cost !== 'Special') {
-    cost = curFitting.cost.match(/^\d*/)[0];
-    console.log(cost);
-  }
-  let massMult = curFitting.mass.includes('#');
-  let powMult = curFitting.power.includes('#');
-  let costMult = curFitting.cost.includes('*');
-  let multSel;
-  switch(initialState.Class) {
-    case 'Fighter':
-      multSel = 0;
-      break;
-    case 'Frigate':
-      multSel = 1;
-      break;
-    case 'Cruiser':
-      multSel = 2;
-      break;
-    case 'Capital':
-      multSel = 3;
-      break;
-    default:
-      multSel = 0;
-      break;
-  }
-  if(massMult) {
-    mass = curFitting.mass.replace('#', '') * massMulitpliers[multSel];
-  };
-  if(powMult) {
-    power = curFitting.power.replace('#', '') * massMulitpliers[multSel];
-  };
-  if(costMult) {
-    let flag = curFitting.cost.replace('*', '');
-    flag = flag.replaceAll(/\d/g, '');
-    if(flag === 'k') {
-      cost = cost * 1000;
-    }
-    if(flag === 'm') {
-      cost = cost * 1000000;
-    }
-    cost = cost * costMulitpliers[multSel];
-  };
-  console.log(cost)
-  return [mass, power, cost];
-};
-
 
 
 export const shipBuilderSlice = createSlice({

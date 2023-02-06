@@ -3,15 +3,16 @@ import './ship.css';
 import { getFittingList } from '../ShipBuilder/shipBuilderSlice';
 import { useSelector } from 'react-redux';
 import { selectDefenses, selectWeapons, selectFittings, selectHulls, selectEquippedFittings } from '../ShipBuilder/shipBuilderSlice';
+import { genCrewAmount } from './shipSlice';
 
-const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'CP', 'Class', 'Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
+const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP', 'Hull Class', 'Crew Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
 
 export function Ship(props) {
   const hulls = useSelector(selectHulls);
   const fittings = useSelector(selectFittings);
   const weapons = useSelector(selectWeapons)
   const defenses = useSelector(selectDefenses);
-  const currentHull = hulls.FreeMerchant;
+  const currentHull = hulls.Battleship;
   const { allFittings } = props;
   let currentDefenses = [];
   let currentWeapons = [];
@@ -30,6 +31,8 @@ export function Ship(props) {
     }
   });
 
+  genCrewAmount(currentHull);
+
   return (
     <div className='Ship'>
       <div className='ShipTitle'>
@@ -43,7 +46,7 @@ export function Ship(props) {
             return (
               <div 
               key={key} 
-              className={ind %2 === 0 ? 'Stat' : 'StatRight'}
+              className={ind % 2 === 0 ? 'Stat' : 'StatRight'}
               >
                   <span key={key + 'Key'} className='StatKey'>{key}:</span>
                   <span key={key + 'Value'} className='StatValue'>{currentHull[stats[1][ind]]}</span>

@@ -315,7 +315,7 @@
     "effect": "At long distances, disguise ship as another"
   },
   "ShipBayFighter": {
-    "name": "Shi pBay: Fighter",
+    "name": "Ship Bay: Fighter",
     "type": "fitting",
     "cost": "200k",
     "power": "0",
@@ -333,7 +333,7 @@
     "effect": "Carrier housing for a frigate"
   },
   "ShipLocker": {
-    "name": "Ships's Locker",
+    "name": "Ship's Locker",
     "type": "fitting",
     "cost": "2k*",
     "power": "0",
