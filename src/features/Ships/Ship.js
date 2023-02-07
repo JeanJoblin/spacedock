@@ -3,7 +3,7 @@ import './ship.css';
 import { getFittingList } from '../ShipBuilder/shipBuilderSlice';
 import { useSelector } from 'react-redux';
 import { selectDefenses, selectWeapons, selectFittings, selectHulls, selectEquippedFittings } from '../ShipBuilder/shipBuilderSlice';
-import { genCrewAmount } from './shipSlice';
+import { genCrewAmount, selectHull } from './shipSlice';
 
 const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP', 'Hull Class', 'Crew Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
 
@@ -12,7 +12,8 @@ export function Ship(props) {
   const fittings = useSelector(selectFittings);
   const weapons = useSelector(selectWeapons)
   const defenses = useSelector(selectDefenses);
-  const currentHull = hulls.Battleship;
+  const currentHull = useSelector(selectHull);
+  console.log('currentHull: ', currentHull);
   const { allFittings } = props;
   let currentDefenses = [];
   let currentWeapons = [];
@@ -30,8 +31,6 @@ export function Ship(props) {
       throw(Error)
     }
   });
-
-  genCrewAmount(currentHull);
 
   return (
     <div className='Ship'>

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import './dryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
-import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList } from './dryDockSlice';
+import { rehull } from '../Ships/shipSlice';
+import { ShoppingList } from '../ShoppingList/shoppingList';
+import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull } from './dryDockSlice';
 
 export function DryDock() {
 
@@ -11,19 +13,22 @@ export function DryDock() {
     dispatch(changeHull(e.target.value));
   };
   const shoppingList = useSelector(selectShoppingList);
+  const hull = useSelector(selectHull)
 
   const addAnyFitting = (e) => {
     dispatch(changeSelectedItem(e.target.value));
   };
-  const addWeapon = (e) => {
-    console.log(e);
+  const refitHull = (e) => {
     e.preventDefault();
+    dispatch(rehull(e.target.value));
     alert('this is not finished yet');
   };
   const handleAddShopping = (e) => {
     e.preventDefault();
     dispatch(addSelectedToShoppingList(e.target.value));
   };
+
+
 
 
   return (
@@ -40,7 +45,7 @@ export function DryDock() {
                 )
               })}
             </select>
-            <button>Change Hull</button>
+            <button onClick={refitHull} value={hull}>Change Hull</button>
         </label>
       </form>
       <form>
@@ -94,13 +99,20 @@ export function DryDock() {
           </button>
         </label>
       </form>
-      {shoppingList.length > 0 ? 
-        <div className='Shopping'>
-          {shoppingList.map((item) => {
+      {shoppingList.length > 0 ?
+        <div>
+          <div>
+          {shoppingList.map((item, ind) => {
             return (
-              <p>{item.name}</p>
+              <span key={item.name}>{ind + 1 < shoppingList.length ? item.name + ', ' : item.name }</span>
             )
           })}
+          </div>
+          <div className="Receipt">
+            <span>Total Cost: </span>
+            <span>Mass Requirements: </span>
+            <span>Power Requirements: </span>
+          </div>
         </div>
       : null}
     </div>

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { selectHulls, selectDefenses, selectFittings, selectWeapons } from "../ShipBuilder/shipBuilderSlice";
 
@@ -100,11 +100,13 @@ export const shipSlice = createSlice({
   initialState,
   reducers: {
     rehull: (state, action) => {
-      const newHull = action.payload;
+      console.log('action.payload:', action.payload)
+      const newHull = getHullObj(action.payload);
+      console.log(newHull);
       state.currentHull = newHull;
       state.freePower = newHull.power;
       state.freeMass = newHull.mass;
-      state.currentCrew = genCrewAmount(newHull.crew);
+      state.currentCrew = genCrewAmount(newHull);
     },
     installFitting: (state, action) => {
       const fitting = action.payload;
@@ -124,9 +126,9 @@ export const shipSlice = createSlice({
   }
 });
 
-export const selectHull = (state) => state.Ship.currentHull;
-export const selectTotalCost = (state) => state.Ship.totalCost;
-export const selectSixMonth = (state) => state.Ship.sixMonthMainenance;
+export const selectHull = (state) => state.ship.currentHull;
+export const selectTotalCost = (state) => state.ship.totalCost;
+export const selectSixMonth = (state) => state.ship.sixMonthMainenance;
 
 export const { rehull, installFitting } = shipSlice.actions;
 
