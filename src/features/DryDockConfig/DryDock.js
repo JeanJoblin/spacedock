@@ -4,11 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
 import { rehull } from '../Ships/shipSlice';
 import { ShoppingList } from '../ShoppingList/shoppingList';
-import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull } from './dryDockSlice';
+import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost } from './dryDockSlice';
+import { getFittingObj } from '../Ships/shipSlice';
 
 export function DryDock() {
 
   const dispatch = useDispatch();
+  const massReq = useSelector(selectMassReq);
+  const powerReq = useSelector(selectPowerReq);
+  const totalCost = useSelector(selectTotalCost);
   const handleHullChange = (e) => {
     dispatch(changeHull(e.target.value));
   };
@@ -16,6 +20,9 @@ export function DryDock() {
   const hull = useSelector(selectHull)
 
   const addAnyFitting = (e) => {
+    console.log(e);
+    console.log(e.target);
+    console.log(e.target.value);
     dispatch(changeSelectedItem(e.target.value));
   };
   const refitHull = (e) => {
@@ -27,9 +34,6 @@ export function DryDock() {
     e.preventDefault();
     dispatch(addSelectedToShoppingList(e.target.value));
   };
-
-
-
 
   return (
     <div>
@@ -54,7 +58,7 @@ export function DryDock() {
           <select onInput={addAnyFitting}>
             {Object.keys(weapons).map((key) => {
               return (
-                <option key={key}>
+                <option value={key}>
                   {weapons[key].name}
                 </option>
               )
@@ -104,14 +108,14 @@ export function DryDock() {
           <div>
           {shoppingList.map((item, ind) => {
             return (
-              <span key={item.name}>{ind + 1 < shoppingList.length ? item.name + ', ' : item.name }</span>
+              <span key={item}>{ind + 1 < shoppingList.length ? getFittingObj(item).name + ', ' : getFittingObj(item).name }</span>
             )
           })}
           </div>
           <div className="Receipt">
-            <span>Total Cost: </span>
-            <span>Mass Requirements: </span>
-            <span>Power Requirements: </span>
+            <span>Total Cost: {totalCost}</span>
+            <span>Mass Requirements: {massReq}</span>
+            <span>Power Requirements: {powerReq}</span>
           </div>
         </div>
       : null}

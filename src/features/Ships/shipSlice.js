@@ -20,22 +20,34 @@ export const genCrewAmount = (inputHull) => {
   return crew;
 };
 
-const correctCostsForClass = (fitting, hull = 'Frigate') => {
+export const correctCostsForClass = (fitting, hull) => {
   const costMulitpliers = [1, 10, 25, 100];
   const massMulitpliers = [1, 2, 3, 4];
   const curFitting = getFittingObj(fitting);
+  console.log('hull:', hull)
+  const curHull = getHullObj(hull);
+  console.log('hull obj:', curHull);
   let mass = curFitting.mass;
   let power = curFitting.power;
   let cost = curFitting.cost;
-  if(cost !== 'Special') {
-    cost = curFitting.cost.match(/^\d*/)[0];
-    console.log(cost);
-  }
   let massMult = curFitting.mass.includes('#');
   let powMult = curFitting.power.includes('#');
   let costMult = curFitting.cost.includes('*');
+  console.log(costMult);
+  if(cost !== 'Special') {
+    cost = curFitting.cost.match(/^\d+\.?\d*/);
+    console.log('pre modifited cost:', cost);
+    let flag = cost.input;
+    console.log(flag);
+    if(flag.includes('k')) {
+      cost = cost * 1000;
+    }
+    if(flag.includes('m')) {
+      cost = cost * 1000000;
+    }
+  }
   let multSel;
-  switch(hull) {
+  switch(curHull.class) {
     case 'Fighter':
       multSel = 0;
       break;
@@ -54,23 +66,21 @@ const correctCostsForClass = (fitting, hull = 'Frigate') => {
   }
   if(massMult) {
     mass = curFitting.mass.replace('#', '') * massMulitpliers[multSel];
+    console.log('mass: ', mass);
+  } else {
+    mass = + mass;
   };
   if(powMult) {
     power = curFitting.power.replace('#', '') * massMulitpliers[multSel];
+    console.log('power: ', power);
+  } else {
+    power = + power;
   };
   if(costMult) {
-    let flag = curFitting.cost.replace('*', '');
-    flag = flag.replaceAll(/\d/g, '');
-    if(flag === 'k') {
-      cost = cost * 1000;
-    }
-    if(flag === 'm') {
-      cost = cost * 1000000;
-    }
     cost = cost * costMulitpliers[multSel];
   };
-  console.log(cost)
-  return [mass, power, cost];
+  console.log('cost:', cost)
+  return {mass, power, cost};
 };
 
 export const getFittingObj = (input) => {
