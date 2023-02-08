@@ -81,7 +81,8 @@ export function Ship(props) {
             <div className='FittingValWrapper'>
               {currentFittings.length > 0 ? currentFittings.map((fitting, ind) => {
                 return (
-                  <span key={fitting.name}>{fitting.name}{ind + 1  !== currentFittings.length ? ', ' : null }</span>
+                  <span key={fitting.name}>{fitting.name}{ind + 1  !== currentFittings.length ? ', ' : null }
+                  </span>
                 )
               })
             : <span>None</span>

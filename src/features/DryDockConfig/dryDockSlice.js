@@ -24,6 +24,15 @@ export const dryDockSlice = createSlice({
   reducers: {
     changeHull: (state, action) => {
       state.selected.hull = action.payload;
+      state.totalCost = 0;
+      state.massReq = 0;
+      state.powerReq = 0;
+      state.shoppingList.forEach((item) => {
+        const {mass, power, cost} = correctCostsForClass(item, action.payload);
+        state.totalCost += cost;
+        state.massReq += mass;
+        state.powerReq += power;
+      })
     },
     changeSelectedItem: (state, action) => {
       const item = getFittingObj(action.payload);
@@ -43,16 +52,18 @@ export const dryDockSlice = createSlice({
       state.totalCost += cost;
     },
     removeFromShoppingList: (state, action) => {
-      console.log(action.payload);
-      const item = action.payload;
-      const ind = state.shoppingList.indexOf(item);
-      state.shoppingList = state.shoppingList.slice(ind, 1);
-
+      const snippy = + action.payload;
+      const removedItem = state.shoppingList[snippy];
+      state.shoppingList = state.shoppingList.filter((item, ind) => ind !== snippy);
+      const {mass, power, cost} = correctCostsForClass(removedItem, state.selected.hull);
+      state.massReq -= mass;
+      state.powerReq -= power;
+      state.totalCost -= cost;
     }
   }
 });
 
-export const { changeHull, changeSelectedItem, addSelectedToShoppingList} = dryDockSlice.actions;
+export const { changeHull, changeSelectedItem, addSelectedToShoppingList, removeFromShoppingList} = dryDockSlice.actions;
 export const selectShoppingList = (state) => state.dryDock.shoppingList;
 export const selectHull = (state) => state.dryDock.selected.hull;
 export const selectMassReq = (state) => state.dryDock.massReq;

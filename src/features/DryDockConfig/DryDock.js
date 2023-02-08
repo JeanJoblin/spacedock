@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import './dryDock.css';
+import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
 import { rehull } from '../Ships/shipSlice';
 import { ShoppingList } from '../ShoppingList/shoppingList';
-import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost } from './dryDockSlice';
+import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList } from './dryDockSlice';
 import { getFittingObj } from '../Ships/shipSlice';
 
 export function DryDock() {
@@ -34,6 +34,10 @@ export function DryDock() {
     e.preventDefault();
     dispatch(addSelectedToShoppingList(e.target.value));
   };
+  const deleteItem = (e) => {
+    e.preventDefault();
+    dispatch(removeFromShoppingList(e.target.value));
+  }
 
   return (
     <div>
@@ -104,18 +108,24 @@ export function DryDock() {
         </label>
       </form>
       {shoppingList.length > 0 ?
-        <div>
-          <div>
+        <div className='Shopping'>
+          <div className='List'>
           {shoppingList.map((item, ind) => {
             return (
-              <span key={item}>{ind + 1 < shoppingList.length ? getFittingObj(item).name + ', ' : getFittingObj(item).name }</span>
+              <div key={item}>
+                <span>{ind + 1 < shoppingList.length ? getFittingObj(item).name + ', ' : getFittingObj(item).name }
+                  <button value={ind} onClick={deleteItem}>x</button>
+                </span>
+                <br/>
+              </div>
+              
             )
           })}
           </div>
           <div className="Receipt">
-            <span>Total Cost: {totalCost}</span>
-            <span>Mass Requirements: {massReq}</span>
-            <span>Power Requirements: {powerReq}</span>
+            <span>Total Cost: {totalCost}</span><br />
+            <span>Mass Requirements: {massReq} </span><br />
+            <span>Power Requirements: {powerReq} </span><br />
           </div>
         </div>
       : null}
