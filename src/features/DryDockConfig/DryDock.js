@@ -4,7 +4,7 @@ import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
 import { rehull } from '../Ships/shipSlice';
 import { ShoppingList } from '../ShoppingList/shoppingList';
-import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList } from './dryDockSlice';
+import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectDisabledDefenses, selectDisabledFittings, selectDisabledWeapons } from './dryDockSlice';
 import { getFittingObj } from '../Ships/shipSlice';
 
 export function DryDock() {
@@ -17,7 +17,11 @@ export function DryDock() {
     dispatch(changeHull(e.target.value));
   };
   const shoppingList = useSelector(selectShoppingList);
-  const hull = useSelector(selectHull)
+  const hull = useSelector(selectHull);
+  const disabledWeapons = useSelector(selectDisabledWeapons);
+  const disabledDefenses = useSelector(selectDisabledDefenses);
+
+  const disabledFittings = useSelector(selectDisabledFittings);
 
   const addAnyFitting = (e) => {
     console.log(e);
@@ -62,7 +66,7 @@ export function DryDock() {
           <select onInput={addAnyFitting}>
             {Object.keys(weapons).map((key) => {
               return (
-                <option value={key}>
+                <option value={key} >
                   {weapons[key].name}
                 </option>
               )
