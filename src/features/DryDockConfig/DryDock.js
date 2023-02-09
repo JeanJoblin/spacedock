@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
-import { rehull } from '../Ships/shipSlice';
+import { getHullObj, rehull } from '../Ships/shipSlice';
 import { ShoppingList } from '../ShoppingList/shoppingList';
 import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons } from './dryDockSlice';
 import { getFittingObj } from '../Ships/shipSlice';
@@ -22,6 +22,25 @@ export function DryDock() {
   const mountableDefenses = useSelector(selectMountableDefenses);
   const mountableFittings = useSelector(selectMountableFittings);
 
+  const isOverweight = () => {
+    if(massReq > getHullObj(hull).mass) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const isOverpower = () => {
+    if(powerReq > getHullObj(hull).power) {
+      console.log('hull power: ', hull.power);
+      console.log('powerReq: ', powerReq);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+ 
   const addAnyFitting = (e) => {
     console.log(e);
     console.log(e.target);
@@ -130,8 +149,12 @@ export function DryDock() {
           </div>
           <div className="Receipt">
             <span>Total Cost: {totalCost}</span><br />
-            <span>Mass Requirements: {massReq} </span><br />
-            <span>Power Requirements: {powerReq} </span><br />
+            <span>Mass Requirements: </span>
+            <span className={isOverweight() ? 'Disallowed' : null}>{massReq}</span>
+            <br />
+            <span>Power Requirements: </span>
+            <span className={isOverpower() ? 'Disallowed' : null}>{powerReq} </span>
+            <br />
           </div>
         </div>
       : null}
