@@ -4,7 +4,7 @@ import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
 import { rehull } from '../Ships/shipSlice';
 import { ShoppingList } from '../ShoppingList/shoppingList';
-import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectDisabledDefenses, selectDisabledFittings, selectDisabledWeapons } from './dryDockSlice';
+import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons } from './dryDockSlice';
 import { getFittingObj } from '../Ships/shipSlice';
 
 export function DryDock() {
@@ -18,10 +18,9 @@ export function DryDock() {
   };
   const shoppingList = useSelector(selectShoppingList);
   const hull = useSelector(selectHull);
-  const disabledWeapons = useSelector(selectDisabledWeapons);
-  const disabledDefenses = useSelector(selectDisabledDefenses);
-
-  const disabledFittings = useSelector(selectDisabledFittings);
+  const mountableWeapons = useSelector(selectMountableWeapons);
+  const mountableDefenses = useSelector(selectMountableDefenses);
+  const mountableFittings = useSelector(selectMountableFittings);
 
   const addAnyFitting = (e) => {
     console.log(e);
@@ -32,7 +31,7 @@ export function DryDock() {
   const refitHull = (e) => {
     e.preventDefault();
     dispatch(rehull(e.target.value));
-    alert('this is not finished yet');
+    alert('This currently changes the ship card displayed below.');
   };
   const handleAddShopping = (e) => {
     e.preventDefault();
@@ -40,6 +39,9 @@ export function DryDock() {
   };
   const deleteItem = (e) => {
     e.preventDefault();
+    console.log('event', e);
+    console.log('event.target', e.target);
+    console.log('event.target.key', e.target.value);
     dispatch(removeFromShoppingList(e.target.value));
   }
 
@@ -64,9 +66,9 @@ export function DryDock() {
         <label>
           Weapon:
           <select onInput={addAnyFitting}>
-            {Object.keys(weapons).map((key) => {
+            {Object.keys(weapons).map((key, ind) => {
               return (
-                <option value={key} >
+                <option key={key+ind} value={key} disabled={mountableWeapons[ind] ? null : 'true'} >
                   {weapons[key].name}
                 </option>
               )
@@ -81,9 +83,9 @@ export function DryDock() {
         <label>
           Defense:
           <select onInput={addAnyFitting}>
-            {Object.keys(defenses).map((key) => {
+            {Object.keys(defenses).map((key, ind) => {
               return (
-                <option value={key}>
+                <option key={key} value={key} disabled={mountableDefenses[ind] ? null : 'true'}>
                   {defenses[key].name}
                 </option>
               )
@@ -98,9 +100,9 @@ export function DryDock() {
         <label>
           Fitting:
           <select onInput={addAnyFitting}>
-            {Object.keys(fittings).map((key) => {
+            {Object.keys(fittings).map((key, ind) => {
               return (
-                <option value={key}>
+                <option key={key} value={key} disabled={mountableFittings[ind] ? null : 'true'}>
                   {fittings[key].name}
                 </option>
               )
@@ -116,7 +118,7 @@ export function DryDock() {
           <div className='List'>
           {shoppingList.map((item, ind) => {
             return (
-              <div key={item}>
+              <div key={item+ind}>
                 <span>{ind + 1 < shoppingList.length ? getFittingObj(item).name + ', ' : getFittingObj(item).name }
                   <button value={ind} onClick={deleteItem}>x</button>
                 </span>

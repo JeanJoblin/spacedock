@@ -39,11 +39,10 @@ export const correctCostsForClass = (fitting, hull) => {
     console.log('pre modifited cost:', cost);
     let flag = cost.input;
     console.log(flag);
-    if(flag.includes('k')) {
-      cost = cost * 1000;
-    }
     if(flag.includes('m')) {
       cost = cost * 1000000;
+    }else if(flag.includes('k')) {
+      cost = cost * 1000;
     }
   }
   let multSel;

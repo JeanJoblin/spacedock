@@ -4,17 +4,25 @@ import { getFittingObj, getHullObj, correctCostsForClass } from '../Ships/shipSl
 import { getFittingList, } from '../ShipBuilder/shipBuilderSlice';
 
 //This slice is to handle selecting and adding fittings, weapons and defenses to a ship. It may be the slice that deals with generating new ships, but that might got to a spaceport slice or smth.
-const frigateWeapons = Object.keys(weapons).map(weapon => weapons[weapon].class !== 'Fighter');
-const cruiserWeapons = Object.keys(weapons).map(weapon => weapons[weapon].class !== 'Fighter' || 'Frigate');
-const capitalWeapons = Object.keys(weapons).map(weapon => weapons[weapon].class !== 'Fighter' || 'Frigate' || 'Cruiser');
+const fighterMountable = ['Fighter'];
+const frigateMountable = ['Fighter', 'Frigate'];
+const cruiserMountable = ['Fighter', 'Frigate', 'Cruiser'];
+const capitalMountable = ['Fighter', 'Frigate', 'Cruiser', 'Capital'];
 
-const frigateDefenses = Object.keys(defenses).map(defense => defenses[defense].class !== 'Fighter');
-const cruiserDefenses = Object.keys(defenses).map(defense => defenses[defense].class !== 'Fighter' || 'Frigate');
-const capitalDefenses = Object.keys(defenses).map(defense => defenses[defense].class !== 'Fighter' || 'Frigate' || 'Cruiser');
+const capitalWeapons = Object.keys(weapons).map(weapon => capitalMountable.includes(weapons[weapon].class));
+const cruiserWeapons = Object.keys(weapons).map(weapon => cruiserMountable.includes(weapons[weapon].class));
+const frigateWeapons = Object.keys(weapons).map(weapon => frigateMountable.includes(weapons[weapon].class));
+const fighterWeapons = Object.keys(weapons).map(weapon => fighterMountable.includes(weapons[weapon].class));
 
-const frigateFittings = Object.keys(fittings).map(fitting => fittings[fitting].class !== 'Fighter')
-const cruiserFittings = Object.keys(fittings).map(fitting => fittings[fitting].class !== 'Fighter' || 'Frigate')
-const capitalFittings = Object.keys(fittings).map(fitting => fittings[fitting].class !== 'Fighter' || 'Frigate' || 'Cruiser');
+const capitalDefenses = Object.keys(defenses).map(defense => capitalMountable.includes(defenses[defense].class));
+const cruiserDefenses = Object.keys(defenses).map(defense => cruiserMountable.includes(defenses[defense].class));
+const frigateDefenses = Object.keys(defenses).map(defense => frigateMountable.includes(defenses[defense].class));
+const fighterDefenses = Object.keys(defenses).map(defense => fighterMountable.includes(defenses[defense].class));
+
+const capitalFittings = Object.keys(fittings).map(fitting => capitalMountable.includes(fittings[fitting].class));
+const cruiserFittings = Object.keys(fittings).map(fitting => cruiserMountable.includes(fittings[fitting].class));
+const frigateFittings = Object.keys(fittings).map(fitting => frigateMountable.includes(fittings[fitting].class));
+const fighterFittings = Object.keys(fittings).map(fitting => fighterMountable.includes(fittings[fitting].class));
 
 const initialState = {
   selected: {
@@ -23,10 +31,10 @@ const initialState = {
     fitting: Object.keys(fittings)[0],
     defense: Object.keys(defenses)[0],
   },
-  disabled: {
-    weapon: frigateWeapons,
-    defense: frigateDefenses,
-    fitting: frigateFittings,
+  mountable: {
+    weapon: fighterWeapons,
+    defense: fighterDefenses,
+    fitting: fighterFittings,
   },
   shoppingList: [],
   totalCost: 0,
@@ -40,26 +48,28 @@ export const dryDockSlice = createSlice({
   reducers: {
     changeHull: (state, action) => {
       state.selected.hull = action.payload;
+      console.log('hull to change to: ', action.payload);
+      console.log('hull class', getHullObj(action.payload).class);
       switch(getHullObj(action.payload).class) {
         case 'Frigate':
-          state.disabled.weapon = cruiserWeapons;
-          state.disabled.defense = cruiserDefense;
-          state.disabled.fitting = cruiserFitting;
+          state.mountable.weapon = frigateWeapons;
+          state.mountable.defense = frigateDefenses;
+          state.mountable.fitting = frigateFittings;
           break;
         case 'Cruiser':
-          state.disabled.weapon = capitalWeapons;
-          state.disabled.defense = capitalDefenses;
-          state.disabled.fitting = capitalFittings;
+          state.mountable.weapon = cruiserWeapons;
+          state.mountable.defense = cruiserDefenses;
+          state.mountable.fitting = cruiserFittings;
           break;
         case 'Capital':
-          state.disabled.weapon = [];
-          state.disabled.defense = [];
-          state.disabled.fitting =[];
+          state.mountable.weapon = capitalWeapons;
+          state.mountable.defense = capitalDefenses;
+          state.mountable.fitting = capitalFittings;
           break;
         default:
-          state.disabled.weapon = frigateWeapons;
-          state.disabled.defense = frigateDefenses;
-          state.disabled.fitting = frigateFittings;
+          state.mountable.weapon = fighterWeapons;
+          state.mountable.defense = fighterDefenses;
+          state.mountable.fitting = fighterFittings;
           break;
       }
       state.totalCost = 0;
@@ -92,6 +102,8 @@ export const dryDockSlice = createSlice({
     removeFromShoppingList: (state, action) => {
       const snippy = + action.payload;
       const removedItem = state.shoppingList[snippy];
+      console.log(snippy);
+      console.log(removedItem);
       state.shoppingList = state.shoppingList.filter((item, ind) => ind !== snippy);
       const {mass, power, cost} = correctCostsForClass(removedItem, state.selected.hull);
       state.massReq -= mass;
@@ -107,7 +119,7 @@ export const selectHull = (state) => state.dryDock.selected.hull;
 export const selectMassReq = (state) => state.dryDock.massReq;
 export const selectPowerReq = (state) => state.dryDock.powerReq;
 export const selectTotalCost = (state) => state.dryDock.totalCost;
-export const selectDisabledWeapons = (state) => state.dryDock.disabled.weapon;
-export const selectDisabledDefenses = (state) => state.dryDock.disabled.defense;
-export const selectDisabledFittings = (state) => state.dryDock.disabled.fitting;
+export const selectMountableWeapons = (state) => state.dryDock.mountable.weapon;
+export const selectMountableDefenses = (state) => state.dryDock.mountable.defense;
+export const selectMountableFittings = (state) => state.dryDock.mountable.fitting;
 export default dryDockSlice.reducer
