@@ -4,7 +4,7 @@ import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
 import { getHullObj, rehull } from '../Ships/shipSlice';
 import { ShoppingList } from '../ShoppingList/shoppingList';
-import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons } from './dryDockSlice';
+import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq } from './dryDockSlice';
 import { getFittingObj } from '../Ships/shipSlice';
 
 export function DryDock() {
@@ -12,6 +12,7 @@ export function DryDock() {
   const dispatch = useDispatch();
   const massReq = useSelector(selectMassReq);
   const powerReq = useSelector(selectPowerReq);
+  const hardReq = useSelector(selectHardReq);
   const totalCost = useSelector(selectTotalCost);
   const handleHullChange = (e) => {
     dispatch(changeHull(e.target.value));
@@ -21,6 +22,9 @@ export function DryDock() {
   const mountableWeapons = useSelector(selectMountableWeapons);
   const mountableDefenses = useSelector(selectMountableDefenses);
   const mountableFittings = useSelector(selectMountableFittings);
+  const avMass = useSelector(selectAvMass);
+  const avPower = useSelector(selectAvPower);
+  const avHard = useSelector(selectAvHard);
 
   const isOverweight = () => {
     if(massReq > getHullObj(hull).mass) {
@@ -34,6 +38,14 @@ export function DryDock() {
     if(powerReq > getHullObj(hull).power) {
       console.log('hull power: ', hull.power);
       console.log('powerReq: ', powerReq);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const isOverhard = () => {
+    if(hardReq > getHullObj(hull).hardpoints) {
       return true;
     } else {
       return false;
@@ -132,6 +144,13 @@ export function DryDock() {
           </button>
         </label>
       </form>
+      <div className='Available'>
+        <span>Available Mass: {avMass}</span>
+        <span>  </span>
+        <span>Available Power: {avPower}</span>
+        <span>  </span>
+        <span>Available Hardpoints: {avHard}</span>
+      </div>
       {shoppingList.length > 0 ?
         <div className='Shopping'>
           <div className='List'>
@@ -155,7 +174,9 @@ export function DryDock() {
             <span>Power Requirements: </span>
             <span className={isOverpower() ? 'Disallowed' : null}>{powerReq} </span>
             <br />
-          </div>
+            <span>Hardpoint Requirements: </span>
+            <span className={isOverhard() ? 'Disallowed' : null}>{hardReq}</span>
+          </div> 
         </div>
       : null}
     </div>

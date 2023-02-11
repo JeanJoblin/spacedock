@@ -40,6 +40,12 @@ const initialState = {
   totalCost: 0,
   massReq: 0,
   powerReq: 0,
+  hardReq: 0,
+  available: {
+    mass: 2,
+    power: 5,
+    hard: 1,
+  }
 };
 
 export const dryDockSlice = createSlice({
@@ -48,9 +54,10 @@ export const dryDockSlice = createSlice({
   reducers: {
     changeHull: (state, action) => {
       state.selected.hull = action.payload;
+      const hullObj = getHullObj(action.payload);
       console.log('hull to change to: ', action.payload);
       console.log('hull class', getHullObj(action.payload).class);
-      switch(getHullObj(action.payload).class) {
+      switch(hullObj.class) {
         case 'Frigate':
           state.mountable.weapon = frigateWeapons;
           state.mountable.defense = frigateDefenses;
@@ -80,7 +87,10 @@ export const dryDockSlice = createSlice({
         state.totalCost += cost;
         state.massReq += mass;
         state.powerReq += power;
-      })
+      });
+      state.available.power = hullObj.power - state.powerReq;
+      state.available.mass = hullObj.mass - state.massReq;
+      state.available.hard = hullObj.mass - state.hardReq;
     },
     changeSelectedItem: (state, action) => {
       const item = getFittingObj(action.payload);
@@ -98,6 +108,17 @@ export const dryDockSlice = createSlice({
       state.massReq = state.massReq + mass;
       state.powerReq += power;
       state.totalCost += cost;
+      state.available.power -= power;
+      state.available.mass -= mass;
+      const itemObj = getFittingObj(item);
+      console.log('hardpoints', itemObj.hardpoints);
+      if(itemObj.hardpoints) {
+        console.log(typeof(itemObj.hardpoints));
+        const hardNum = + itemObj.hardpoints;
+        console.log('state has: ', state.available.hard, 'item has: ', hardNum);
+        state.hardReq += hardNum;
+        state.available.hard -= hardNum;
+      }
     },
     removeFromShoppingList: (state, action) => {
       const snippy = + action.payload;
@@ -109,6 +130,13 @@ export const dryDockSlice = createSlice({
       state.massReq -= mass;
       state.powerReq -= power;
       state.totalCost -= cost;
+      state.available.power += power;
+      state.available.mass += mass;
+      const hardNum = +getFittingObj(removedItem).hardpoints;
+      if(hardNum) {
+        state.available.hard += hardNum;
+        state.hardReq -= hardNum;
+      }
     }
   }
 });
@@ -119,7 +147,11 @@ export const selectHull = (state) => state.dryDock.selected.hull;
 export const selectMassReq = (state) => state.dryDock.massReq;
 export const selectPowerReq = (state) => state.dryDock.powerReq;
 export const selectTotalCost = (state) => state.dryDock.totalCost;
+export const selectHardReq = (state) => state.dryDock.hardReq;
+export const selectAvPower = (state) => state.dryDock.available.power;
+export const selectAvMass = (state) => state.dryDock.available.mass;
+export const selectAvHard = (state) => state.dryDock.available.hard;
 export const selectMountableWeapons = (state) => state.dryDock.mountable.weapon;
 export const selectMountableDefenses = (state) => state.dryDock.mountable.defense;
 export const selectMountableFittings = (state) => state.dryDock.mountable.fitting;
-export default dryDockSlice.reducer
+export default dryDockSlice.reducer;
