@@ -19,8 +19,8 @@ const cruiserDefenses = Object.keys(defenses).map(defense => cruiserMountable.in
 const frigateDefenses = Object.keys(defenses).map(defense => frigateMountable.includes(defenses[defense].class));
 const fighterDefenses = Object.keys(defenses).map(defense => fighterMountable.includes(defenses[defense].class));
 
-const capitalFittings = Object.keys(fittings).map(fitting => capitalMountable.includes(fittings[fitting].class));
-const cruiserFittings = Object.keys(fittings).map(fitting => cruiserMountable.includes(fittings[fitting].class));
+const capitalFittings = Object.keys(fittings).map((fitting, ind) => capitalMountable.includes(fittings[fitting].class) && ind !== 4 && ind !== 2);
+const cruiserFittings = Object.keys(fittings).map((fitting, ind) => cruiserMountable.includes(fittings[fitting].class) && ind !== 4 && ind !== 2);
 const frigateFittings = Object.keys(fittings).map(fitting => frigateMountable.includes(fittings[fitting].class));
 const fighterFittings = Object.keys(fittings).map(fitting => fighterMountable.includes(fittings[fitting].class));
 

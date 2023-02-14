@@ -4,29 +4,48 @@ import { getFittingList } from '../ShipBuilder/shipBuilderSlice';
 import { useSelector } from 'react-redux';
 import { selectDefenses, selectWeapons, selectFittings, selectHulls, selectEquippedFittings } from '../ShipBuilder/shipBuilderSlice';
 import { genCrewAmount, selectHull } from './shipSlice';
+import { tables } from '../../app/resources/tables';
 
 const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP', 'Hull Class', 'Crew Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
 
 export function Ship(props) {
-  const hulls = useSelector(selectHulls);
-  const fittings = useSelector(selectFittings);
-  const weapons = useSelector(selectWeapons)
-  const defenses = useSelector(selectDefenses);
+  const { hulls, fittings, weapons, defenses } = tables;
   const currentHull = useSelector(selectHull);
   console.log('currentHull: ', currentHull);
   const { allFittings } = props;
   let currentDefenses = [];
   let currentWeapons = [];
   let currentFittings = [];
+  let extras = {
+    HP: null,
+    AC: null,
+    Speed: null,
+    Crew: null,
+  };
   allFittings.forEach((input) => {
     const fitting = getFittingList(input)[input];
     const type = fitting.type + 's';
     if(type === 'defenses') {
       currentDefenses.push(fitting);
+      switch(fitting.name) {
+        case 'Ablative Hull Compartements':
+          extras.AC += 1;
+          extras.HP += 20;
+          break;
+        case 'Augmented Plating':
+          extras.AC += 2;
+          extras.Speed -= 1;
+          break;
+        default:
+          break;
+      }
     } else if( type === 'weapons') {
       currentWeapons.push(fitting);
     } else if( type === 'fittings') {
       currentFittings.push(fitting);
+      if(fitting.name === 'Extended Life Support') {
+        extras.Crew = true;
+      }
     } else {
       throw(Error)
     }
@@ -48,7 +67,7 @@ export function Ship(props) {
               className={ind % 2 === 0 ? 'Stat' : 'StatRight'}
               >
                   <span key={key + 'Key'} className='StatKey'>{key}:</span>
-                  <span key={key + 'Value'} className='StatValue'>{currentHull[stats[1][ind]]}</span>
+                  <span key={key + 'Value'} className='StatValue'>{currentHull[stats[1][ind]] }</span>
               </div>
           )})}
         </div>
