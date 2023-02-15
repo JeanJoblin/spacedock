@@ -1,30 +1,80 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import './dryDock.css';
+import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
-import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList } from './dryDockSlice';
+import { getHullObj, rehull } from '../Ships/shipSlice';
+import { ShoppingList } from '../ShoppingList/shoppingList';
+import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq } from './dryDockSlice';
+import { getFittingObj } from '../Ships/shipSlice';
 
 export function DryDock() {
 
   const dispatch = useDispatch();
+  const massReq = useSelector(selectMassReq);
+  const powerReq = useSelector(selectPowerReq);
+  const hardReq = useSelector(selectHardReq);
+  const totalCost = useSelector(selectTotalCost);
   const handleHullChange = (e) => {
     dispatch(changeHull(e.target.value));
   };
   const shoppingList = useSelector(selectShoppingList);
+  const hull = useSelector(selectHull);
+  const mountableWeapons = useSelector(selectMountableWeapons);
+  const mountableDefenses = useSelector(selectMountableDefenses);
+  const mountableFittings = useSelector(selectMountableFittings);
+  const avMass = useSelector(selectAvMass);
+  const avPower = useSelector(selectAvPower);
+  const avHard = useSelector(selectAvHard);
 
+  const isOverweight = () => {
+    if(massReq > getHullObj(hull).mass) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const isOverpower = () => {
+    if(powerReq > getHullObj(hull).power) {
+      console.log('hull power: ', hull.power);
+      console.log('powerReq: ', powerReq);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const isOverhard = () => {
+    if(hardReq > getHullObj(hull).hardpoints) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+ 
   const addAnyFitting = (e) => {
+    console.log(e);
+    console.log(e.target);
+    console.log(e.target.value);
     dispatch(changeSelectedItem(e.target.value));
   };
-  const addWeapon = (e) => {
-    console.log(e);
+  const refitHull = (e) => {
     e.preventDefault();
-    alert('this is not finished yet');
+    dispatch(rehull(e.target.value));
+    alert('This currently changes the ship card displayed below.');
   };
   const handleAddShopping = (e) => {
     e.preventDefault();
     dispatch(addSelectedToShoppingList(e.target.value));
   };
-
+  const deleteItem = (e) => {
+    e.preventDefault();
+    console.log('event', e);
+    console.log('event.target', e.target);
+    console.log('event.target.key', e.target.value);
+    dispatch(removeFromShoppingList(e.target.value));
+  }
 
   return (
     <div>
@@ -40,16 +90,16 @@ export function DryDock() {
                 )
               })}
             </select>
-            <button>Change Hull</button>
+            <button onClick={refitHull} value={hull}>Change Hull</button>
         </label>
       </form>
       <form>
         <label>
           Weapon:
           <select onInput={addAnyFitting}>
-            {Object.keys(weapons).map((key) => {
+            {Object.keys(weapons).map((key, ind) => {
               return (
-                <option key={key}>
+                <option key={key+ind} value={key} disabled={mountableWeapons[ind] ? null : 'true'} >
                   {weapons[key].name}
                 </option>
               )
@@ -64,9 +114,9 @@ export function DryDock() {
         <label>
           Defense:
           <select onInput={addAnyFitting}>
-            {Object.keys(defenses).map((key) => {
+            {Object.keys(defenses).map((key, ind) => {
               return (
-                <option value={key}>
+                <option key={key} value={key} disabled={mountableDefenses[ind] ? null : 'true'}>
                   {defenses[key].name}
                 </option>
               )
@@ -81,9 +131,9 @@ export function DryDock() {
         <label>
           Fitting:
           <select onInput={addAnyFitting}>
-            {Object.keys(fittings).map((key) => {
+            {Object.keys(fittings).map((key, ind) => {
               return (
-                <option value={key}>
+                <option key={key} value={key} disabled={mountableFittings[ind] ? null : 'true'}>
                   {fittings[key].name}
                 </option>
               )
@@ -94,13 +144,39 @@ export function DryDock() {
           </button>
         </label>
       </form>
-      {shoppingList.length > 0 ? 
+      <div className='Available'>
+        <span>Available Mass: {avMass}</span>
+        <span>  </span>
+        <span>Available Power: {avPower}</span>
+        <span>  </span>
+        <span>Available Hardpoints: {avHard}</span>
+      </div>
+      {shoppingList.length > 0 ?
         <div className='Shopping'>
-          {shoppingList.map((item) => {
+          <div className='List'>
+          {shoppingList.map((item, ind) => {
             return (
-              <p>{item.name}</p>
+              <div key={item+ind}>
+                <span>{ind + 1 < shoppingList.length ? getFittingObj(item).name + ', ' : getFittingObj(item).name }
+                  <button value={ind} onClick={deleteItem}>x</button>
+                </span>
+                <br/>
+              </div>
+              
             )
           })}
+          </div>
+          <div className="Receipt">
+            <span>Total Cost: {totalCost}</span><br />
+            <span>Mass Requirements: </span>
+            <span className={isOverweight() ? 'Disallowed' : null}>{massReq}</span>
+            <br />
+            <span>Power Requirements: </span>
+            <span className={isOverpower() ? 'Disallowed' : null}>{powerReq} </span>
+            <br />
+            <span>Hardpoint Requirements: </span>
+            <span className={isOverhard() ? 'Disallowed' : null}>{hardReq}</span>
+          </div> 
         </div>
       : null}
     </div>

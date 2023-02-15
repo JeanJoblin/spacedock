@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { selectHulls, selectDefenses, selectFittings, selectWeapons } from "../ShipBuilder/shipBuilderSlice";
 
@@ -20,22 +20,33 @@ export const genCrewAmount = (inputHull) => {
   return crew;
 };
 
-const correctCostsForClass = (fitting, hull = 'Frigate') => {
+export const correctCostsForClass = (fitting, hull) => {
   const costMulitpliers = [1, 10, 25, 100];
   const massMulitpliers = [1, 2, 3, 4];
   const curFitting = getFittingObj(fitting);
+  console.log('hull:', hull)
+  const curHull = getHullObj(hull);
+  console.log('hull obj:', curHull);
   let mass = curFitting.mass;
   let power = curFitting.power;
   let cost = curFitting.cost;
-  if(cost !== 'Special') {
-    cost = curFitting.cost.match(/^\d*/)[0];
-    console.log(cost);
-  }
   let massMult = curFitting.mass.includes('#');
   let powMult = curFitting.power.includes('#');
   let costMult = curFitting.cost.includes('*');
+  console.log(costMult);
+  if(cost !== 'Special') {
+    cost = curFitting.cost.match(/^\d+\.?\d*/);
+    console.log('pre modifited cost:', cost);
+    let flag = cost.input;
+    console.log(flag);
+    if(flag.includes('m')) {
+      cost = cost * 1000000;
+    }else if(flag.includes('k')) {
+      cost = cost * 1000;
+    }
+  }
   let multSel;
-  switch(hull) {
+  switch(curHull.class) {
     case 'Fighter':
       multSel = 0;
       break;
@@ -54,23 +65,21 @@ const correctCostsForClass = (fitting, hull = 'Frigate') => {
   }
   if(massMult) {
     mass = curFitting.mass.replace('#', '') * massMulitpliers[multSel];
+    console.log('mass: ', mass);
+  } else {
+    mass = + mass;
   };
   if(powMult) {
     power = curFitting.power.replace('#', '') * massMulitpliers[multSel];
+    console.log('power: ', power);
+  } else {
+    power = + power;
   };
   if(costMult) {
-    let flag = curFitting.cost.replace('*', '');
-    flag = flag.replaceAll(/\d/g, '');
-    if(flag === 'k') {
-      cost = cost * 1000;
-    }
-    if(flag === 'm') {
-      cost = cost * 1000000;
-    }
     cost = cost * costMulitpliers[multSel];
   };
-  console.log(cost)
-  return [mass, power, cost];
+  console.log('cost:', cost)
+  return {mass, power, cost};
 };
 
 export const getFittingObj = (input) => {
@@ -100,11 +109,13 @@ export const shipSlice = createSlice({
   initialState,
   reducers: {
     rehull: (state, action) => {
-      const newHull = action.payload;
+      console.log('action.payload:', action.payload)
+      const newHull = getHullObj(action.payload);
+      console.log(newHull);
       state.currentHull = newHull;
       state.freePower = newHull.power;
       state.freeMass = newHull.mass;
-      state.currentCrew = genCrewAmount(newHull.crew);
+      state.currentCrew = genCrewAmount(newHull);
     },
     installFitting: (state, action) => {
       const fitting = action.payload;
@@ -124,9 +135,9 @@ export const shipSlice = createSlice({
   }
 });
 
-export const selectHull = (state) => state.Ship.currentHull;
-export const selectTotalCost = (state) => state.Ship.totalCost;
-export const selectSixMonth = (state) => state.Ship.sixMonthMainenance;
+export const selectHull = (state) => state.ship.currentHull;
+export const selectTotalCost = (state) => state.ship.totalCost;
+export const selectSixMonth = (state) => state.ship.sixMonthMainenance;
 
 export const { rehull, installFitting } = shipSlice.actions;
 
