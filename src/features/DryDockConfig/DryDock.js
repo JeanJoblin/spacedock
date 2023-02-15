@@ -99,7 +99,7 @@ export function DryDock() {
           <select onInput={addAnyFitting}>
             {Object.keys(weapons).map((key, ind) => {
               return (
-                <option key={key+ind} value={key} disabled={mountableWeapons[ind] ? null : 'true'} >
+                <option key={key+ind} value={key} disabled={mountableWeapons[ind] ? false : true} >
                   {weapons[key].name}
                 </option>
               )
@@ -116,7 +116,7 @@ export function DryDock() {
           <select onInput={addAnyFitting}>
             {Object.keys(defenses).map((key, ind) => {
               return (
-                <option key={key} value={key} disabled={mountableDefenses[ind] ? null : 'true'}>
+                <option key={key} value={key} disabled={mountableDefenses[ind] ? false : true}>
                   {defenses[key].name}
                 </option>
               )
@@ -133,7 +133,7 @@ export function DryDock() {
           <select onInput={addAnyFitting}>
             {Object.keys(fittings).map((key, ind) => {
               return (
-                <option key={key} value={key} disabled={mountableFittings[ind] ? null : 'true'}>
+                <option key={key} value={key} disabled={mountableFittings[ind] ? false : true}>
                   {fittings[key].name}
                 </option>
               )
@@ -158,7 +158,7 @@ export function DryDock() {
             return (
               <div key={item+ind}>
                 <span>{ind + 1 < shoppingList.length ? getFittingObj(item).name + ', ' : getFittingObj(item).name }
-                  <button value={ind} onClick={deleteItem}>x</button>
+                  <button value={ind} onClick={deleteItem} className='RemoveButton'>x</button>
                 </span>
                 <br/>
               </div>

@@ -5,7 +5,7 @@ import { useDispatch, useSelector, } from 'react-redux';
 
 export function ShipBuilder() {
   // const { current: fittings } = useRef(['MultifocalLaser', 'FuelScoops', 'FoxerDrones',]);
-  const fittings = ['MultifocalLaser', 'FuelScoops', 'FoxerDrones', 'AugmentedPlating'];
+  const fittings = ['MultifocalLaser', 'FuelScoops', 'ExtendedLifeSupport', 'AugmentedPlating'];
   const dispatch = useDispatch();
     fittings.forEach((fitting) => {
       console.log('Fitting to add: ', fitting);

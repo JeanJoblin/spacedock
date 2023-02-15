@@ -12,7 +12,7 @@ export function Ship(props) {
   const { hulls, fittings, weapons, defenses } = tables;
   const currentHull = useSelector(selectHull);
   console.log('currentHull: ', currentHull);
-  const { allFittings } = props;
+  const { allFittings } = props; 
   let currentDefenses = [];
   let currentWeapons = [];
   let currentFittings = [];
@@ -44,7 +44,12 @@ export function Ship(props) {
     } else if( type === 'fittings') {
       currentFittings.push(fitting);
       if(fitting.name === 'Extended Life Support') {
-        extras.Crew = true;
+        const crewBonus = currentHull.crew.match(/\/(\d+)/);
+        if(extras.Crew === null) {
+          extras.Crew = crewBonus[1];
+        } else {
+          extras.Crew += crewBonus[1];
+        }
       }
     } else {
       throw(Error)
@@ -67,7 +72,8 @@ export function Ship(props) {
               className={ind % 2 === 0 ? 'Stat' : 'StatRight'}
               >
                   <span key={key + 'Key'} className='StatKey'>{key}:</span>
-                  <span key={key + 'Value'} className='StatValue'>{currentHull[stats[1][ind]] }</span>
+                  <span key={key + 'Value'} className='StatValue'>{currentHull[stats[1][ind]] }{ extras[key] ? `(${extras[key] > 0 ? '+' : ''}${extras[key]})` : null }</span>
+                  
               </div>
           )})}
         </div>
