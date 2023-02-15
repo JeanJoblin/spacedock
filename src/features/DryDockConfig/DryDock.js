@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
-import { getHullObj, rehull } from '../Ships/shipSlice';
+import { getHullObj, installFitting, rehull } from '../Ships/shipSlice';
 import { ShoppingList } from '../ShoppingList/shoppingList';
 import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq } from './dryDockSlice';
 import { getFittingObj } from '../Ships/shipSlice';
@@ -74,6 +74,13 @@ export function DryDock() {
     console.log('event.target', e.target);
     console.log('event.target.key', e.target.value);
     dispatch(removeFromShoppingList(e.target.value));
+  };
+  console.log('shoppingList: ', shoppingList);
+  const buildShip = () => {
+    dispatch(rehull(hull));
+    shoppingList.forEach(element => {
+      dispatch(installFitting(element));
+    });
   }
 
   return (
@@ -176,7 +183,9 @@ export function DryDock() {
             <br />
             <span>Hardpoint Requirements: </span>
             <span className={isOverhard() ? 'Disallowed' : null}>{hardReq}</span>
-          </div> 
+          </div>
+          <br/>
+          <button className='BuildShip' onClick={buildShip}>Build This Ship</button>
         </div>
       : null}
     </div>

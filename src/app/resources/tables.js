@@ -3,4 +3,4 @@ export const fittings = require('../../app/resources/fittings.json');
 export const defenses = require('../../app/resources/defenses.json');
 export const weapons = require('../../app/resources/weapons.json');
 
-export const tables = [hulls, fittings, defenses, weapons]
+export const tables = [hulls, fittings, defenses, weapons];

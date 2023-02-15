@@ -90,7 +90,7 @@ export const dryDockSlice = createSlice({
       });
       state.available.power = hullObj.power - state.powerReq;
       state.available.mass = hullObj.mass - state.massReq;
-      state.available.hard = hullObj.mass - state.hardReq;
+      state.available.hard = hullObj.hardpoints - state.hardReq;
     },
     changeSelectedItem: (state, action) => {
       const item = getFittingObj(action.payload);

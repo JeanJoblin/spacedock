@@ -4,15 +4,15 @@ import { getFittingList } from '../ShipBuilder/shipBuilderSlice';
 import { useSelector } from 'react-redux';
 import { selectDefenses, selectWeapons, selectFittings, selectHulls, selectEquippedFittings } from '../ShipBuilder/shipBuilderSlice';
 import { genCrewAmount, selectHull } from './shipSlice';
-import { tables } from '../../app/resources/tables';
+import { hulls } from '../../app/resources/tables';
+import { getFittingObj } from './shipSlice';
 
 const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP', 'Hull Class', 'Crew Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
 
 export function Ship(props) {
-  const { hulls, fittings, weapons, defenses } = tables;
-  const currentHull = useSelector(selectHull);
-  console.log('currentHull: ', currentHull);
-  const { allFittings } = props; 
+  // const currentHull = useSelector(selectHull);
+  const { allFittings, hull, name } = props;
+  let currentHull = hull ? hull : hulls.FreeMerchant;
   let currentDefenses = [];
   let currentWeapons = [];
   let currentFittings = [];
@@ -23,7 +23,7 @@ export function Ship(props) {
     Crew: null,
   };
   allFittings.forEach((input) => {
-    const fitting = getFittingList(input)[input];
+    const fitting = getFittingObj(input);
     const type = fitting.type + 's';
     if(type === 'defenses') {
       currentDefenses.push(fitting);
@@ -59,7 +59,7 @@ export function Ship(props) {
   return (
     <div className='Ship'>
       <div className='ShipTitle'>
-        <span className='Name'>SHIPNAME</span>
+        <span className='Name'>{name ? name : 'SHIPNAME' }</span>
         <span className='Hull'>{currentHull.name}</span>
       </div>
       <hr/>

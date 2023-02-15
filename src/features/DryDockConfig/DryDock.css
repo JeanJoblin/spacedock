@@ -8,6 +8,7 @@
 
 .Receipt {
   flex: 1 1 0;
+  break-after: always;
 }
 
 .Disallowed {
@@ -24,4 +25,9 @@
   border-radius: 2px;
   position: relative;
   top: -5px;
+}
+
+.BuildShip {
+  height: max-content;
+  width: max-content;
 }
