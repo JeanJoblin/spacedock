@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getFittingObj } from "../../app/resources/genFunctions.mjs";
+import { getFittingObj } from "../../app/resources/genFunctions.js";
 
 const initialState = {
   installed: [],

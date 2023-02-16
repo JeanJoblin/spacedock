@@ -1,9 +1,10 @@
-import { crewQuals as _crewQuals, genCrewAmount } from './genFunctions.mjs';
+import * as genFuncs from './genFunctions.js'
+// const genFuncs = require('./genFunctions.js');
 
 import { hulls, fittings, defenses, weapons } from './tables';
 
 const hullList = Object.keys(hulls);
-const crewQuals = _crewQuals;
+const crewQuals = genFuncs.crewQuals;
 
 hullList.forEach((hull) => {
   const min = + hulls[hull].crew.match(/^\d*/)[0];
@@ -41,7 +42,7 @@ hullList.forEach((hull) => {
         rangeMin = min;
         rangeMax = max;
     };
-    const crew = genCrewAmount(hull, qual)
+    const crew = genFuncs.genCrewAmount(genFuncs.getHullObj(hull), qual)
     test(`Minimum ${qual} crew for ${hull}`, () => {
       expect(crew).toBeGreaterThanOrEqual(rangeMin);
     });
