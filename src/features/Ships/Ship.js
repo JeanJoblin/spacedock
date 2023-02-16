@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import './ship.css';
-import { getFittingList } from '../ShipBuilder/shipBuilderSlice';
 import { useSelector } from 'react-redux';
-import { selectDefenses, selectWeapons, selectFittings, selectHulls, selectEquippedFittings } from '../ShipBuilder/shipBuilderSlice';
-import { genCrewAmount, selectHull } from './shipSlice';
+import {  selectHull } from './shipSlice';
 import { hulls } from '../../app/resources/tables';
-import { getFittingObj } from './shipSlice';
+import { getFittingObj, genCrewAmount } from '../../app/resources/genFunctions';
 
 const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP', 'Hull Class', 'Crew Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
 

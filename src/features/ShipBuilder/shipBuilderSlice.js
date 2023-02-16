@@ -1,8 +1,7 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 
 import { hulls, weapons, fittings, defenses } from '../../app/resources/tables';
-import { getFittingObj } from '../Ships/shipSlice';
-import { getHullObj } from '../Ships/shipSlice';
+import { getFittingObj, getHullObj } from '../../app/resources/genFunctions';
 
 const costMulitpliers = [1, 10, 25, 100];
 const massMulitpliers = [1, 2, 3, 4];
