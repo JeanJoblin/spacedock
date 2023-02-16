@@ -3,7 +3,7 @@ import './ship.css';
 import { useSelector } from 'react-redux';
 import {  selectHull } from './shipSlice';
 import { hulls } from '../../app/resources/tables';
-import { getFittingObj, genCrewAmount } from '../../app/resources/genFunctions';
+import { getFittingObj, genCrewAmount } from '../../app/resources/genFunctions.mjs';
 
 const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP', 'Hull Class', 'Crew Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
 

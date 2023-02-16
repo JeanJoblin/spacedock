@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { selectHulls, selectDefenses, selectFittings, selectWeapons } from "../ShipBuilder/shipBuilderSlice";
-import { genCrewAmount, getHullObj, getFittingObj, correctCostsForClass } from "../../app/resources/genFunctions";
+import { genCrewAmount, getHullObj, getFittingObj, correctCostsForClass } from "../../app/resources/genFunctions.mjs";
 
 const hulls = require('../../app/resources/hulls.json');
 const fittings = require('../../app/resources/fittings.json');

@@ -1,45 +1,78 @@
-import { hulls, weapons, defenses, fittings } from './tables';
+// import tables from './tables.js';
+
+const hulls = require('./hulls.json');
+const weapons = require('./weapons.json');
+const fittings = require('./fittings.json');
+const defenses = require('./defenses.json');
+
+const { hulls, weapons, fittings, defenses} = tables;
+
 export const getHullObj = (inputHullStr) => {
   return hulls[inputHullStr];
 }
 
-export const genCrewAmount = (inputHull, qualifier = 'none') => {
+export const genCrewAmount = (inputHull, qualifier = 'fullRange') => {
   //This function grabs the min and max crew from a given hull and generate a number in between. Us it for generating amount of crew for a ship. Add extra functionality later for running with a lean, medium, or higher crew amount.
+  console.log('generating crew for: ', inputHull.name, ' with qualifier: ', qualifier);
   if(inputHull.name === 'Strike Fighter') {
     return 1;
   };
-  const min = inputHull.crew.match(/^\d*/)[0];
-  const max = inputHull.crew.match(/\/(\d*)/)[1];
+  const min = + inputHull.crew.match(/^\d*/)[0];
+  console.log('minimum: ', min);
+  const max = + inputHull.crew.match(/\/(\d*)/)[1];
+  console.log('maximum: ', max);
   const dif = max - min;
-  let crew = Math.floor(Math.random() * dif);
+  console.log('difference is: ', dif);
+  let crew = Math.round(Math.random() * dif) + min;
+  console.log(`generated: ${crew} as base`)
   switch(qualifier) {
     case 'low':
-      if(crew > dif / 3) {
-        crew = Math.floor(crew / 2);
+      console.log(`low range should be: ${min} - ${dif / 2}`);
+      while(crew > dif / 3 + min) {
+        crew = Math.round(crew / 2);
       }
       break;
     case 'high':
-      if(crew < 0.66 * dif) {
-        crew += Math.floor(0.45 * dif);
+      console.log(`high range should be: ${0.66 * dif + min} - ${max}`);
+      if(crew < 0.66 * dif + min) {
+        crew += Math.round(0.34 * dif);
+        //doesn't quite work
       };
       break;
     case 'med':
+      console.log(`med range should be: ${0.25 * dif + min} - ${0.75 * dif + min}`);
       if(crew > 0.75 * dif) {
         crew -= Math.floor(dif/4);
       } else if(crew < dif / 4) {
-        crew += Math.floor(dif/4);
+        crew += Math.ceil(dif/4);
       }
       break;
     case 'skeleton':
-      if(crew > dif / 4) {
-        crew = Math.floor(crew * 0.2);
+      console.log(`skeleton range should be: ${min} - ${(dif / 4) + min}`);
+      if(crew > (dif / 4) + min) {
+        crew = Math.round(crew * 0.2);
       };
       break;
     case 'belowMin':
-      crew = Math.floor
+      crew = Math.floor(Math.random() * min);
+      break;
+    case 'fullRange':
+      break;
+    case 'packed':
+      console.log(`packed range should be: ${(dif * 0.75) + min} - ${max}`);
+      if( crew < (dif * 0.75) + min ) {
+        crew = Math.round( (Math.random() * dif / 5) + min + (dif * 0.8) );
+      }
+      break;
     default:
-      return crew;
+      console.log('A bad qualifier has been selected. Please send low, high, med, skeleton, or belowMin. Generating a number of crew between minimum and maximum.')
+      break;
   }
+  //at least 1 crew rule: if crew = 0, return 1
+  if(crew === 0) {
+    crew = 1;
+  }
+  console.log(`returning ${crew} crew for ${qualifier} between ${min} and ${max}.`)
   return crew;
 };
 
@@ -131,3 +164,11 @@ export const parseStringCost = (inputItem) => {
   }
   return cost;
 }
+
+export const crewQuals = ['low', 'med', 'high', 'skeleton', 'belowMin', 'fullRange', 'packed'];
+
+Object.keys(hulls).forEach((hull) => {
+  crewQuals.forEach((qual) => {
+    genCrewAmount(getHullObj(hull), qual);
+  });
+});

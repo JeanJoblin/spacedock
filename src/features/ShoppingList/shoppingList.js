@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import './shoppingList.css';
 import { selectSixMonth, selectInstalled, selectMassReq, selectPowerReq, selectMaintCost, intakeArray } from "./shoppingListSlice";
 
-import { tables } from '../../app/resources/tables';
-
-const { hulls, weapons, defenses, fittings } = tables;
+import { hulls, weapons, defenses, fittings } from '../../app/resources/tables';
 
 export function ShoppingList(props) {
   const { list } = props;
