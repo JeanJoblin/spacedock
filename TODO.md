@@ -8,6 +8,10 @@
 * Disable hull that are incompatible with current selections
 > This component is quite big, maybe split some of the HTML into separate components
 
+## General Functions  
+
+* Rework crew generator to use ratio of min to max rather than hard fractions (e.g. dif / 4)  
+
 ## Shipbuilder Section
 
 * Rework to intake props passed from drydock into a ship component to be rendered

@@ -1,32 +1,34 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 
-const hulls = require('../../app/resources/hulls.json');
-const fittings = require('../../app/resources/fittings.json');
-const defenses = require('../../app/resources/defenses.json');
-const weapons = require('../../app/resources/weapons.json');
+import { hulls, weapons, fittings, defenses } from '../../app/resources/tables';
+import { getFittingObj, getHullObj } from '../../app/resources/genFunctions.js';
 
 const costMulitpliers = [1, 10, 25, 100];
 const massMulitpliers = [1, 2, 3, 4];
 
-export const getFittingList = (fitting) => {
-  if(Object.keys(defenses).includes(fitting)) {
-    return defenses;
-  };
-  if(Object.keys(weapons).includes(fitting)) {
-    return weapons;
-  };
-  if(Object.keys(fittings).includes(fitting)) {
-    return fittings;
-  }
-};
+//I don't think I need this function anymore, just use .type key
+// export const getFittingList = (imp) => {
+//   let fitting = imp;
+//   if (typeof(imp) === 'string') {
+//     fitting = getFittingObj(imp);
+//   }
+//   if(Object.keys(defenses).includes(fitting)) {
+//     return defenses;
+//   };
+//   if(Object.keys(weapons).includes(fitting)) {
+//     return weapons;
+//   };
+//   if(Object.keys(fittings).includes(fitting)) {
+//     return fittings;
+//   }
+// };
 
 const initialState = {
-  hulls: require('../../app/resources/hulls.json'),
-  weapons: require('../../app/resources/weapons.json'),
-  defenses: require('../../app/resources/defenses.json'),
-  fittings: require('../../app/resources/fittings.json'),
+  hull: hulls.FreeMerchant,
   equippedFittings: ['SpikeDrive1'],
   isInvalid: false,
+  freePower: 10,
+  freeMass: 15,
 };
 
 
@@ -38,13 +40,20 @@ export const shipBuilderSlice = createSlice({
       const fitting = action.payload;
       let fittingObj;
       if(typeof fitting === 'string') {
-        fittingObj = getFittingList(fitting)[fitting];
+        fittingObj = getFittingObj(fitting);
       } else {
         fittingObj = fitting;
       }
-      const type = 'equipped' + fittingObj.type + 's';
       state.equippedFittings = [...state.equippedFittings, fitting];
     },
+    changeHull: (state, action) => {
+      let newHull = action.payload;
+      if(typeof(newHull) === 'string') {
+        newHull = getHullObj(newHull);
+      }
+      state.hull = newHull;
+    },
+
   } 
 });
 

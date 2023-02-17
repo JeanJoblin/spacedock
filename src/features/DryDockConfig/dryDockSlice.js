@@ -1,7 +1,6 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice, } from '@reduxjs/toolkit';
 import { hulls, weapons, fittings, defenses } from '../../app/resources/tables';
-import { getFittingObj, getHullObj, correctCostsForClass } from '../Ships/shipSlice';
-import { getFittingList, } from '../ShipBuilder/shipBuilderSlice';
+import { getFittingObj, getHullObj, correctCostsForClass } from '../../app/resources/genFunctions.js';
 
 //This slice is to handle selecting and adding fittings, weapons and defenses to a ship. It may be the slice that deals with generating new ships, but that might got to a spaceport slice or smth.
 const fighterMountable = ['Fighter'];
@@ -90,7 +89,7 @@ export const dryDockSlice = createSlice({
       });
       state.available.power = hullObj.power - state.powerReq;
       state.available.mass = hullObj.mass - state.massReq;
-      state.available.hard = hullObj.mass - state.hardReq;
+      state.available.hard = hullObj.hardpoints - state.hardReq;
     },
     changeSelectedItem: (state, action) => {
       const item = getFittingObj(action.payload);

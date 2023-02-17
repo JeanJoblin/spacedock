@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
-import { getHullObj, rehull } from '../Ships/shipSlice';
-import { ShoppingList } from '../ShoppingList/shoppingList';
+import { installFitting, rehull } from '../Ships/shipSlice';
 import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq } from './dryDockSlice';
-import { getFittingObj } from '../Ships/shipSlice';
+import { getHullObj, getFittingObj } from '../../app/resources/genFunctions.js';
 
 export function DryDock() {
 
@@ -52,6 +51,16 @@ export function DryDock() {
     }
   }
   
+  const passShip = () => {
+    return {
+      hull: hull,
+      fittings: shoppingList,
+      freeMass: avMass,
+      freePower: avPower,
+      totalCost: totalCost,
+      sixMonth: (0.05 * totalCost),
+    }
+  }
  
   const addAnyFitting = (e) => {
     console.log(e);
@@ -74,6 +83,14 @@ export function DryDock() {
     console.log('event.target', e.target);
     console.log('event.target.key', e.target.value);
     dispatch(removeFromShoppingList(e.target.value));
+  };
+  console.log('shoppingList: ', shoppingList);
+
+  const buildShip = () => {
+    dispatch(rehull(hull));
+    shoppingList.forEach(element => {
+      dispatch(installFitting(element));
+    });
   }
 
   return (
@@ -99,7 +116,7 @@ export function DryDock() {
           <select onInput={addAnyFitting}>
             {Object.keys(weapons).map((key, ind) => {
               return (
-                <option key={key+ind} value={key} disabled={mountableWeapons[ind] ? null : 'true'} >
+                <option key={key+ind} value={key} disabled={mountableWeapons[ind] ? false : true} >
                   {weapons[key].name}
                 </option>
               )
@@ -116,7 +133,7 @@ export function DryDock() {
           <select onInput={addAnyFitting}>
             {Object.keys(defenses).map((key, ind) => {
               return (
-                <option key={key} value={key} disabled={mountableDefenses[ind] ? null : 'true'}>
+                <option key={key} value={key} disabled={mountableDefenses[ind] ? false : true}>
                   {defenses[key].name}
                 </option>
               )
@@ -133,7 +150,7 @@ export function DryDock() {
           <select onInput={addAnyFitting}>
             {Object.keys(fittings).map((key, ind) => {
               return (
-                <option key={key} value={key} disabled={mountableFittings[ind] ? null : 'true'}>
+                <option key={key} value={key} disabled={mountableFittings[ind] ? false : true}>
                   {fittings[key].name}
                 </option>
               )
@@ -158,7 +175,7 @@ export function DryDock() {
             return (
               <div key={item+ind}>
                 <span>{ind + 1 < shoppingList.length ? getFittingObj(item).name + ', ' : getFittingObj(item).name }
-                  <button value={ind} onClick={deleteItem}>x</button>
+                  <button value={ind} onClick={deleteItem} className='RemoveButton'>x</button>
                 </span>
                 <br/>
               </div>
@@ -176,7 +193,9 @@ export function DryDock() {
             <br />
             <span>Hardpoint Requirements: </span>
             <span className={isOverhard() ? 'Disallowed' : null}>{hardReq}</span>
-          </div> 
+          </div>
+          <br/>
+          <button className='BuildShip' onClick={buildShip}>Build This Ship</button>
         </div>
       : null}
     </div>

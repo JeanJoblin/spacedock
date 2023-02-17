@@ -1,16 +1,17 @@
-import { addFitting, selectFittings, addFittingArr, selectWeapons, selectDefenses, selectEquippedFittings } from './shipBuilderSlice';
-import React, { useEffect, useRef } from 'react';
+import { addFitting, selectEquippedFittings } from './shipBuilderSlice';
+import React from 'react';
 import { Ship } from '../Ships/Ship';
 import { useDispatch, useSelector, } from 'react-redux';
 
-export function ShipBuilder() {
+export function ShipBuilder(props) {
   // const { current: fittings } = useRef(['MultifocalLaser', 'FuelScoops', 'FoxerDrones',]);
-  const fittings = ['MultifocalLaser', 'FuelScoops', 'FoxerDrones', 'AugmentedPlating'];
+  const { passFittings, passHull } = props;
+  const fittings = ['MultifocalLaser', 'FuelScoops', 'ExtendedLifeSupport', 'AugmentedPlating'];
   const dispatch = useDispatch();
-    fittings.forEach((fitting) => {
+    passFittings.forEach((fitting) => {
       console.log('Fitting to add: ', fitting);
       dispatch(addFitting(fitting));
-    }, []);
+    }, [fittings]);
 
   const allFittings = useSelector(selectEquippedFittings);
 

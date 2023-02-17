@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import './ship.css';
-import { getFittingList } from '../ShipBuilder/shipBuilderSlice';
 import { useSelector } from 'react-redux';
-import { selectDefenses, selectWeapons, selectFittings, selectHulls, selectEquippedFittings } from '../ShipBuilder/shipBuilderSlice';
-import { genCrewAmount, selectHull } from './shipSlice';
-import { tables } from '../../app/resources/tables';
+import {  selectHull } from './shipSlice';
+import { hulls } from '../../app/resources/tables';
+import { getFittingObj, genCrewAmount } from '../../app/resources/genFunctions.js';
 
 const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP', 'Hull Class', 'Crew Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
 
 export function Ship(props) {
-  const { hulls, fittings, weapons, defenses } = tables;
-  const currentHull = useSelector(selectHull);
-  console.log('currentHull: ', currentHull);
-  const { allFittings } = props;
+  // const currentHull = useSelector(selectHull);
+  const { allFittings, hull, name } = props;
+  let currentHull = hull ? hull : hulls.FreeMerchant;
   let currentDefenses = [];
   let currentWeapons = [];
   let currentFittings = [];
@@ -23,7 +21,7 @@ export function Ship(props) {
     Crew: null,
   };
   allFittings.forEach((input) => {
-    const fitting = getFittingList(input)[input];
+    const fitting = getFittingObj(input);
     const type = fitting.type + 's';
     if(type === 'defenses') {
       currentDefenses.push(fitting);
@@ -44,7 +42,12 @@ export function Ship(props) {
     } else if( type === 'fittings') {
       currentFittings.push(fitting);
       if(fitting.name === 'Extended Life Support') {
-        extras.Crew = true;
+        const crewBonus = currentHull.crew.match(/\/(\d+)/);
+        if(extras.Crew === null) {
+          extras.Crew = crewBonus[1];
+        } else {
+          extras.Crew += crewBonus[1];
+        }
       }
     } else {
       throw(Error)
@@ -54,7 +57,7 @@ export function Ship(props) {
   return (
     <div className='Ship'>
       <div className='ShipTitle'>
-        <span className='Name'>SHIPNAME</span>
+        <span className='Name'>{name ? name : 'SHIPNAME' }</span>
         <span className='Hull'>{currentHull.name}</span>
       </div>
       <hr/>
@@ -67,7 +70,8 @@ export function Ship(props) {
               className={ind % 2 === 0 ? 'Stat' : 'StatRight'}
               >
                   <span key={key + 'Key'} className='StatKey'>{key}:</span>
-                  <span key={key + 'Value'} className='StatValue'>{currentHull[stats[1][ind]] }</span>
+                  <span key={key + 'Value'} className='StatValue'>{currentHull[stats[1][ind]] }{ extras[key] ? `(${extras[key] > 0 ? '+' : ''}${extras[key]})` : null }</span>
+                  
               </div>
           )})}
         </div>

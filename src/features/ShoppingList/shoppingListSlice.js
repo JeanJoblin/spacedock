@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getFittingObj } from "../Ships/shipSlice";
+import { getFittingObj } from "../../app/resources/genFunctions.js";
 
 const initialState = {
   installed: [],

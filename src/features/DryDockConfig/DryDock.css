@@ -8,8 +8,26 @@
 
 .Receipt {
   flex: 1 1 0;
+  break-after: always;
 }
 
 .Disallowed {
   color: red;
+}
+
+.RemoveButton {
+  font-size: xx-small;
+  width: min-content;
+  height: min-content;
+  background-color: darkred;
+  border: 1px solid black;
+  color: oldlace;
+  border-radius: 2px;
+  position: relative;
+  top: -5px;
+}
+
+.BuildShip {
+  height: max-content;
+  width: max-content;
 }
