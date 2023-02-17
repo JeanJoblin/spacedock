@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
 import { installFitting, rehull } from '../Ships/shipSlice';
-import { ShoppingList } from '../ShoppingList/shoppingList';
 import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq } from './dryDockSlice';
 import { getHullObj, getFittingObj } from '../../app/resources/genFunctions.js';
 
@@ -52,6 +51,16 @@ export function DryDock() {
     }
   }
   
+  const passShip = () => {
+    return {
+      hull: hull,
+      fittings: shoppingList,
+      freeMass: avMass,
+      freePower: avPower,
+      totalCost: totalCost,
+      sixMonth: (0.05 * totalCost),
+    }
+  }
  
   const addAnyFitting = (e) => {
     console.log(e);
@@ -76,6 +85,7 @@ export function DryDock() {
     dispatch(removeFromShoppingList(e.target.value));
   };
   console.log('shoppingList: ', shoppingList);
+
   const buildShip = () => {
     dispatch(rehull(hull));
     shoppingList.forEach(element => {

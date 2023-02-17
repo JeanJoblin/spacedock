@@ -27,6 +27,8 @@ const initialState = {
   hull: hulls.FreeMerchant,
   equippedFittings: ['SpikeDrive1'],
   isInvalid: false,
+  freePower: 10,
+  freeMass: 15,
 };
 
 
@@ -42,9 +44,16 @@ export const shipBuilderSlice = createSlice({
       } else {
         fittingObj = fitting;
       }
-      const type = 'equipped' + fittingObj.type + 's';
       state.equippedFittings = [...state.equippedFittings, fitting];
     },
+    changeHull: (state, action) => {
+      let newHull = action.payload;
+      if(typeof(newHull) === 'string') {
+        newHull = getHullObj(newHull);
+      }
+      state.hull = newHull;
+    },
+
   } 
 });
 
