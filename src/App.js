@@ -4,6 +4,7 @@ import './App.css';
 import { Ship } from './features/Ships/Ship.js';
 import { ShipBuilder } from './features/ShipBuilder/ShipBuilder';
 import { DryDock } from './features/DryDockConfig/DryDock';
+import { Hanger } from './features/Hanger/Hanger';
 
 function App() {
 
@@ -12,7 +13,7 @@ function App() {
       <header>
       </header>
         <DryDock />
-        <ShipBuilder />
+        <Hanger />
     </div>
   );
 }

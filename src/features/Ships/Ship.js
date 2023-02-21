@@ -9,7 +9,19 @@ const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP',
 
 export function Ship(props) {
   // const currentHull = useSelector(selectHull);
-  const { allFittings, hull, name } = props;
+  const { 
+    allFittings, 
+    hull, 
+    name,
+    cost,
+    crew,
+    maint,
+    pay, 
+  } = props;
+  console.log(crew)
+  let actualCrew = crew;
+  console.log(hull);
+
   let currentHull = hull ? hull : hulls.FreeMerchant;
   let currentDefenses = [];
   let currentWeapons = [];
@@ -20,6 +32,7 @@ export function Ship(props) {
     Speed: null,
     Crew: null,
   };
+
   allFittings.forEach((input) => {
     const fitting = getFittingObj(input);
     const type = fitting.type + 's';
@@ -54,6 +67,22 @@ export function Ship(props) {
     }
   });
 
+  const isCargoSpace = (fitting) => {
+    if(fitting.name === 'Cargo Space') {
+      return (
+        <span key={fitting.name}></span>
+      )
+    }
+  };
+
+  const isCrew = (key) => {
+    if(key === 'crew') {
+      return `(current: ${crew})`;
+    }
+  }
+
+//todo: make the max crew render differently from generated crew. Removed the + when current crew
+
   return (
     <div className='Ship'>
       <div className='ShipTitle'>
@@ -70,12 +99,13 @@ export function Ship(props) {
               className={ind % 2 === 0 ? 'Stat' : 'StatRight'}
               >
                   <span key={key + 'Key'} className='StatKey'>{key}:</span>
-                  <span key={key + 'Value'} className='StatValue'>{currentHull[stats[1][ind]] }{ extras[key] ? `(${extras[key] > 0 ? '+' : ''}${extras[key]})` : null }</span>
+                  <span key={key + 'Value'} className='StatValue'>{currentHull[stats[1][ind]] }{ extras[key] ? `(${extras[key] > 0 ? '+' : ''}${extras[key]})` : null }{isCrew(stats[1][ind])}</span>
                   
               </div>
           )})}
         </div>
         <div className='ShipParts'>
+          <hr/>
           <div className='ShipWeapons'>
             <span className='Fitting'>Weapons:</span>
             <div className='FittingValWrapper'>
@@ -87,6 +117,7 @@ export function Ship(props) {
             }
             </div>  
           </div>
+          <hr/>
           <div className='ShipDefenses'>
             <span className='Fitting'>Defenses: </span>
             <div className='FittingValWrapper'>
@@ -99,10 +130,12 @@ export function Ship(props) {
               }
             </div>
           </div>
+          <hr/>
           <div className='ShipFittings'>
             <span className='Fitting'>Fittings: </span>
             <div className='FittingValWrapper'>
               {currentFittings.length > 0 ? currentFittings.map((fitting, ind) => {
+                isCargoSpace(fitting);
                 return (
                   <span key={fitting.name}>{fitting.name}{ind + 1  !== currentFittings.length ? ', ' : null }
                   </span>
@@ -110,6 +143,15 @@ export function Ship(props) {
               })
             : <span>None</span>
             }
+            </div>
+          </div>
+          <hr/>
+          <div className='ShipCosts'>
+            <span className='Cost'>Cost: </span>
+            <div>
+              <span>{cost} base price, {maint} maintenace</span>
+              <br/>
+              <span>{pay} yearly crew cost for {crew} crew</span>
             </div>
           </div>
         </div>

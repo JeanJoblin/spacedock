@@ -5,6 +5,7 @@ import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
 import { installFitting, rehull } from '../Ships/shipSlice';
 import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq } from './dryDockSlice';
 import { getHullObj, getFittingObj } from '../../app/resources/genFunctions.js';
+import { addShip } from '../Hanger/hangerSlice'
 
 export function DryDock() {
 
@@ -52,14 +53,15 @@ export function DryDock() {
   }
   
   const passShip = () => {
-    return {
-      hull: hull,
-      fittings: shoppingList,
-      freeMass: avMass,
-      freePower: avPower,
-      totalCost: totalCost,
-      sixMonth: (0.05 * totalCost),
-    }
+    dispatch(addShip({
+        hull: hull,
+        fittings: shoppingList,
+        freeMass: avMass,
+        freePower: avPower,
+        totalCost: totalCost,
+        sixMonth: (0.05 * totalCost),
+      }
+    ));
   }
  
   const addAnyFitting = (e) => {
@@ -195,7 +197,7 @@ export function DryDock() {
             <span className={isOverhard() ? 'Disallowed' : null}>{hardReq}</span>
           </div>
           <br/>
-          <button className='BuildShip' onClick={buildShip}>Build This Ship</button>
+          <button className='BuildShip' onClick={passShip}>Build This Ship</button>
         </div>
       : null}
     </div>
