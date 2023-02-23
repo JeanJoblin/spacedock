@@ -148,7 +148,7 @@ export function Ship(props) {
           <hr/>
           <div className='ShipCosts'>
             <span className='Cost'>Cost: </span>
-            <div>
+            <div className='CostBreakdown'>
               <span>{cost} base price, {maint} maintenace</span>
               <br/>
               <span>{pay} yearly crew cost for {crew} crew</span>

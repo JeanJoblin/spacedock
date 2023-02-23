@@ -5,6 +5,7 @@ import { Ship } from './features/Ships/Ship.js';
 import { ShipBuilder } from './features/ShipBuilder/ShipBuilder';
 import { DryDock } from './features/DryDockConfig/DryDock';
 import { Hanger } from './features/Hanger/Hanger';
+import './app/resources/fonts/RoboGirls.ttf';
 
 function App() {
 

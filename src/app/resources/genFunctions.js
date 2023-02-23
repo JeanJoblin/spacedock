@@ -8,6 +8,7 @@ import tables from './tables.js';
 const { hulls, weapons, fittings, defenses} = tables;
 
 export const getHullObj = (inputHullStr) => {
+  //frequently, a string will be passed as a hull. Use this to turn it into an object.
   return hulls[inputHullStr];
 }
 

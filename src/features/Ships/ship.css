@@ -51,19 +51,15 @@
   flex: 1 1 0;
 }
 
-.ShipWeapons, .ShipDefenses, .ShipFittings{
+.ShipWeapons, .ShipDefenses, .ShipFittings, .ShipCosts{
   display: flex;
 }
 
-.ShipDefenses {
-  background-color: lightgray;
-}
-
-.Fitting {
+.Fitting, .Cost{
   flex: 1 1 0;
   text-align: right;
 }
 
-.FittingValWrapper {
+.FittingValWrapper, .CostBreakdown {
   flex: 3 1 0;
 }

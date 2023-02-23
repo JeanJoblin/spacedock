@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectShips } from './hangerSlice';
 import { Ship } from '../Ships/Ship';
+import './hanger.css';
 
 
 export function Hanger() {

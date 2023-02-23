@@ -11,8 +11,14 @@ export const hangerSlice = createSlice({
   initialState,
   reducers: {
     addShip: (state, action) => {
+      let crewParam;
+      if(!action.payload.crewParam) {
+        crewParam = 'fullRange';
+      } else {
+        crewParam = action.payload.crewParam;
+      };
       let hull = getHullObj(action.payload.hull);
-      let crew = genCrewAmount(hull, 'fullRange');
+      let crew = genCrewAmount(hull, crewParam);
       let ship = {};
       ship.crew = crew;
       ship.maint = action.payload.sixMonth;
@@ -23,6 +29,9 @@ export const hangerSlice = createSlice({
       ship.freePower = action.payload.freePower;
       ship.hull = hull;
       state.ships = [...state.ships, ship];
+    },
+    deleteShip: (state, action) => {
+      state.ships = state.ships.filter(ship => ship.ind != action.payload);
     }
   }
 });
