@@ -13,6 +13,7 @@ function App() {
     <div className="App">
       <header>
       </header>
+      <h1>SPACEDOCK</h1>
         <DryDock />
         <Hanger />
     </div>

@@ -19,6 +19,7 @@ export function Hanger() {
         maint={ship.maint}
         pay={ship.pay}
         key={ind}
+        freeMass={ship.freeMass}
         ></Ship>
     )
   });
@@ -27,8 +28,8 @@ export function Hanger() {
     <div className='Hanger'>
       <div className='Hanger Title'>
         <span>Hanger</span>
-        {renderShips}
       </div>
+      {renderShips}
     </div>
   )
 }

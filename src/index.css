@@ -18,15 +18,14 @@
 
 body {
   margin: 0;
-  font-family: 'OrbitronBlack';
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; */
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: darkgrey;
-  text-shadow: cyan .5px -.5px, magenta -0.5px 0.5px;
-  color: black;
+  /* text-shadow: cyan .5px -.5px, magenta -0.5px 0.5px;
+  color: black; */
 }
 
 code {

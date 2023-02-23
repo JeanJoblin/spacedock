@@ -1,5 +1,6 @@
-.Hanger {
-  font-family: 'Robo Girls';
-  text-shadow: cyan .5px -.5px, magenta -0.5px 0.5px;
-  color: black;
+.Title {
+  font-family: 'OrbitronBlack';
+  text-shadow:
+             cyan 0.75px -0.75px 2px,
+             magenta -0.75px 0.75px 2px;
 }

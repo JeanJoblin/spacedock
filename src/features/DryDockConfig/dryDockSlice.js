@@ -27,8 +27,8 @@ const initialState = {
   selected: {
     hull: Object.keys(hulls)[0],
     weapon: Object.keys(weapons)[0],
-    fitting: Object.keys(fittings)[0],
-    defense: Object.keys(defenses)[0],
+    fitting: Object.keys(fittings)[2],
+    defense: Object.keys(defenses)[1],
   },
   mountable: {
     weapon: fighterWeapons,
