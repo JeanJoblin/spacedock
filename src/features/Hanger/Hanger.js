@@ -9,6 +9,7 @@ export function Hanger() {
   const ships = useSelector(selectShips);
  
   const renderShips = ships.map((ship, ind) => {
+    console.log('pushing ship with ind:', ind);
     return (
       <Ship 
         allFittings={ship.fittings}
@@ -19,6 +20,7 @@ export function Hanger() {
         maint={ship.maint}
         pay={ship.pay}
         key={ind}
+        id={ind}
         freeMass={ship.freeMass}
         ></Ship>
     )

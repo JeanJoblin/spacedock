@@ -31,11 +31,11 @@ export const hangerSlice = createSlice({
       state.ships = [...state.ships, ship];
     },
     deleteShip: (state, action) => {
-      state.ships = state.ships.filter(ship => ship.ind != action.payload);
+      state.ships = state.ships.filter((ship, ind) => ind != action.payload);
     }
   }
 });
 
 export default hangerSlice.reducer;
-export const { addShip } = hangerSlice.actions;
+export const { addShip, deleteShip } = hangerSlice.actions;
 export const selectShips = (state) => state.hanger.ships;

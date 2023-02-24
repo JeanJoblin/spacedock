@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './ship.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {  selectHull } from './shipSlice';
 import { hulls, fittings } from '../../app/resources/tables';
 import { getFittingObj, genCrewAmount } from '../../app/resources/genFunctions.js';
+import { deleteShip } from '../Hanger/hangerSlice';
 
 const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP', 'Hull Class', 'Crew Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
 
@@ -18,10 +19,12 @@ export function Ship(props) {
     maint,
     pay,
     freeMass,
+    id,
   } = props;
-  console.log(crew);
-  let actualCrew = crew;
-  console.log(hull);
+
+  const dispatch = useDispatch();
+
+  console.log('ship created with id: ', id);
 
   let currentHull = hull ? hull : hulls.FreeMerchant;
   let currentDefenses = [];
@@ -36,7 +39,7 @@ export function Ship(props) {
   };
 
 
-
+//Sort all fittings passed in into respective arrays. if they have pure stat changes, add those to an array to be displayed
 allFittings.forEach((input) => {
     const fitting = getFittingObj(input);
     switch(fitting.name) {
@@ -79,6 +82,7 @@ allFittings.forEach((input) => {
     }
   });
 
+  //used in the stats block to display the number of current crew
   const isCrew = (key) => {
     if(key === 'crew') {
       return `(${crew})`;
@@ -92,6 +96,13 @@ allFittings.forEach((input) => {
     }
   }
 
+  const removeShip = (e) => {
+    console.log(e);
+    console.log(e.target);
+    console.log(e.target.value);
+    dispatch(deleteShip(e.target.value));
+  }
+
 //todo: make the max crew render differently from generated crew. Removed the + when current crew
 
   return (
@@ -99,6 +110,7 @@ allFittings.forEach((input) => {
       <div className='ShipTitle'>
         <span className='Name'>{name ? name : 'SHIPNAME' }</span>
         <span className='Hull'>{currentHull.name}</span>
+        <button onClick={removeShip} value={id}>delete</button>
       </div>
       <hr/>
       <div className='ShipBody'>
