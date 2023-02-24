@@ -43,11 +43,12 @@ h1 {
   font-family: 'Robo Girls';
   text-shadow:
 
-  
-    cyan 1px -1px 3px,
-      magenta -1px 1px 3px,
-      cyan 2px -2px 10px,
-      magenta -2px 2px 10px,
+    cyan 1px -1px 1px,
+    magenta -1px 1px 1px,
+    cyan 1px -1px 8px,
+      magenta -1px 1px 8px,
+      cyan 2px -2px 12px,
+      magenta -2px 2px 12px,
       
 /* 
               cyan 14px -7px 10px,
