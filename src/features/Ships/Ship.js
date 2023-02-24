@@ -159,7 +159,7 @@ allFittings.forEach((input) => {
           <div className='ShipCosts'>
             <span className='Cost'>Cost: </span>
             <div className='CostBreakdown'>
-              <span>{cost} base price, {maint} maintenace</span>
+              <span>{cost} base price, {maint} maintenance</span>
               <br/>
               <span>{pay} yearly crew cost for {crew} crew</span>
             </div>
