@@ -11,7 +11,9 @@ export const hangerSlice = createSlice({
   initialState,
   reducers: {
     addShip: (state, action) => {
+      console.log('payload crew param? ', action.payload.crewParam);
       let crewParam;
+      console.log('passed ship: ', action.payload)
       if(!action.payload.crewParam) {
         crewParam = 'fullRange';
       } else {

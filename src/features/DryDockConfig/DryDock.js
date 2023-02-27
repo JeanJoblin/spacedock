@@ -3,8 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
 import { installFitting, rehull } from '../Ships/shipSlice';
-import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName } from './dryDockSlice';
-import { getHullObj, getFittingObj } from '../../app/resources/genFunctions.js';
+import { changeHull, changeSelectedItem,
+  selectShoppingList, addSelectedToShoppingList,
+  selectHull, selectMassReq,
+  selectPowerReq, selectTotalCost,
+  removeFromShoppingList, selectMountableDefenses,
+  selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName, selectCrewParam, changeCrewParam } from './dryDockSlice';
+import { getHullObj, getFittingObj, crewQuals } from '../../app/resources/genFunctions.js';
 import { addShip } from '../Hanger/hangerSlice'
 
 export function DryDock() {
@@ -26,6 +31,7 @@ export function DryDock() {
   const avMass = useSelector(selectAvMass);
   const avPower = useSelector(selectAvPower);
   const avHard = useSelector(selectAvHard);
+  const crewParam = useSelector(selectCrewParam);
 
   const isOverweight = () => {
     if(massReq > getHullObj(hull).mass) {
@@ -52,8 +58,11 @@ export function DryDock() {
       return false;
     }
   }
+
+  const crewParams = [ 'Crew Amount', ...crewQuals ];
   
   const passShip = () => {
+    console.log('crewParam in passShip: ', crewParam);
     dispatch(addShip({
         name: name,
         hull: hull,
@@ -62,6 +71,7 @@ export function DryDock() {
         freePower: avPower,
         totalCost: totalCost,
         sixMonth: (0.05 * totalCost),
+        crewParam: crewParam,
       }
     ));
     dispatch(clearShoppingList());
@@ -115,6 +125,28 @@ export function DryDock() {
     );
   }
 
+  const crewSelector = () => {
+    const handleCrewChange = (e) => {
+      console.log('crewParam in crewSelector: ', e.target.value);
+      dispatch(changeCrewParam(e.target.value));
+      console.log(crewParam);
+    }
+    return (
+      <select onInput={handleCrewChange}>
+        {crewParams.map((param, id) => {
+          return (
+            <option
+            key={param + id}
+            value={param}
+            >{param}
+            </option>
+          );
+        })}
+      </select>
+    );
+  }
+
+  //actual React function return
   return (
     <div>
       <form>
@@ -184,6 +216,7 @@ export function DryDock() {
           </button>
         </label>
       </form>
+      {crewSelector()}
       <div className='Available'>
         <span>Available Mass: {avMass}</span>
         <span>  </span>

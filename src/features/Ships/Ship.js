@@ -96,7 +96,6 @@ allFittings.forEach((input) => {
     }
     if(Object.keys(numOfFitting).includes(fitting.name)) {
         numOfFitting[fitting.name] ++;
-        console.table(numOfFitting);
     } else {
       numOfFitting[fitting.name] = 1;
       switch(fitting.type) {
@@ -139,7 +138,7 @@ allFittings.forEach((input) => {
         // return `${tonnage} tons of `;
         return;
       } else {
-        return `${numOfFitting[fitting.name]}x`;
+        return `${numOfFitting[fitting.name]}x `;
       }
     }
   }

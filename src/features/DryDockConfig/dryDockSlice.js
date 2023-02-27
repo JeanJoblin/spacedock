@@ -1,6 +1,6 @@
 import { createSlice, } from '@reduxjs/toolkit';
 import { hulls, weapons, fittings, defenses } from '../../app/resources/tables';
-import { getFittingObj, getHullObj, correctCostsForClass } from '../../app/resources/genFunctions.js';
+import { getFittingObj, getHullObj, correctCostsForClass, crewQuals } from '../../app/resources/genFunctions.js';
 
 //This slice is to handle selecting and adding fittings, weapons and defenses to a ship. It may be the slice that deals with generating new ships, but that might got to a spaceport slice or smth.
 const fighterMountable = ['Fighter'];
@@ -29,13 +29,14 @@ const initialState = {
     weapon: Object.keys(weapons)[0],
     fitting: Object.keys(fittings)[2],
     defense: Object.keys(defenses)[1],
+    crewParam: crewQuals[0],
   },
   mountable: {
     weapon: fighterWeapons,
     defense: fighterDefenses,
     fitting: fighterFittings,
   },
-  name: null,
+  name: '',
   shoppingList: [],
   totalCost: 0,
   massReq: 0,
@@ -154,12 +155,20 @@ export const dryDockSlice = createSlice({
       state.available.mass = hullObj.mass;
       state.available.power = hullObj.power;
       state.totalCost = 0;
-    },  
+    },
+    changeCrewParam(state, action) {
+      state.selected.crewParam = action.payload;
+    }
   }
 });
 
-export const { changeHull, changeSelectedItem, addSelectedToShoppingList, removeFromShoppingList, changeName, clearShoppingList, clearName} = dryDockSlice.actions;
+export const {
+  changeHull, changeSelectedItem, 
+  addSelectedToShoppingList, removeFromShoppingList, changeName, clearShoppingList,
+  clearName, changeCrewParam,
+} = dryDockSlice.actions;
 export const selectShoppingList = (state) => state.dryDock.shoppingList;
+export const selectCrewParam = (state) => state.dryDock.selected.crewParam;
 export const selectHull = (state) => state.dryDock.selected.hull;
 export const selectMassReq = (state) => state.dryDock.massReq;
 export const selectPowerReq = (state) => state.dryDock.powerReq;

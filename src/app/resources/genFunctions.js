@@ -14,6 +14,7 @@ export const getHullObj = (inputHullStr) => {
 
 export const genCrewAmount = (inputHull, qualifier = 'fullRange') => {
   //This function grabs the min and max crew from a given hull and generate a number in between. Us it for generating amount of crew for a ship. Add extra functionality later for running with a lean, medium, or higher crew amount.
+  console.log(`Generating crew for ${inputHull.name} with param: ${qualifier}`);
   if(inputHull.name === 'Strike Fighter') {
     return 1;
   };
