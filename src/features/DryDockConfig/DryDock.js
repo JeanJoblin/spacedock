@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
 import { installFitting, rehull } from '../Ships/shipSlice';
-import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq } from './dryDockSlice';
+import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList } from './dryDockSlice';
 import { getHullObj, getFittingObj } from '../../app/resources/genFunctions.js';
 import { addShip } from '../Hanger/hangerSlice'
 
@@ -62,6 +62,7 @@ export function DryDock() {
         sixMonth: (0.05 * totalCost),
       }
     ));
+    dispatch(clearShoppingList());
   }
  
   const addAnyFitting = (e) => {
@@ -87,6 +88,11 @@ export function DryDock() {
     dispatch(removeFromShoppingList(e.target.value));
   };
   console.log('shoppingList: ', shoppingList);
+
+  const clearShopping = (e) => {
+    e.preventDefault();
+    dispatch(clearShoppingList());
+  }
 
   const buildShip = () => {
     dispatch(rehull(hull));
@@ -198,6 +204,7 @@ export function DryDock() {
           </div>
           <br/>
           <button className='BuildShip' onClick={passShip}>Build This Ship</button>
+          <button className='ClearShopping' onClick={clearShopping}>Clear List</button>
         </div>
       : null}
     </div>

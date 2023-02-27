@@ -136,11 +136,22 @@ export const dryDockSlice = createSlice({
         state.available.hard += hardNum;
         state.hardReq -= hardNum;
       }
-    }
+    },
+    clearShoppingList(state) {
+      state.shoppingList = [];
+      state.massReq = 0;
+      state.powerReq = 0;
+      state.hardReq = 0;
+      const hullObj = getHullObj(state.selected.hull);
+      state.available.hard = hullObj.hardpoints;
+      state.available.mass = hullObj.mass;
+      state.available.power = hullObj.power;
+      state.totalCost = 0;
+    },  
   }
 });
 
-export const { changeHull, changeSelectedItem, addSelectedToShoppingList, removeFromShoppingList} = dryDockSlice.actions;
+export const { changeHull, changeSelectedItem, addSelectedToShoppingList, removeFromShoppingList, clearShoppingList} = dryDockSlice.actions;
 export const selectShoppingList = (state) => state.dryDock.shoppingList;
 export const selectHull = (state) => state.dryDock.selected.hull;
 export const selectMassReq = (state) => state.dryDock.massReq;

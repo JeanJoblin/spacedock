@@ -5,7 +5,7 @@
 
 > This component renders the ships that have been built.
 
-* ~~Add functionality to delete ships from the list.~~ ``(DONE)``
+* ~~Add functionality to delete ships from the list.~~ ``(DONE) Feb 24 2023``
 * Add functionality to edit ships on this list.
   
 ## Drydock section
@@ -14,17 +14,17 @@
 
 * Add styling to the selectors, buttons, and displays
 * Allow someone to pass in a name for a ship when they build it
-* when a ship is built, remove items from the shopping list
-* remove all button for the shopping list
+* ~~when a ship is built, remove items from the shopping list~~ ``(DONE) Feb 27 2023``
+* ~~remove all button for the shopping list~~ ``(DONE) Feb 27 2023``
 * quantity adjustor for items on the list
 * let user select qualifier for amount of crew
 
 ## Ship Section
 
-* ~~Show remaining free power and mass for those stats~~ ``(DONE)``
-* Use up remaining free mass and convert it to cargo space
-* Display cargo space differently like in the swn rulebook
-* Add a way to edit the name of the ship
+* ~~Show remaining free power and mass for those stats~~ ``(DONE) Feb 24 2023``
+* ~~Use up remaining free mass and convert it to cargo space~~ ``(DONE) Feb 27 2023``
+* ~~Display cargo space differently like in the swn rulebook~~ ``(DONE) Feb 27 2023``
+* Add a way to edit each ship
 
 ## General Functions  
 
