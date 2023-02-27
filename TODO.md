@@ -5,7 +5,7 @@
 
 > This component renders the ships that have been built.
 
-* Add functionality to delete ships from the list.
+* ~~Add functionality to delete ships from the list.~~ ``(DONE)``
 * Add functionality to edit ships on this list.
   
 ## Drydock section
@@ -21,7 +21,7 @@
 
 ## Ship Section
 
-* Show remaining free power and mass for those stats
+* ~~Show remaining free power and mass for those stats~~ ``(DONE)``
 * Use up remaining free mass and convert it to cargo space
 * Display cargo space differently like in the swn rulebook
 * Add a way to edit the name of the ship

@@ -12,7 +12,7 @@ export function Hanger() {
     console.log('pushing ship with ind:', ind);
     return (
       <Ship 
-        allFittings={ship.fittings}
+        passedFittings={ship.fittings}
         hull={ship.hull}
         name={ship.name}
         crew={ship.crew}
@@ -22,6 +22,8 @@ export function Hanger() {
         key={ind}
         id={ind}
         freeMass={ship.freeMass}
+        freePower={ship.freePower}
+        cargoSetting={ship.cargoSetting}
         ></Ship>
     )
   });

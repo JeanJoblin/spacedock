@@ -28,6 +28,8 @@ export const hangerSlice = createSlice({
       ship.freeMass = action.payload.freeMass;
       ship.freePower = action.payload.freePower;
       ship.hull = hull;
+      //let this be passed in to configure auto mass to cargo
+      ship.cargoSetting = true;
       state.ships = [...state.ships, ship];
     },
     deleteShip: (state, action) => {
