@@ -20,6 +20,7 @@ export const hangerSlice = createSlice({
       let hull = getHullObj(action.payload.hull);
       let crew = genCrewAmount(hull, crewParam);
       let ship = {};
+      ship.name = action.payload.name;
       ship.crew = crew;
       ship.maint = action.payload.sixMonth;
       ship.cost = action.payload.totalCost;

@@ -35,6 +35,7 @@ const initialState = {
     defense: fighterDefenses,
     fitting: fighterFittings,
   },
+  name: null,
   shoppingList: [],
   totalCost: 0,
   massReq: 0,
@@ -51,6 +52,12 @@ export const dryDockSlice = createSlice({
   name: 'dryDock',
   initialState,
   reducers: {
+    changeName: (state, action) => {
+      state.name = action.payload;
+    },
+    clearName: (state) => {
+      state.name = '';
+    },
     changeHull: (state, action) => {
       state.selected.hull = action.payload;
       const hullObj = getHullObj(action.payload);
@@ -151,12 +158,13 @@ export const dryDockSlice = createSlice({
   }
 });
 
-export const { changeHull, changeSelectedItem, addSelectedToShoppingList, removeFromShoppingList, clearShoppingList} = dryDockSlice.actions;
+export const { changeHull, changeSelectedItem, addSelectedToShoppingList, removeFromShoppingList, changeName, clearShoppingList, clearName} = dryDockSlice.actions;
 export const selectShoppingList = (state) => state.dryDock.shoppingList;
 export const selectHull = (state) => state.dryDock.selected.hull;
 export const selectMassReq = (state) => state.dryDock.massReq;
 export const selectPowerReq = (state) => state.dryDock.powerReq;
 export const selectTotalCost = (state) => state.dryDock.totalCost;
+export const selectName = (state) => state.dryDock.name;
 export const selectHardReq = (state) => state.dryDock.hardReq;
 export const selectAvPower = (state) => state.dryDock.available.power;
 export const selectAvMass = (state) => state.dryDock.available.mass;

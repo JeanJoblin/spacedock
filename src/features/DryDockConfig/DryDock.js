@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
 import { installFitting, rehull } from '../Ships/shipSlice';
-import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList } from './dryDockSlice';
+import { changeHull, changeSelectedItem, selectShoppingList, addSelectedToShoppingList, selectHull, selectMassReq, selectPowerReq, selectTotalCost, removeFromShoppingList, selectMountableDefenses, selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName } from './dryDockSlice';
 import { getHullObj, getFittingObj } from '../../app/resources/genFunctions.js';
 import { addShip } from '../Hanger/hangerSlice'
 
@@ -14,6 +14,7 @@ export function DryDock() {
   const powerReq = useSelector(selectPowerReq);
   const hardReq = useSelector(selectHardReq);
   const totalCost = useSelector(selectTotalCost);
+  const name = useSelector(selectName);
   const handleHullChange = (e) => {
     dispatch(changeHull(e.target.value));
   };
@@ -54,6 +55,7 @@ export function DryDock() {
   
   const passShip = () => {
     dispatch(addShip({
+        name: name,
         hull: hull,
         fittings: shoppingList,
         freeMass: avMass,
@@ -63,6 +65,7 @@ export function DryDock() {
       }
     ));
     dispatch(clearShoppingList());
+    dispatch(clearName());
   }
  
   const addAnyFitting = (e) => {
@@ -94,16 +97,28 @@ export function DryDock() {
     dispatch(clearShoppingList());
   }
 
-  const buildShip = () => {
-    dispatch(rehull(hull));
-    shoppingList.forEach(element => {
-      dispatch(installFitting(element));
-    });
+  const nameInput = () => {
+    const updateName = (e) => {
+      console.log(e);
+      dispatch(changeName(e.target.value));
+    }
+    return (
+      <div>
+        <input 
+        className='ShipName' 
+        placeholder='Ship Name'
+        onChange={updateName}
+        type='text'
+        value={name}
+        ></input>
+      </div>
+    );
   }
 
   return (
     <div>
       <form>
+        {nameInput()}
         <label>
           Hull:
             <select onInput={handleHullChange}>

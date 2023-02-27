@@ -13,11 +13,12 @@
 > This component is quite big, maybe split some of the HTML into separate components
 
 * Add styling to the selectors, buttons, and displays
-* Allow someone to pass in a name for a ship when they build it
+* ~~Allow someone to pass in a name for a ship when they build it~~ ``(DONE) Feb 27 2023``
 * ~~when a ship is built, remove items from the shopping list~~ ``(DONE) Feb 27 2023``
 * ~~remove all button for the shopping list~~ ``(DONE) Feb 27 2023``
 * quantity adjustor for items on the list
-* let user select qualifier for amount of crew
+* let user select qualifier for amount of crew 
+
 
 ## Ship Section
 
