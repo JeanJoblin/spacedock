@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectShips } from './hangerSlice';
 import { Ship } from '../Ships/Ship';
+import './hanger.css';
 
 
 export function Hanger() {
   const ships = useSelector(selectShips);
  
   const renderShips = ships.map((ship, ind) => {
+    console.log('pushing ship with ind:', ind);
     return (
       <Ship 
-        allFittings={ship.fittings}
+        passedFittings={ship.fittings}
         hull={ship.hull}
         name={ship.name}
         crew={ship.crew}
@@ -18,6 +20,10 @@ export function Hanger() {
         maint={ship.maint}
         pay={ship.pay}
         key={ind}
+        id={ind}
+        freeMass={ship.freeMass}
+        freePower={ship.freePower}
+        cargoSetting={ship.cargoSetting}
         ></Ship>
     )
   });
@@ -26,8 +32,8 @@ export function Hanger() {
     <div className='Hanger'>
       <div className='Hanger Title'>
         <span>Hanger</span>
-        {renderShips}
       </div>
+      {renderShips}
     </div>
   )
 }

@@ -11,8 +11,14 @@ export const hangerSlice = createSlice({
   initialState,
   reducers: {
     addShip: (state, action) => {
+      let crewParam;
+      if(!action.payload.crewParam) {
+        crewParam = 'fullRange';
+      } else {
+        crewParam = action.payload.crewParam;
+      };
       let hull = getHullObj(action.payload.hull);
-      let crew = genCrewAmount(hull, 'fullRange');
+      let crew = genCrewAmount(hull, crewParam);
       let ship = {};
       ship.crew = crew;
       ship.maint = action.payload.sixMonth;
@@ -22,11 +28,16 @@ export const hangerSlice = createSlice({
       ship.freeMass = action.payload.freeMass;
       ship.freePower = action.payload.freePower;
       ship.hull = hull;
+      //let this be passed in to configure auto mass to cargo
+      ship.cargoSetting = true;
       state.ships = [...state.ships, ship];
+    },
+    deleteShip: (state, action) => {
+      state.ships = state.ships.filter((ship, ind) => ind != action.payload);
     }
   }
 });
 
 export default hangerSlice.reducer;
-export const { addShip } = hangerSlice.actions;
+export const { addShip, deleteShip } = hangerSlice.actions;
 export const selectShips = (state) => state.hanger.ships;

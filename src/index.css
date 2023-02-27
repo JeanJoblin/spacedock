@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'Robo Girls';
+  src: local('Robo Girls'),
+    url('./app/resources/fonts/RoboGirls.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Robo Girls Italic';
+  src: local('Robo Girls Italic'),
+    url('./app/resources/fonts/Robo Girls Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OrbitronBlack';
+  src: local('Orbitron-Black'),
+    url('./app/resources/fonts/Orbitron-Black.ttf') format('truetype');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +23,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: darkgrey;
+  /* text-shadow: cyan .5px -.5px, magenta -0.5px 0.5px;
+  color: black; */
 }
 
 code {

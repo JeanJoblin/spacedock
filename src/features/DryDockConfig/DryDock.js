@@ -135,7 +135,7 @@ export function DryDock() {
           <select onInput={addAnyFitting}>
             {Object.keys(defenses).map((key, ind) => {
               return (
-                <option key={key} value={key} disabled={mountableDefenses[ind] ? false : true}>
+                <option key={key+ind} value={key} disabled={mountableDefenses[ind] ? false : true}>
                   {defenses[key].name}
                 </option>
               )

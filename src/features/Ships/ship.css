@@ -4,6 +4,7 @@
   border: 1px solid black;
   min-width: min-content;
 }
+
 .ShipTitle {
   width: 100%;
   display: inline-flex;
@@ -12,8 +13,12 @@
 .Name {
   text-align: left;
   flex: 3 1 0;
-  background-color: lightgray;
+  background-color: grey;
   padding-left: .5rem;
+  font-family: 'Robo Girls';
+  text-shadow: cyan 0.75px -0.75px, magenta -0.75px 0.75px,
+    cyan 1px -1px 2px,
+    magenta -1px 1px 2px;
 }
 
 .Hull {
@@ -51,19 +56,17 @@
   flex: 1 1 0;
 }
 
-.ShipWeapons, .ShipDefenses, .ShipFittings{
+.ShipWeapons, .ShipDefenses, .ShipFittings, .ShipCosts{
   display: flex;
 }
 
-.ShipDefenses {
-  background-color: lightgray;
-}
-
-.Fitting {
-  flex: 1 1 0;
+.Fitting, .Cost{
+  flex: 1 1 ;
   text-align: right;
+  margin-right: 1em;
 }
 
-.FittingValWrapper {
+.FittingValWrapper, .CostBreakdown {
   flex: 3 1 0;
+  text-align: left;
 }

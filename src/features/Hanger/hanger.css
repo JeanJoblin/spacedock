@@ -1,0 +1,6 @@
+.Title {
+  font-family: 'OrbitronBlack';
+  text-shadow:
+             cyan 0.75px -0.75px 2px,
+             magenta -0.75px 0.75px 2px;
+}

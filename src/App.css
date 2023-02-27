@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -36,4 +37,28 @@
   100% {
     transform: translateY(0px);
   }
+}
+
+h1 {
+  font-family: 'Robo Girls';
+  text-shadow:
+
+    cyan 1px -1px 1px,
+    magenta -1px 1px 1px,
+    cyan 1px -1px 8px,
+      magenta -1px 1px 8px,
+      cyan 2px -2px 12px,
+      magenta -2px 2px 12px,
+      
+/* 
+              cyan 14px -7px 10px,
+              magenta -14px 7px 10px,
+              cyan 9px -5px 20px,
+              magenta -9px 5px 20px,
+              cyan 6px -3px 5px,
+              magenta -6px 3px 5px, */
+
+
+              cyan 0.75px -0.75px,
+              magenta -0.75px 0.75px;
 }
