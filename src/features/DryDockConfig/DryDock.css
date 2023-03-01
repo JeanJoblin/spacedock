@@ -1,3 +1,49 @@
+
+.DryDock {
+  display: flex;
+  max-width: 80%;
+  flex-wrap: nowrap;
+  flex-flow: column;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  justify-content: space-evenly;
+  margin: auto;
+}
+
+.Available div{
+  break-after: always;
+}
+
+form {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.Options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.Outline {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.Outfit {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.Outfit form {
+  display: flex;
+  justify-content: space-between;
+
+}
 .Shopping {
   display: flex;
 }
@@ -10,6 +56,8 @@
 .Receipt {
   flex: 1.5 1 0;
   break-after: always;
+  text-align: left;
+  margin-left: 5vmin;
 }
 
 .Disallowed {
@@ -28,7 +76,16 @@
   top: -5px;
 }
 
-.BuildShip {
-  height: max-content;
-  width: max-content;
+.BuildShip, .ClearShopping{
+  width: 10vmin;
+  max-width: 20vmin;
+  flex: 1 1;
+  margin-left: 4vmin;
+  margin-right: 4vmin;
+}
+
+.ListButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

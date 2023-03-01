@@ -6,14 +6,16 @@ import { ShipBuilder } from './features/ShipBuilder/ShipBuilder';
 import { DryDock } from './features/DryDockConfig/DryDock';
 import { Hanger } from './features/Hanger/Hanger';
 import './app/resources/fonts/RoboGirls.ttf';
-
+import { PopoutList } from './features/PopoutList/PopoutList';
+// PopoutList function component is for mouseover adding fittings to shoppinglist 
 function App() {
 
   return (
     <div className="App">
       <header>
       </header>
-      <h1>SPACEDOCK</h1>
+      <h1>SPACEDOCK ....,,..,,.,..</h1>
+        {/* <PopoutList/> */}
         <DryDock />
         <Hanger />
     </div>

@@ -10,7 +10,8 @@ import { changeHull, changeSelectedItem,
   removeFromShoppingList, selectMountableDefenses,
   selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName, selectCrewParam, changeCrewParam } from './dryDockSlice';
 import { getHullObj, getFittingObj, crewQuals } from '../../app/resources/genFunctions.js';
-import { addShip } from '../Hanger/hangerSlice'
+import { addShip } from '../Hanger/hangerSlice';
+import { PopoutList } from '../PopoutList/PopoutList';
 
 export function DryDock() {
 
@@ -127,47 +128,63 @@ export function DryDock() {
 
   const crewSelector = () => {
     const handleCrewChange = (e) => {
-      console.log('crewParam in crewSelector: ', e.target.value);
       dispatch(changeCrewParam(e.target.value));
       console.log(crewParam);
     }
     return (
-      <select onInput={handleCrewChange}>
-        {crewParams.map((param, id) => {
-          return (
-            <option
-            key={param + id}
-            value={param}
-            >{param}
-            </option>
-          );
-        })}
-      </select>
+      <form>
+        <label>
+          Crew:
+        </label>
+        <select onInput={handleCrewChange}>
+          {crewParams.map((param, id) => {
+            return (
+              <option
+              key={param + id}
+              value={param}
+              >{param}
+              </option>
+            );
+          })}
+        </select>
+      </form>
+
     );
   }
 
   //actual React function return
   return (
-    <div>
-      <form>
+    <div className='DryDock'>
+      <div className='Options'>
+      <div className='Outline'>
         {nameInput()}
-        <label>
-          Hull:
-            <select onInput={handleHullChange}>
-              {Object.keys(hulls).map((key) => {
-                return (
-                  <option key={key} value={key}>
-                    {hulls[key].name}
-                  </option>
-                )
-              })}
-            </select>
-            <button onClick={refitHull} value={hull}>Change Hull</button>
-        </label>
-      </form>
-      <form>
-        <label>
-          Weapon:
+        <form>
+          <label>
+            Hull:
+          </label>
+          <select onInput={handleHullChange}>
+            {Object.keys(hulls).map((key) => {
+              return (
+                <option key={key} value={key}>
+                  {hulls[key].name}
+                </option>
+              )
+            })}
+          </select>
+        </form>
+        {crewSelector()}
+        <div className='Available'>
+          <div>Mass: {avMass}</div>
+          <div>Power: {avPower}</div>
+          <div>Hardpoints: {avHard}</div>
+        </div>
+      </div>
+      <div className='Outfit'>
+        <form>
+          <label>
+            Weapons:
+          </label>
+          <br/>
           <select onInput={addAnyFitting}>
             {Object.keys(weapons).map((key, ind) => {
               return (
@@ -178,30 +195,32 @@ export function DryDock() {
             })}
           </select>
           <button onClick={handleAddShopping} value='weapon'>
-            Add Weapon
+              Add
           </button>
-        </label>
-      </form>
-      <form>
-        <label>
-          Defense:
-          <select onInput={addAnyFitting}>
+        </form>
+        <form>
+          <label for="Defense">
+           Defenses:
+          </label>
+          <br/>
+          <select onInput={addAnyFitting} name="Defense">
             {Object.keys(defenses).map((key, ind) => {
-              return (
+                return (
                 <option key={key+ind} value={key} disabled={mountableDefenses[ind] ? false : true}>
-                  {defenses[key].name}
+                {defenses[key].name}
                 </option>
               )
             })}
           </select>
           <button onClick={handleAddShopping} value='defense'>
-            Add Defense
+            Add
           </button>
-        </label>
-      </form>
-      <form>
-        <label>
-          Fitting:
+       </form>
+        <form>
+          <label>
+            Fittings:
+          </label>
+          <br/>
           <select onInput={addAnyFitting}>
             {Object.keys(fittings).map((key, ind) => {
               return (
@@ -211,18 +230,13 @@ export function DryDock() {
               )
             })}
           </select>
-          <button onClick={handleAddShopping} value='fitting'>
-            Add Fitting
+          <button onClick={handleAddShopping}
+            value='fitting'>
+              Add
           </button>
-        </label>
-      </form>
-      {crewSelector()}
-      <div className='Available'>
-        <span>Available Mass: {avMass}</span>
-        <span>  </span>
-        <span>Available Power: {avPower}</span>
-        <span>  </span>
-        <span>Available Hardpoints: {avHard}</span>
+        </form>
+      </div>
+     
       </div>
       {shoppingList.length > 0 ?
         <div className='Shopping'>
@@ -240,21 +254,26 @@ export function DryDock() {
           })}
           </div>
           <div className="Receipt">
-            <span>Total Cost: {totalCost}</span><br />
-            <span>Mass Requirements: </span>
+            <div>Costs:</div>
+            <span>Credits: {totalCost}</span><br />
+            <span>Mass: </span>
             <span className={isOverweight() ? 'Disallowed' : null}>{massReq}</span>
             <br />
-            <span>Power Requirements: </span>
+            <span>Power: </span>
             <span className={isOverpower() ? 'Disallowed' : null}>{powerReq} </span>
             <br />
-            <span>Hardpoint Requirements: </span>
+            <span>Hardpoint: </span>
             <span className={isOverhard() ? 'Disallowed' : null}>{hardReq}</span>
           </div>
           <br/>
-          <button className='BuildShip' onClick={passShip}>Build This Ship</button>
-          <button className='ClearShopping' onClick={clearShopping}>Clear List</button>
         </div>
       : null}
+      <div className='ListButtons'>
+        <button className='BuildShip' onClick={passShip}>Build This Ship
+        </button>
+        <button className='ClearShopping' onClick={clearShopping}>Clear List
+        </button>
+      </div>
     </div>
 
 

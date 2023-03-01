@@ -28,7 +28,7 @@
 
 ## General Functions  
 
-* Rework crew generator to use ratio of min to max rather than hard fractions (e.g. dif / 4)  
+* Rework crew generator to use ratio of min to max rather than hard fractions (e.g. min / max rather than dif / 4)  
 
 ## Shipbuilder Section
 
