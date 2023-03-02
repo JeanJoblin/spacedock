@@ -4,19 +4,8 @@
   max-width: 80%;
   flex-wrap: nowrap;
   flex-flow: column;
-  padding-left: 2.5%;
-  padding-right: 2.5%;
   justify-content: space-evenly;
   margin: auto;
-}
-
-.Available div{
-  break-after: always;
-}
-
-form {
-  display: flex;
-  justify-content: space-evenly;
 }
 
 .Options {
@@ -25,25 +14,42 @@ form {
   justify-content: space-evenly;
 }
 
-.Outline {
+.Frame {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  max-width: 270px;
+}
+
+.Frame .Inputs, .Frame .Available {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: right;
+}
+
+.Frame .Inputs div, .Frame .Available div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .Outfit {
   flex: 1 1 auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-evenly;
+  max-width: 330px;
 }
 
-.Outfit form {
+.Outfit div {
   display: flex;
-  justify-content: space-between;
-
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: right;
 }
+
 .Shopping {
   display: flex;
 }

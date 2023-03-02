@@ -34,12 +34,6 @@ export function DryDock() {
   const avHard = useSelector(selectAvHard);
   const crewParam = useSelector(selectCrewParam);
 
-  const mountable = {
-    weapon: mountableWeapons,
-    defense: mountableDefenses,
-    fitting: mountableFittings,
-  }
-
   const isOverweight = () => {
     if(massReq > getHullObj(hull).mass) {
       return true;
@@ -91,6 +85,11 @@ export function DryDock() {
     console.log(e.target.value);
     dispatch(changeSelectedItem(e.target.value));
   };
+  const refitHull = (e) => {
+    e.preventDefault();
+    dispatch(rehull(e.target.value));
+    alert('This currently changes the ship card displayed below.');
+  };
   const handleAddShopping = (e) => {
     e.preventDefault();
     dispatch(addSelectedToShoppingList(e.target.value));
@@ -109,7 +108,6 @@ export function DryDock() {
     dispatch(clearShoppingList());
   }
 
-  //name input mini component
   const nameInput = () => {
     const updateName = (e) => {
       console.log(e);
@@ -123,21 +121,22 @@ export function DryDock() {
         onChange={updateName}
         type='text'
         value={name}
-        id="Name"
-        />
+        ></input>
       </div>
     );
   }
 
-  //Crew size selector mini-component
   const crewSelector = () => {
     const handleCrewChange = (e) => {
       dispatch(changeCrewParam(e.target.value));
       console.log(crewParam);
     }
-    //lable used to be here, but that made styling much harder
     return (
-        <select onInput={handleCrewChange} id="Crew">
+      <form>
+        <label>
+          Crew:
+        </label>
+        <select onInput={handleCrewChange}>
           {crewParams.map((param, id) => {
             return (
               <option
@@ -148,74 +147,93 @@ export function DryDock() {
             );
           })}
         </select>
+      </form>
     );
-  };
-
-  //Fitting Selector mini-component
-  const fittingSelector = (list) => {
-    const keys = Object.keys(list);
-    const type = list[keys[0]].type;
-    console.log('type: ', type);
-    return (
-      <select onInput={addAnyFitting} id={type + 's'}>
-      {Object.keys(list).map((key, ind) => {
-          return (
-          <option key={key+ind} value={key} disabled={mountable[type][ind] ? false : true}>
-          {list[key].name}
-          </option>
-        )
-      })}
-    </select>
-    )
   }
 
   //actual React function return
   return (
     <div className='DryDock'>
       <div className='Options'>
-        <div className='Frame'>
-          <div className="Inputs">
-            <div>
-              <label for="Name">Name: </label>
-              <label for="Crew">Crew: </label>
-              <label for="Hulls">Hull: </label>
-            </div>
-            <div>
-              {nameInput()}
-              {crewSelector()}
-              <select onInput={handleHullChange} id="Hulls">
-                {Object.keys(hulls).map((key) => {
-                  return (
-                    <option key={key} value={key}>
-                      {hulls[key].name}
-                    </option>
-                  )
-                })}
-              </select>
-            </div>
-          </div>
-          <div className='Available'>
-            <div>Mass:</div> <div>{avMass}</div>
-            <div>Power:</div> <div>{avPower}</div>
-            <div>Hardpoints:</div> <div>{avHard}</div>
-          </div>
+      <div className='Outline'>
+        {nameInput()}
+        <form>
+          <label>
+            Hull:
+          </label>
+          <select onInput={handleHullChange}>
+            {Object.keys(hulls).map((key) => {
+              return (
+                <option key={key} value={key}>
+                  {hulls[key].name}
+                </option>
+              )
+            })}
+          </select>
+        </form>
+        {crewSelector()}
+        <div className='Available'>
+          <div>Mass: {avMass}</div>
+          <div>Power: {avPower}</div>
+          <div>Hardpoints: {avHard}</div>
         </div>
+      </div>
       <div className='Outfit'>
-        <div>
-          <label for='weapons'>Weapons: </label>
-          <label for='defenses'>Defenses: </label>
-          <label for='fittings'>Fittings: </label>
-        </div>
-        <div>
-        {fittingSelector(weapons)}
-        {fittingSelector(defenses)}
-        {fittingSelector(fittings)}
-        </div>
-        <div>
-        <button onClick={handleAddShopping} value='weapon'>Add</button>
-        <button onClick={handleAddShopping} value='defense'>Add</button>
-        <button onClick={handleAddShopping} value='fitting'>Add</button>
-        </div>
+        <form>
+          <label>
+            Weapons:
+          </label>
+          <br/>
+          <select onInput={addAnyFitting}>
+            {Object.keys(weapons).map((key, ind) => {
+              return (
+                <option key={key+ind} value={key} disabled={mountableWeapons[ind] ? false : true} >
+                  {weapons[key].name}
+                </option>
+              )
+            })}
+          </select>
+          <button onClick={handleAddShopping} value='weapon'>
+              Add
+          </button>
+        </form>
+        <form>
+          <label for="Defense">
+           Defenses:
+          </label>
+          <br/>
+          <select onInput={addAnyFitting} name="Defense">
+            {Object.keys(defenses).map((key, ind) => {
+                return (
+                <option key={key+ind} value={key} disabled={mountableDefenses[ind] ? false : true}>
+                {defenses[key].name}
+                </option>
+              )
+            })}
+          </select>
+          <button onClick={handleAddShopping} value='defense'>
+            Add
+          </button>
+       </form>
+        <form>
+          <label>
+            Fittings:
+          </label>
+          <br/>
+          <select onInput={addAnyFitting}>
+            {Object.keys(fittings).map((key, ind) => {
+              return (
+                <option key={key} value={key} disabled={mountableFittings[ind] ? false : true}>
+                  {fittings[key].name}
+                </option>
+              )
+            })}
+          </select>
+          <button onClick={handleAddShopping}
+            value='fitting'>
+              Add
+          </button>
+        </form>
       </div>
      
       </div>
