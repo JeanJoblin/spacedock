@@ -46,6 +46,19 @@ label {
   }
 }
 
+@media (max-width: 300px) {
+  .DryDock, option, button, select{
+    font-size:  3.75vmin;
+    font-weight: 600;
+  }
+  .Available {
+    width: 80vmin;
+  }
+  select, button, input {
+    margin-bottom: 3px;
+  }
+}
+
 
 
 
