@@ -65,8 +65,6 @@ export function DryDock() {
       return false;
     }
   }
-
-  const crewParams = [ 'Crew Amount', ...crewQuals ];
   
   const passShip = () => {
     console.log('crewParam in passShip: ', crewParam);
@@ -131,19 +129,21 @@ export function DryDock() {
 
   //Crew size selector mini-component
   const crewSelector = () => {
+    const paramsWithNames = [crewQuals, ['Crew Size', 'Below Minimum', 'Skeleton', 'Small', 'Medium', 'Large', 'Packed', 'Any']]
+
     const handleCrewChange = (e) => {
       dispatch(changeCrewParam(e.target.value));
       console.log(crewParam);
     }
-    //lable used to be here, but that made styling much harder
+    //label used to be here, but that made styling much harder
     return (
         <select onInput={handleCrewChange} id="Crew">
-          {crewParams.map((param, id) => {
+          {paramsWithNames[0].map((param, id) => {
             return (
               <option
               key={param + id}
               value={param}
-              >{param}
+              >{paramsWithNames[1][id]}
               </option>
             );
           })}
@@ -195,9 +195,9 @@ export function DryDock() {
             </div>
           </div>
           <div className='Available'>
-            <div>Mass:</div> <div>{avMass}</div>
-            <div>Power:</div> <div>{avPower}</div>
-            <div>Hardpoints:</div> <div>{avHard}</div>
+            <div>Mass:</div> <div className="Num">{avMass}</div>
+            <div>Power:</div> <div className="Num">{avPower}</div>
+            <div>Hardpoints:</div> <div className="Num">{avHard}</div>
           </div>
         </div>
       <div className='Outfit'>
