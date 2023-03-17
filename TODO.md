@@ -16,7 +16,7 @@
 * ~~when a ship is built, remove items from the shopping list~~ ``(DONE) Feb 27 2023``
 * ~~remove all button for the shopping list~~ ``(DONE) Feb 27 2023``
 * ~~let user select qualifier for amount of crew~~ ``(DONE) Feb 27 2023``
-* Add styling to the selectors, buttons, and displays
+* ~~Add styling to the selectors, buttons, and displays~~ ``(DONE) Feb 28``
 * quantity adjustor for items on the list
 
 ## Ship Section
@@ -25,6 +25,7 @@
 * ~~Use up remaining free mass and convert it to cargo space~~ ``(DONE) Feb 27 2023``
 * ~~Display cargo space differently like in the swn rulebook~~ ``(DONE) Feb 27 2023``
 * Add a way to edit each ship
+* Make sure any given ship has SOME kind of drive
 
 ## General Functions  
 
@@ -33,6 +34,13 @@
 ## Shipbuilder Section
 
 > This component is sort of obsolete as it is now. Rework it to make the semirandom ship generator.
+
+## Ship Generator Logic
+
+* Make sure stations do not get a spike drive assigned to them
+* Fix some ships mounting more fittings than they can power
+* Planetary parameter, ensuring atmospheric config, amphibious, cargolighter, or a ship bay.
+
 
 ## New sections to be made
 

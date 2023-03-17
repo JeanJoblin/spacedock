@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
@@ -9,8 +9,9 @@ import { changeHull, changeSelectedItem,
   selectPowerReq, selectTotalCost,
   removeFromShoppingList, selectMountableDefenses,
   selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName, selectCrewParam, changeCrewParam } from './dryDockSlice';
-import { getHullObj, getFittingObj, crewQuals } from '../../app/resources/genFunctions.js';
+import { getHullObj, getFittingObj, crewQuals, } from '../../app/resources/genFunctions.js';
 import { addShip } from '../Hanger/hangerSlice';
+import { genShip } from '../../app/resources/shipGen';
 import { PopoutList } from '../PopoutList/PopoutList';
 
 export function DryDock() {
@@ -66,6 +67,10 @@ export function DryDock() {
     }
   }
   
+  useEffect(() => {
+    dispatch(addShip(genShip()))
+  }, [])
+  
   const passShip = () => {
     console.log('crewParam in passShip: ', crewParam);
     dispatch(addShip({
@@ -75,7 +80,6 @@ export function DryDock() {
         freeMass: avMass,
         freePower: avPower,
         totalCost: totalCost,
-        sixMonth: (0.05 * totalCost),
         crewParam: crewParam,
       }
     ));
@@ -84,9 +88,6 @@ export function DryDock() {
   }
  
   const addAnyFitting = (e) => {
-    console.log(e);
-    console.log(e.target);
-    console.log(e.target.value);
     dispatch(changeSelectedItem(e.target.value));
   };
   const handleAddShopping = (e) => {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './ship.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {  selectHull } from './shipSlice';
+import {  selectHull, changeShipName, clearAll } from './shipSlice';
 import { hulls, fittings } from '../../app/resources/tables';
 import { getFittingObj, genCrewAmount } from '../../app/resources/genFunctions.js';
-import { deleteShip } from '../Hanger/hangerSlice';
+import { deleteShip, toggleEdit } from '../Hanger/hangerSlice';
 
 const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP', 'Hull Class', 'Crew Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
 
@@ -22,9 +22,14 @@ export function Ship(props) {
     freePower,
     id,
     cargoSetting,
+    editable,
   } = props;
 
   const dispatch = useDispatch();
+
+  const toggleEditThis = () => {
+    dispatch(toggleEdit(id));
+  }
 
   let currentHull = hull ? hull : hulls.FreeMerchant;
   let currentDefenses = [];
@@ -73,7 +78,10 @@ export function Ship(props) {
   cargoHandler.pushCargoSpace();
 //Sort all fittings passed in into respective arrays. if they have pure stat changes, add those to an array to be displayed
 allFittings.forEach((input) => {
-    const fitting = getFittingObj(input);
+    let fitting = input;
+    if(typeof(fitting) === 'string') {
+      fitting = getFittingObj(input);
+    }
     switch(fitting.name) {
       case 'Ablative Hull Compartements':
         extras.AC += 1;
@@ -147,14 +155,77 @@ allFittings.forEach((input) => {
     dispatch(deleteShip(e.target.value));
   }
 
+  const displayShipName = () => {
+    const changeName = (e) => {
+      dispatch(changeShipName(e.target.value));
+    }
+    if(editable) {
+      return (
+        <div>
+          <input value={name} onChange={changeName} placeholder="Ship Name" />
+        </div>
+      )
+    } else {
+      console.log('Name: ', name);
+      return (
+        <div className='Name'>
+          {name ? name : 'ShipName'}
+        </div>
+      )
+    }
+  }
+
+  const displayWeapons = () => {
+    // const deleteWeapon = (e) => {
+    //   dispatch(removeWeapon(e.target.value));
+    // }
+    if(editable) {
+      return (
+      <div className='ShipWeapons'>
+        <span className="Fitting">Weapons:</span>
+        <div className="FittingValWrapper">
+        {currentWeapons.length > 0 ? currentWeapons.map((weapon, ind) => {
+              return (
+                <button key={weapon.name}>
+                  <span key={weapon.name}>{displayNum(weapon)}{weapon.name}</span>
+                  <br/>
+                </button>
+              )
+            }) : <span>None</span>
+            }
+            <button>Add</button>
+        </div>
+      </div>
+      )
+    } else {
+      return (
+        <div className='ShipWeapons'>
+          <span className='Fitting'>Weapons:</span>
+          <div className='FittingValWrapper'>
+            {currentWeapons.length > 0 ? currentWeapons.map((weapon, ind) => {
+              return (
+                <div key={weapon.name}>
+                  <span key={weapon.name}>{displayNum(weapon)}{weapon.name} ({weapon.dmg}, {weapon.qualities}){ind + 1  !== currentWeapons.length ? ', ' : null }</span>
+                  <br/>
+                </div>
+              )
+            }) : <span>None</span>
+            }
+          </div>  
+        </div>
+      )
+    }
+  }
+
 //todo: make the max crew render differently from generated crew. Removed the + when current crew
 
   return (
     <div className='Ship'>
       <div className='ShipTitle'>
-        <span className='Name'>{name ? name : 'SHIPNAME' }</span>
+        {displayShipName()}
         <span className='Hull'>{currentHull.name}</span>
         <button onClick={removeShip} value={id}>delete</button>
+        <button onClick={toggleEditThis}>edit</button>
       </div>
       <hr/>
       <div className='ShipBody'>
@@ -173,20 +244,7 @@ allFittings.forEach((input) => {
         </div>
         <div className='ShipParts'>
           <hr/>
-          <div className='ShipWeapons'>
-            <span className='Fitting'>Weapons:</span>
-            <div className='FittingValWrapper'>
-              {currentWeapons.length > 0 ? currentWeapons.map((weapon, ind) => {
-                return (
-                  <div key={weapon.name}>
-                    <span key={weapon.name}>{displayNum(weapon)}{weapon.name} ({weapon.dmg}, {weapon.qualities}){ind + 1  !== currentWeapons.length ? ', ' : null }</span>
-                    <br/>
-                  </div>
-                )
-              }) : <span>None</span>
-            }
-            </div>  
-          </div>
+          {displayWeapons()}
           <hr/>
           <div className='ShipDefenses'>
             <span className='Fitting'>Defenses:</span>

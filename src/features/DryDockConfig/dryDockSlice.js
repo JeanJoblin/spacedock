@@ -7,6 +7,13 @@ const fighterMountable = ['Fighter'];
 const frigateMountable = ['Fighter', 'Frigate'];
 const cruiserMountable = ['Fighter', 'Frigate', 'Cruiser'];
 const capitalMountable = ['Fighter', 'Frigate', 'Cruiser', 'Capital'];
+ 
+export const mountable = {
+  Fighter: fighterMountable,
+  Frigate: frigateMountable,
+  Cruiser: cruiserMountable,
+  Capital: capitalMountable,
+}
 
 const capitalWeapons = Object.keys(weapons).map(weapon => capitalMountable.includes(weapons[weapon].class));
 const cruiserWeapons = Object.keys(weapons).map(weapon => cruiserMountable.includes(weapons[weapon].class));
@@ -29,7 +36,8 @@ const initialState = {
     weapon: Object.keys(weapons)[0],
     fitting: Object.keys(fittings)[2],
     defense: Object.keys(defenses)[1],
-    crewParam: crewQuals[0],
+    //CrewParam used to be crewQuals[0], but that started causing a reference error? genfunctions was initializing after this file?
+    crewParam: 'FullRange',
   },
   mountable: {
     weapon: fighterWeapons,

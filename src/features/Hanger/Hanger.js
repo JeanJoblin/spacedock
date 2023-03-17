@@ -25,6 +25,7 @@ export function Hanger() {
         freeMass={ship.freeMass}
         freePower={ship.freePower}
         cargoSetting={ship.cargoSetting}
+        editable={ship.editable}
         ></Ship>
     )
   });

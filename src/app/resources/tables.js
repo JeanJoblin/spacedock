@@ -10,4 +10,9 @@ const tables = {
   defenses: defenses,
 };
 
+
+export const weaponsArray = Object.keys(weapons).map(weapon => weapons[weapon]);
+export const defensesArray = Object.keys(defenses).map(defense => defenses[defense]);
+export const fittingsArray = Object.keys(fittings).map(fittings => fittings[fittings]);
+
 export default tables;

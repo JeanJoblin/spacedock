@@ -1,3 +1,4 @@
+import { produceWithPatches } from 'immer';
 import tables from './tables.js';
 
 // const hulls = require('./hulls.json');
@@ -6,6 +7,8 @@ import tables from './tables.js';
 // const defenses = require('./defenses.json');
 
 const { hulls, weapons, fittings, defenses} = tables;
+
+//Making weapons, defense, and fitting objs into array bc I don't understand how to make objects iterable
 
 export const getHullObj = (inputHullStr) => {
   //frequently, a string will be passed as a hull. Use this to turn it into an object.
@@ -81,7 +84,11 @@ export const genCrewAmount = (inputHull, qualifier = 'fullRange') => {
 export const correctCostsForClass = (fitting, hull) => {
   const costMulitpliers = [1, 10, 25, 100];
   const massMulitpliers = [1, 2, 3, 4];
-  const curFitting = getFittingObj(fitting);
+  console.log(`correcting cost of fitting`, fitting);
+  let curFitting = fitting;
+  if(typeof(fitting) === 'string') {
+    curFitting = getFittingObj(fitting);
+  }
   //console.log('hull:', hull);
   let curHull = hull;
   if(typeof(hull) === 'string') {
@@ -138,6 +145,8 @@ export const correctCostsForClass = (fitting, hull) => {
   };
   if(costMult) {
     cost = cost * costMulitpliers[multSel];
+  } else {
+    cost = + cost;
   };
   //console.log('cost:', cost)
   return {mass, power, cost};
@@ -174,3 +183,23 @@ export const crewQuals = ['fullRange', 'belowMin', 'skeleton', 'low', 'med', 'hi
 //     genCrewAmount(getHullObj(hull), qual);
 //   });
 // });
+
+
+  // //function for swapping the drive of a ship. Input level of new drive
+  // const refitDrive = (level) => {
+  //   const oldDrive = this.allFittings.forEach((fitting, ind) => {
+  //     if(fitting.includes('SpikeDrive')) {
+  //       let driveLevel = fitting.match(/\d/);
+  //       return {ind, driveLevel};
+  //     };
+  //   const old = correctCostsForClass(this.drives[oldDrive.driveLevel[0]]);
+  //   this.allFittings.filter((e, ind) => ind !== oldDrive.ind);
+  //   this.caps.free.mass += old.mass;
+  //   this.caps.free.power += old.power;
+  //   const newDrive = this.drives[level];
+  //   const newCosts = correctCostsForClass(newDrive);
+  //   this.caps.free.mass -= newCosts.mass;
+  //   this.caps.free.power -= newCosts.power;
+  //   this.allFittings.push(newDrive);
+  //   })
+  // }
