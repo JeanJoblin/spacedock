@@ -16,6 +16,12 @@ export const getRandom = (array) => {
 
 export const genShip = (role, params) => {
   //add params later
+  const cargoLevels = {
+    Fighter: 2,
+    Frigate: 20,
+    Cruiser: 200,
+    Capital: 2000,
+  };
   let hullParam;
   let crewParam;
   if(!role) {
@@ -43,22 +49,29 @@ export const genShip = (role, params) => {
   let driveLevel = role.driveBase;
   let allFittings = [];
   let finalDrive = null;
+  let cor = {};
   //Roll under driveUp (d100). Success: keep rolling, Fail: Stop rolling.
-  do {
-    if(Math.random() < role.driveUp) {
-      driveLevel++;
-      console.log('upgrading drive to level: ', driveLevel);
-    } else {
-      console.log('assigning final drive of level: ', driveLevel);
-      finalDrive = drives[driveLevel];
-    }
-  } while ( finalDrive === null );
-  //Add the upgraded drive to fittings list.
-  let cor = correctCostsForClass(finalDrive, hull);
-  mass -= cor.mass;
-  power -= cor.power;
-  cost += cor.cost;
-  allFittings.push(finalDrive);
+  if(!hull.name.includes('Station')) {
+    do {
+      if(Math.random() < role.driveUp) {
+        driveLevel++;
+        console.log('upgrading drive to level: ', driveLevel);
+      } else if(driveLevel === role.driveMax) {
+        console.log('Hit drive limit. Drive Level: ', driveLevel);
+        finalDrive = drives[driveLevel];
+      } else {
+        console.log('assigning final drive of level: ', driveLevel);
+        finalDrive = drives[driveLevel];
+      }
+    } while ( finalDrive === null && driveLevel < role.driveMax);
+    //Add the upgraded drive to fittings list.
+    cor = correctCostsForClass(finalDrive, hull);
+    mass -= cor.mass;
+    power -= cor.power;
+    cost += cor.cost;
+    allFittings.push(finalDrive);
+  };
+  let cargoLighter = false;
   //Drive has been selected. Outfit the ship with weapons defenses and fittings.
   const canDupe = [...weaponsArray, defenses.FoxerDrones, fittings.AutotargetingSystem, fittings.CargoLighter, fittings.CargoSpace, fittings.ColdSleepPods, fittings.DropPod, fittings.ExodusBay, fittings.ExtendedStores, fittings.HydroponicProduction, fittings.ShipBayFighter, fittings.ShipBayFrigate, fittings.ShiptenderMount, fittings.SmugglersHold,  ];
   console.table('mountable: ', mountable);
@@ -71,36 +84,44 @@ export const genShip = (role, params) => {
         if(!canDupe.includes(fitting)) {
           console.log(`${fitting.name} is already on allFittings list`);
           dupe = true;
-        }
-      }
+        }};
+      if(
+        (fitting.name === 'Atmospheric Configuration' && allFittings.includes(fittings.AmphibiousOperation)) ||
+        (fitting.name === 'Amphibious Operation' && allFittings.includes(fittings.AtmosphericConfiguration))) {
+          console.log('A planetary interface fitting is already equipped');
+          dupe = true;
+      };
       const req = correctCostsForClass(fitting, hull);
       console.log('classes mountable by hull class: ', mountable[hull.class]);
       console.log('fitting class', fitting.class);
       const validCheck = {
+        name: fitting.name,
         power: req.power <= power,
         mass: req.mass <= mass,
         mountable: mountable[hull.class].includes(fitting.class),
         hardpoints: fitting.hardpoints ? fitting.hardpoints <= hardpoints : 'fitting reqs none',
         noDupe: !dupe,
+        enoughCargo: fitting.name === 'Cargo Lighter' ? cargoLighter : true,
       }
       console.table(validCheck);
       return req.power <= power &&
       req.mass <= mass &&
       mountable[hull.class].includes(fitting.class) &&
       !dupe &&
-      (fitting.hardpoints ? fitting.hardpoints <= hardpoints : true);
+      (fitting.hardpoints ? fitting.hardpoints <= hardpoints : true)&&
+      (fitting.name === 'Cargo Lighter' ? cargoLighter : true);
     });
     console.log('Returning these as valid: ', validFittings);
     return validFittings;
   }
+  let retry = 0;
   do {
     console.log('ENTERED THE DO WHILE');
     let fitting;
-    let chance = Math.random();
-    if(Math.random() < role.freq[0]) {
+    if(Math.random() < role.freq.weapon) {
         console.log('chosing a weapon');
         fitting = filterValidFittings(role.weapons, hull);
-    } else if(Math.random() < role.freq[1]) {
+    } else if(Math.random() < role.freq.defense) {
       // fitting = role.defenses.filter(defense => {
         // console.log('CHOOSING A DEFENSE');
         // const req = correctCostsForClass(defense, hull);
@@ -136,9 +157,14 @@ export const genShip = (role, params) => {
         hardpoints -= toAdd.hardpoints;
       }
       allFittings.push(toAdd);
-      console.table(allFittings);
+      let cargoSpace = allFittings.filter(fitting => fitting.name === 'Cargo Space').length * cargoLevels[hull.class];
+      if(cargoSpace > 200) {
+        cargoLighter = true;
+      }
+    } else {
+      retry++;
     }
-  } while ( mass > 0 && power > 0 && hardpoints > 0 && toAdd !== undefined);
+  } while ( mass > 0 && power > 0 && hardpoints > 0 && retry < 3);
 
   const ship = {
     name:  getRandom(['FRANK', 'BOB', 'JIM', 'JAMES', 'KEVIN', 'OSCAR', 'DWIGHT', 'PAM', 'STANLEY', 'MICHAEL',]),
@@ -148,7 +174,8 @@ export const genShip = (role, params) => {
     freePower: power,
     totalCost: cost,
     crewParam: crewParam,
+    role: role.name,
   };
-  console.table(ship);
+  console.log('This is the generated ship: ', ship);
   return ship;
 };

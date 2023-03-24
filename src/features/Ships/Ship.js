@@ -23,6 +23,7 @@ export function Ship(props) {
     id,
     cargoSetting,
     editable,
+    role,
   } = props;
 
   const dispatch = useDispatch();
@@ -75,6 +76,7 @@ export function Ship(props) {
   }
 
   let allFittings = passedFittings.slice();
+  console.log('allFittings:', allFittings);
   cargoHandler.pushCargoSpace();
 //Sort all fittings passed in into respective arrays. if they have pure stat changes, add those to an array to be displayed
 allFittings.forEach((input) => {
@@ -122,6 +124,15 @@ allFittings.forEach((input) => {
     }
   });
 
+  //Test bit for checking role of a ship from generation:
+  const dispRole = (role) => {
+    return (
+      <div className='Role'>
+        Role: {role}
+      </div>
+    )
+  };
+
   //used to display current crew only after crew min/max
   const isCrew = (key) => {
     if(key === 'Crew') {
@@ -149,11 +160,11 @@ allFittings.forEach((input) => {
         return `${numOfFitting[fitting.name]}x `;
       }
     }
-  }
+  };
 
   const removeShip = (e) => {
     dispatch(deleteShip(e.target.value));
-  }
+  };
 
   const displayShipName = () => {
     const changeName = (e) => {
@@ -173,7 +184,7 @@ allFittings.forEach((input) => {
         </div>
       )
     }
-  }
+  };
 
   const displayWeapons = () => {
     // const deleteWeapon = (e) => {
@@ -219,6 +230,8 @@ allFittings.forEach((input) => {
 
 //todo: make the max crew render differently from generated crew. Removed the + when current crew
 
+
+//Return for the full React component
   return (
     <div className='Ship'>
       <div className='ShipTitle'>
@@ -242,6 +255,7 @@ allFittings.forEach((input) => {
               </div>
           )})}
         </div>
+        {role ? dispRole(role) : null}
         <div className='ShipParts'>
           <hr/>
           {displayWeapons()}
@@ -264,7 +278,7 @@ allFittings.forEach((input) => {
             <div className='FittingValWrapper'>
               {currentFittings.length > 0 ? currentFittings.map((fitting, ind) => {
                 return (
-                  <span key={fitting.name}>{displayNum(fitting)} {fitting.name}{ind + 1  !== currentFittings.length ? ', ' : null }{cargoHandler.massToCargo(fitting.name)}
+                  <span key={fitting.name}>{displayNum(fitting)} {fitting.name}{cargoHandler.massToCargo(fitting.name)}{ind + 1  !== currentFittings.length ? ', ' : null }
                   </span>
                 )
               })

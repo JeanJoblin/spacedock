@@ -166,14 +166,17 @@ export const dryDockSlice = createSlice({
     },
     changeCrewParam(state, action) {
       state.selected.crewParam = action.payload;
-    }
+    },
+    addSpikeDrive(state) {
+      state.shoppingList.push('SpikeDrive1');
+    },
   }
 });
 
 export const {
   changeHull, changeSelectedItem, 
   addSelectedToShoppingList, removeFromShoppingList, changeName, clearShoppingList,
-  clearName, changeCrewParam,
+  clearName, changeCrewParam, addSpikeDrive,
 } = dryDockSlice.actions;
 export const selectShoppingList = (state) => state.dryDock.shoppingList;
 export const selectCrewParam = (state) => state.dryDock.selected.crewParam;

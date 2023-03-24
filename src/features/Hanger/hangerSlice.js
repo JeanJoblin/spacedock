@@ -11,9 +11,11 @@ export const hangerSlice = createSlice({
   initialState,
   reducers: {
     addShip: (state, action) => {
-      console.log('action.payload: ', action.payload);
       let crewParam;
       console.log('passed ship: ', action.payload)
+      let drive = false;
+      let passedFittings = action.payload.fittings;
+      console.log(passedFittings);
       if(!action.payload.crewParam) {
         crewParam = 'fullRange';
       } else {
@@ -31,24 +33,32 @@ export const hangerSlice = createSlice({
       ship.maint = 0.05 * action.payload.totalCost;
       ship.crew = crew;
       ship.pay = crew * 120 * 365;
-      ship.fittings = action.payload.fittings;
+      if(!hull.name.includes('Station')) {
+        if(typeof(action.payload.fittings[0]) === 'string') {
+          action.payload.fittings.forEach((fitting) => {
+            if(fitting.includes('SpikeDrive')){
+              drive = true;
+            }
+          });
+          if(drive === true) {
+            ship.fittings = passedFittings;
+          } else {
+            ship.fittings = ['SpikeDrive1', ...passedFittings];
+          }
+        } else {
+          ship.fittings = action.payload.fittings;
+        };
+      }
       ship.freeMass = action.payload.freeMass;
       ship.freePower = action.payload.freePower;
       ship.hull = hull;
       //let this be passed in to configure auto mass to cargo
       ship.cargoSetting = true;
       ship.editable = false;
-      let drive = false;
-      ship.fittings.forEach(fitting => {
-        console.log('fitting Name: ', fitting.name)
-        if(fitting.name.match(/Spike Drive/) !== null) {
-          drive = true;
-        }
-      });
-      if(drive === false) {
-        ship.fittings.push('SpikeDrive1')
-      }
       console.log('ship: ', ship);
+      if(action.payload.role) {
+        ship.role = action.payload.role;
+      }
       state.ships = [...state.ships, ship];
     },
     deleteShip: (state, action) => {

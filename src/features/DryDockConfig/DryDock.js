@@ -8,7 +8,7 @@ import { changeHull, changeSelectedItem,
   selectHull, selectMassReq,
   selectPowerReq, selectTotalCost,
   removeFromShoppingList, selectMountableDefenses,
-  selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName, selectCrewParam, changeCrewParam } from './dryDockSlice';
+  selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName, selectCrewParam, changeCrewParam, addSpikeDrive } from './dryDockSlice';
 import { getHullObj, getFittingObj, crewQuals, } from '../../app/resources/genFunctions.js';
 import { addShip } from '../Hanger/hangerSlice';
 import { genShip } from '../../app/resources/shipGen';
@@ -73,6 +73,19 @@ export function DryDock() {
   
   const passShip = () => {
     console.log('crewParam in passShip: ', crewParam);
+    console.log('Shopping list to be passed: ', shoppingList);
+    // let drive = false;
+    // shoppingList.forEach(fitting => {
+    //   if(fitting.includes('SpikeDrive')) {
+    //     console.log("Found a spike drive!");
+    //     drive = true;
+    //   }
+    // });
+    // if(drive === false) {
+    //   console.log('I should be pushing a drive');
+    //   dispatch(addSpikeDrive());
+    // };
+    console.log('Here is the shoppingList to be fittings: ', shoppingList);
     dispatch(addShip({
         name: name,
         hull: hull,
@@ -157,12 +170,27 @@ export function DryDock() {
     const keys = Object.keys(list);
     const type = list[keys[0]].type;
     console.log('type: ', type);
+    let newList = keys.map((item, ind) => {
+      let disabled = (mountable[type][ind] ? (hull.includes('Station') && item.includes('SpikeDrive')) : true )
+      return [item, disabled];
+    });
+    let sortedList = newList.sort((a, b) => {
+      if(a[1] === true && b[1] === false) {
+        return 1;
+      };
+      if(a[1] === false && b[1] === true) {
+        return -1;
+      };
+      if(a[1] === b[1]) {
+        return 0;
+      };
+    });
     return (
       <select onInput={addAnyFitting} id={type + 's'}>
-      {Object.keys(list).map((key, ind) => {
+      {sortedList.map((key, ind) => {
           return (
-          <option key={key+ind} value={key} disabled={mountable[type][ind] ? false : true}>
-          {list[key].name}
+          <option key={key[0]+ind} value={key[0]} disabled={key[1]}>
+          {list[key[0]].name}
           </option>
         )
       })}

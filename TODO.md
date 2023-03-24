@@ -18,6 +18,7 @@
 * ~~let user select qualifier for amount of crew~~ ``(DONE) Feb 27 2023``
 * ~~Add styling to the selectors, buttons, and displays~~ ``(DONE) Feb 28``
 * quantity adjustor for items on the list
+* ~~Sort fitting options to have enabled come before disabled~~ `(DONE) Mar 24 2023`
 
 ## Ship Section
 
@@ -25,7 +26,7 @@
 * ~~Use up remaining free mass and convert it to cargo space~~ ``(DONE) Feb 27 2023``
 * ~~Display cargo space differently like in the swn rulebook~~ ``(DONE) Feb 27 2023``
 * Add a way to edit each ship
-* Make sure any given ship has SOME kind of drive
+* ~~Make sure any given ship has SOME kind of drive~~ `(DONE) Mar 23 2023`
 
 ## General Functions  
 
@@ -37,10 +38,13 @@
 
 ## Ship Generator Logic
 
-* Make sure stations do not get a spike drive assigned to them
-* Fix some ships mounting more fittings than they can power
+* ~~Make sure stations do not get a spike drive assigned to them~~ `(DONE) Mar 24 2023`
+* ~~Fix some ships mounting more fittings than they can power~~ ``(DONE) Mar 20 2023``
 * Planetary parameter, ensuring atmospheric config, amphibious, cargolighter, or a ship bay.
-
+* Hull specific fittings (eg, all Frigates have a chance to have atmospheric config)
+* Parameter for how many ships to generate
+* Special role specific processes for generating things like psitech for a research vessel
+* ~~Miss counter. Let a fitting to add be undefined x times before no longer trying~~ `(DONE) Mar 23 2023`
 
 ## New sections to be made
 
