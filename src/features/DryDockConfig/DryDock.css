@@ -1,3 +1,95 @@
+
+.DryDock {
+  display: flex;
+  max-width: 90%;
+  flex-wrap: nowrap;
+  flex-flow: column;
+  justify-content: space-evenly;
+  margin: auto;
+}
+
+.Num {
+  font-family: OrbitronBlack;
+}
+
+.Options {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.Frame {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 270px;
+  margin-right: 5px;
+}
+
+label {
+  margin-right: 0.5em;
+}
+
+@media (max-width: 555px) {
+  .Options {
+    flex-direction: column;
+  }
+  .Frame, .Available{
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .Available{
+    width: 285px;
+    margin-bottom: 3px;
+  }
+}
+
+@media (max-width: 300px) {
+  .DryDock, option, button, select{
+    font-size:  3.75vmin;
+    font-weight: 600;
+  }
+  .Available {
+    width: 80vmin;
+  }
+  select, button, input {
+    margin-bottom: 3px;
+  }
+}
+
+
+
+
+.Frame .Inputs, .Frame .Available {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: right;
+}
+
+.Frame .Inputs div, .Frame .Available div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.Outfit {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  max-width: 330px;
+}
+
+.Outfit div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: right;
+}
+
 .Shopping {
   display: flex;
 }
@@ -10,6 +102,8 @@
 .Receipt {
   flex: 1.5 1 0;
   break-after: always;
+  text-align: left;
+  margin-left: 5vmin;
 }
 
 .Disallowed {
@@ -28,7 +122,16 @@
   top: -5px;
 }
 
-.BuildShip {
-  height: max-content;
-  width: max-content;
+.BuildShip, .ClearShopping{
+  width: 10vmin;
+  max-width: 20vmin;
+  flex: 1 1;
+  margin-left: 4vmin;
+  margin-right: 4vmin;
+}
+
+.ListButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

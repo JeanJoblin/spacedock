@@ -1,0 +1,57 @@
+.PopOut {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Hider:not(:hover) .cardHolder, .Hider:not(:hover) .Pointy {
+  display: none;
+}
+
+.cardHolder {
+  display: flex;
+  flex-wrap: wrap;
+  width: 360px;
+  min-height: 200px;
+  background-color: black;
+  position: relative;
+  top: 25px;
+  right: 245px;
+  border-radius: 5px;
+  border: 2px solid white;
+}
+
+.Pointy {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid white;
+  position: relative;
+  top: 25px;
+  left: 20px;
+  z-index: 2;
+}
+
+.Hider {
+  background-color: black;
+  border: 2px solid white;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.weaponCard, .fittingCard, .defenseCard {
+  color: white;
+  border: 1px solid white;
+  border-radius: 3px;
+  margin: 2px;
+  padding: 1px;
+  flex: 1 1 auto;
+  display: flex;
+  height: 25px;
+  background-color: black;
+}

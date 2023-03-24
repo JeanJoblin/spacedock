@@ -10,6 +10,7 @@ const weapons = require('../../app/resources/weapons.json');
 
 
 const initialState = {
+  name: '',
   equippedFittings: ['SpikeDrive1'],
   isInvalid: false,
   currentHull: hulls.FreeMerchant,
@@ -24,6 +25,20 @@ export const shipSlice = createSlice({
   name: 'ship',
   initialState,
   reducers: {
+    clearAll: (state) => {
+      state.name = '';
+      state.equippedFittings= [];
+      state.isInvalid = false;
+      state.currentHull = {};
+      state.FreePower = 0;
+      state.FreeMass = 0;
+      state.currentCrew = 0;
+      state.totalCost = 0;
+      state.sixMonthMainenance = 0;
+    },
+    changeShipName: (state, action) => {
+      state.name = action.payload;
+    },
     rehull: (state, action) => {
       console.log('action.payload:', action.payload)
       const newHull = getHullObj(action.payload);
@@ -54,10 +69,11 @@ export const shipSlice = createSlice({
   }
 });
 
+export const selectShipName = (state) => state.ship.name;
 export const selectHull = (state) => state.ship.currentHull;
 export const selectTotalCost = (state) => state.ship.totalCost;
 export const selectSixMonth = (state) => state.ship.sixMonthMainenance;
 
-export const { rehull, installFitting } = shipSlice.actions;
+export const { rehull, installFitting, changeShipName, clearAll } = shipSlice.actions;
 
 export default shipSlice.reducer;

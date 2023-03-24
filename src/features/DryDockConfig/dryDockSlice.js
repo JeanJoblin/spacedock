@@ -1,12 +1,19 @@
 import { createSlice, } from '@reduxjs/toolkit';
 import { hulls, weapons, fittings, defenses } from '../../app/resources/tables';
-import { getFittingObj, getHullObj, correctCostsForClass } from '../../app/resources/genFunctions.js';
+import { getFittingObj, getHullObj, correctCostsForClass, crewQuals } from '../../app/resources/genFunctions.js';
 
 //This slice is to handle selecting and adding fittings, weapons and defenses to a ship. It may be the slice that deals with generating new ships, but that might got to a spaceport slice or smth.
 const fighterMountable = ['Fighter'];
 const frigateMountable = ['Fighter', 'Frigate'];
 const cruiserMountable = ['Fighter', 'Frigate', 'Cruiser'];
 const capitalMountable = ['Fighter', 'Frigate', 'Cruiser', 'Capital'];
+ 
+export const mountable = {
+  Fighter: fighterMountable,
+  Frigate: frigateMountable,
+  Cruiser: cruiserMountable,
+  Capital: capitalMountable,
+}
 
 const capitalWeapons = Object.keys(weapons).map(weapon => capitalMountable.includes(weapons[weapon].class));
 const cruiserWeapons = Object.keys(weapons).map(weapon => cruiserMountable.includes(weapons[weapon].class));
@@ -29,12 +36,15 @@ const initialState = {
     weapon: Object.keys(weapons)[0],
     fitting: Object.keys(fittings)[2],
     defense: Object.keys(defenses)[1],
+    //CrewParam used to be crewQuals[0], but that started causing a reference error? genfunctions was initializing after this file?
+    crewParam: 'FullRange',
   },
   mountable: {
     weapon: fighterWeapons,
     defense: fighterDefenses,
     fitting: fighterFittings,
   },
+  name: '',
   shoppingList: [],
   totalCost: 0,
   massReq: 0,
@@ -51,6 +61,12 @@ export const dryDockSlice = createSlice({
   name: 'dryDock',
   initialState,
   reducers: {
+    changeName: (state, action) => {
+      state.name = action.payload;
+    },
+    clearName: (state) => {
+      state.name = '';
+    },
     changeHull: (state, action) => {
       state.selected.hull = action.payload;
       const hullObj = getHullObj(action.payload);
@@ -136,16 +152,39 @@ export const dryDockSlice = createSlice({
         state.available.hard += hardNum;
         state.hardReq -= hardNum;
       }
-    }
+    },
+    clearShoppingList(state) {
+      state.shoppingList = [];
+      state.massReq = 0;
+      state.powerReq = 0;
+      state.hardReq = 0;
+      const hullObj = getHullObj(state.selected.hull);
+      state.available.hard = hullObj.hardpoints;
+      state.available.mass = hullObj.mass;
+      state.available.power = hullObj.power;
+      state.totalCost = 0;
+    },
+    changeCrewParam(state, action) {
+      state.selected.crewParam = action.payload;
+    },
+    addSpikeDrive(state) {
+      state.shoppingList.push('SpikeDrive1');
+    },
   }
 });
 
-export const { changeHull, changeSelectedItem, addSelectedToShoppingList, removeFromShoppingList} = dryDockSlice.actions;
+export const {
+  changeHull, changeSelectedItem, 
+  addSelectedToShoppingList, removeFromShoppingList, changeName, clearShoppingList,
+  clearName, changeCrewParam, addSpikeDrive,
+} = dryDockSlice.actions;
 export const selectShoppingList = (state) => state.dryDock.shoppingList;
+export const selectCrewParam = (state) => state.dryDock.selected.crewParam;
 export const selectHull = (state) => state.dryDock.selected.hull;
 export const selectMassReq = (state) => state.dryDock.massReq;
 export const selectPowerReq = (state) => state.dryDock.powerReq;
 export const selectTotalCost = (state) => state.dryDock.totalCost;
+export const selectName = (state) => state.dryDock.name;
 export const selectHardReq = (state) => state.dryDock.hardReq;
 export const selectAvPower = (state) => state.dryDock.available.power;
 export const selectAvMass = (state) => state.dryDock.available.mass;
