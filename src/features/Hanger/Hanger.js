@@ -9,8 +9,6 @@ export function Hanger() {
   const ships = useSelector(selectShips);
  
   const renderShips = ships.map((ship, ind) => {
-    console.log('pushing ship with ind:', ind);
-    
     return (
       <Ship 
         passedFittings={ship.fittings}

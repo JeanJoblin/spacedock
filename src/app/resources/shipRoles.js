@@ -5,9 +5,9 @@ const todo = [
 'Cargo',
 ];
 
-export const shipRoles = [
-  {
-    name: 'pirate',
+export const shipRoles = {
+  pirate: {
+    name: 'Pirate',
     driveBase: 1,
     driveUp: 0.25,
     driveMax: 6,
@@ -34,8 +34,8 @@ export const shipRoles = [
       defense: 0.4,
     },
   },
-  {
-    name: 'trader',
+  trader: {
+    name: 'Trader',
     driveBase: 2,
     driveUp: 0.20,
     driveMax: 4,
@@ -57,8 +57,8 @@ export const shipRoles = [
       defense: 0.2,
     },
   },
-  {
-    name: 'explorer',
+  explorer: {
+    name: 'Explorer',
     driveBase: 2,
     driveUp: 0.4,
     driveMax: 5,
@@ -103,8 +103,8 @@ export const shipRoles = [
       defense: 0.15,
     },
   },
-  {
-    name: 'passenger',
+  passenger: {
+    name: 'Passenger',
     driveBase: 1,
     driveUp: 0.2,
     driveMax: 4,
@@ -145,8 +145,8 @@ export const shipRoles = [
       defense: 0.25,
     },
   },
-  {
-    name: 'security',
+  security: {
+    name: 'Security',
     driveBase: 1,
     driveUp: 0.33,
     driveMax: 3,
@@ -190,8 +190,8 @@ export const shipRoles = [
       defense: 0.25,
     },
   },
-  {
-    name: 'research',
+  research: {
+    name: 'Research',
     driveBase: 1,
     driveUp: 0.35,
     driveMax: 6,
@@ -235,8 +235,8 @@ export const shipRoles = [
       defense: 0.15,
     },
   },
-  {
-    name: 'refugee',
+  refugee: {
+    name: 'Refugee',
     driveBase: 1,
     driveUp: 0.18,
     driveMax: 6,
@@ -272,8 +272,8 @@ export const shipRoles = [
       defense: 0.1,
     },
   },
-  {
-    name: 'colony',
+  colony: {
+    name: 'Colony',
     driveBase: 1,
     driveUp: 0.33,
     driveMax: 3,
@@ -318,8 +318,8 @@ export const shipRoles = [
       defense: 0.1,
     },
   },
-  {
-    name: 'mining',
+  mining: {
+    name: 'Mining',
     driveBase: 1,
     driveUp: 0.15,
     driveMax: 4,
@@ -359,8 +359,8 @@ export const shipRoles = [
       defense: 0.2,
     },
   },
-  {
-    name: 'salvage',
+  salvage: {
+    name: 'Salvage',
     driveBase: 1,
     driveUp: 0.125,
     driveMax: 4,
@@ -401,8 +401,8 @@ export const shipRoles = [
       defense: 0.1,
     },
   },
-  {
-    name: 'smuggler',
+  smuggler: {
+    name: 'Smuggler',
     driveBase: 1,
     driveUp: 0.4,
     driveMax: 4,
@@ -436,8 +436,8 @@ export const shipRoles = [
       defense: 0.15,
     },
   },
-  {
-    name: 'courier',
+  courier: {
+    name: 'Courier',
     driveBase:  2,
     driveUp: 0.25,
     driveMax: 5,
@@ -469,8 +469,8 @@ export const shipRoles = [
       defense: 0.15,
     },
   },
-  {
-    name: 'yacht',
+  yacht: {
+    name: 'Yacht',
     driveBase:  1,
     driveUp: 0.2,
     driveMax: 6,
@@ -503,8 +503,8 @@ export const shipRoles = [
       defense: 0.1,
     },
   },
-  {
-    name: 'militarytransport',
+  militarytransport: {
+    name: 'Military Transport',
     driveBase: 2,
     driveUp: 0.3,
     driveMax: 4,
@@ -546,8 +546,8 @@ export const shipRoles = [
       defense: 0.3
     },
   },
-  {
-    name: 'racer',
+  racer: {
+    name: 'Racer',
     driveBase:  3,
     driveUp:  0.2,
     driveMax: 6,
@@ -576,8 +576,8 @@ export const shipRoles = [
       defense: 0,
     },
   },
-  {
-    name: 'warship',
+  warship: {
+    name: 'Warship',
     driveBase: 2,
     driveUp: 0.3,
     driveMax: 4,
@@ -634,8 +634,8 @@ export const shipRoles = [
       defense: 0.6,
     },
   },
-  {
-    name: 'bountyhunter',
+  bountyhunter: {
+    name: 'Bounty Hunter',
     driveBase:  1,
     driveUp: 0.33,
     driveMax: 3,
@@ -679,7 +679,7 @@ export const shipRoles = [
       defense: 0.6,
     },
   },
-];
+};
 
 /*
 const template = 

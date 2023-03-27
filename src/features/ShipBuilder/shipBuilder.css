@@ -1,0 +1,20 @@
+.ShipBuilder {
+  align-items: center;
+}
+.Container {
+  display: flex;
+  justify-content: space-around;
+  max-width: 30%;
+  margin: auto;
+}
+
+.Names, .Values {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.Names {
+  text-align: right;
+  margin-right: 0.5em;
+}

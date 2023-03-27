@@ -16,6 +16,7 @@ function App() {
       </header>
       <h1>SPACEDOCK ....,,..,,.,..</h1>
         {/* <PopoutList/> */}
+        <ShipBuilder />
         <DryDock />
         <Hanger />
     </div>

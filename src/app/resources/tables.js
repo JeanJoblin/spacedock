@@ -71,6 +71,15 @@ export const militaryWeapons = [
   weapons.MagSpikeArray,
   weapons.Gravcannon,
   weapons.MassCannon,
-]
+];
+
+export const drivesArray = [
+  fittings.SpikeDrive1,
+  fittings.SpikeDrive2,
+  fittings.SpikeDrive3,
+  fittings.SpikeDrive4,
+  fittings.SpikeDrive5,
+  fittings.SpikeDrive6,
+];
 
 export default tables;

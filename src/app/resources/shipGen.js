@@ -25,7 +25,7 @@ export const genShip = (role, params) => {
   let hullParam;
   let crewParam;
   if(!role) {
-    role = getRandom(shipRoles);
+    role = shipRoles[getRandom(Object.keys(shipRoles))];
   };
   if(!hullParam) {
     hullParam = getRandom(role.hulls);

@@ -24,11 +24,12 @@ const massMulitpliers = [1, 2, 3, 4];
 // };
 
 const initialState = {
-  hull: hulls.FreeMerchant,
-  equippedFittings: ['SpikeDrive1'],
-  isInvalid: false,
-  freePower: 10,
-  freeMass: 15,
+  params: {
+    role: null,
+    hull: null,
+    crew: null,
+    drive: null,
+  }
 };
 
 
@@ -36,33 +37,14 @@ export const shipBuilderSlice = createSlice({
   name: 'shipBuilder',
   initialState,
   reducers: {
-    addFitting: (state, action) => {
-      const fitting = action.payload;
-      let fittingObj;
-      if(typeof fitting === 'string') {
-        fittingObj = getFittingObj(fitting);
-      } else {
-        fittingObj = fitting;
-      }
-      state.equippedFittings = [...state.equippedFittings, fitting];
-    },
-    changeHull: (state, action) => {
-      let newHull = action.payload;
-      if(typeof(newHull) === 'string') {
-        newHull = getHullObj(newHull);
-      }
-      state.hull = newHull;
-    },
-
+    changeParam: (state, action) => {
+      console.log('Change Param payload', action.payload);
+      state.params[action.payload.target] = action.payload.value;
+    }
   } 
 });
 
-export const {addFitting, addFittingArr} = shipBuilderSlice.actions;
-export const selectFittings = (state) => state.shipBuilder.fittings;
-export const selectWeapons = (state) => state.shipBuilder.weapons;
-export const selectDefenses = (state) => state.shipBuilder.defenses;
-export const selectHulls = (state) => state.shipBuilder.hulls;
-export const selectEquippedFittings = (state) => state.shipBuilder.equippedFittings;
+export const { changeParam, } = shipBuilderSlice.actions;
 export default shipBuilderSlice.reducer;
 
 
