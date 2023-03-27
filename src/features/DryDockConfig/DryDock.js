@@ -143,7 +143,7 @@ export function DryDock() {
 
   //Crew size selector mini-component
   const crewSelector = () => {
-    const paramsWithNames = [crewQuals, ['Crew Size', 'Below Minimum', 'Skeleton', 'Small', 'Medium', 'Large', 'Packed', 'Any']]
+    const paramsWithNames = [crewQuals, ['Crew Size', 'Below Minimum', 'Skeleton', 'Low', 'Medium', 'High', 'Packed', 'Any']]
 
     const handleCrewChange = (e) => {
       dispatch(changeCrewParam(e.target.value));

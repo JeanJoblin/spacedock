@@ -4,11 +4,11 @@
 .Container {
   display: flex;
   justify-content: space-around;
-  max-width: 30%;
+  max-width: 300px;
   margin: auto;
 }
 
-.Names, .Values {
+.Names, .Values, .Checks {
   display: flex;
   flex-direction: column;
   justify-content: space-around;

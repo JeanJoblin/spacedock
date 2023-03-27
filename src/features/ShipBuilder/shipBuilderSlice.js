@@ -1,6 +1,6 @@
 import { createSlice, current } from '@reduxjs/toolkit';
-
-import { hulls, weapons, fittings, defenses } from '../../app/resources/tables';
+import { shipRoles } from '../../app/resources/shipRoles';
+import { hulls, weapons, fittings, defenses, drives } from '../../app/resources/tables';
 import { getFittingObj, getHullObj } from '../../app/resources/genFunctions.js';
 
 const costMulitpliers = [1, 10, 25, 100];
@@ -23,12 +23,19 @@ const massMulitpliers = [1, 2, 3, 4];
 //   }
 // };
 
+
 const initialState = {
   params: {
-    role: null,
-    hull: null,
-    crew: null,
-    drive: null,
+    role: shipRoles.pirate,
+    hull: hulls.StrikeFighter,
+    crew: 'Full Range',
+    drive: drives[1],
+  },
+  required: {
+    role: false,
+    hull: false,
+    crew: false,
+    drive: false,
   }
 };
 
@@ -38,13 +45,22 @@ export const shipBuilderSlice = createSlice({
   initialState,
   reducers: {
     changeParam: (state, action) => {
-      console.log('Change Param payload', action.payload);
+      console.log(`Changing param ${action.payload.target} to ${action.payload.value}`);
       state.params[action.payload.target] = action.payload.value;
-    }
+    },
+    toggleRequired: (state, action) => {
+      if(state.required[action.payload] === false){
+        state.required[action.payload] = true;
+      } else {
+        state.required[action.payload] = false;
+      }
+    },
   } 
 });
 
-export const { changeParam, } = shipBuilderSlice.actions;
+export const { changeParam, toggleRequired} = shipBuilderSlice.actions;
+export const selectReqs = (state) => state.shipBuilder.required;
+export const selectParams = (state) => state.shipBuilder.params;
 export default shipBuilderSlice.reducer;
 
 

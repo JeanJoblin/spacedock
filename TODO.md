@@ -41,11 +41,17 @@
 
 * ~~Make sure stations do not get a spike drive assigned to them~~ `(DONE) Mar 24 2023`
 * ~~Fix some ships mounting more fittings than they can power~~ ``(DONE) Mar 20 2023``
-* Parameter for how many ships to generate
 * ~~Miss counter. Let a fitting to add be undefined x times before no longer trying~~ `(DONE) Mar 23 2023`
 * Special role specific processes for generating things like psitech for a research vessel
 * Hull specific fittings (eg, all Frigates have a chance to have atmospheric config)
 * Planetary parameter, ensuring atmospheric config, amphibious, cargolighter, or a ship bay.
+* Parameter for how many ships to generate
+
+## Bugs to work out
+
+* ~~Params not being passed properly~~ `(DONE) Mar 27 2023`
+* Cargo space reading incorrectly
+* Generator Params can force an invalid ship
 
 ## New sections to be made
 
