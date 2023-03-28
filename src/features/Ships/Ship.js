@@ -27,11 +27,11 @@ export function Ship(props) {
   } = props;
 
   const dispatch = useDispatch();
-
+  let cargoSpaceAmount = passedFittings.filter(fit => fit === 'CargoSpace' || fit?.name === 'Cargo Space').length;
   const toggleEditThis = () => {
     dispatch(toggleEdit(id));
   }
-
+  let allFittings = [];
   let currentHull = hull ? hull : hulls.FreeMerchant;
   let currentDefenses = [];
   let currentWeapons = [];
@@ -52,7 +52,7 @@ export function Ship(props) {
   const cargoHandler = {
     //cargoConvert currently being passed as true from hanger
     cargoConvert: cargoSetting,
-    tonnage: freeMass * hullTonnage[hull.class],
+    tonnage: (cargoSpaceAmount + freeMass) * hullTonnage[hull.class],
     mass() {
       if(cargoHandler.cargoConvert === true) {
         return 0;
@@ -75,8 +75,9 @@ export function Ship(props) {
     }
   }
 
-  let allFittings = passedFittings.slice();
+  allFittings = passedFittings.slice();
   console.log('allFittings:', allFittings);
+  console.log(cargoHandler.tonnage);
   cargoHandler.pushCargoSpace();
 //Sort all fittings passed in into respective arrays. if they have pure stat changes, add those to an array to be displayed
 allFittings.forEach((input) => {

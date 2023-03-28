@@ -475,7 +475,7 @@ export const shipRoles = {
     driveUp: 0.2,
     driveMax: 6,
     hulls: [
-      ...hullsArray.filter(hull => hull.class === 'Frigate' || hull.class === 'Cruiser'),
+      ...hullsArray.filter(hull => (hull.class === 'Frigate' || hull.class === 'Cruiser') && hull.name !== 'Small Station'),
     ],
     crew: [
       'low',
