@@ -1,12 +1,6 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-import { selectHulls, selectDefenses, selectFittings, selectWeapons } from "../ShipBuilder/shipBuilderSlice";
 import { genCrewAmount, getHullObj, getFittingObj, correctCostsForClass } from "../../app/resources/genFunctions.js";
-
-const hulls = require('../../app/resources/hulls.json');
-const fittings = require('../../app/resources/fittings.json');
-const defenses = require('../../app/resources/defenses.json');
-const weapons = require('../../app/resources/weapons.json');
+import { hulls } from '../../app/resources/tables.js';
 
 
 const initialState = {
@@ -50,7 +44,6 @@ export const shipSlice = createSlice({
     },
     installFitting: (state, action) => {
       console.log('installing fitting: ', action.payload)
-      let curHull = state.currentHull;
       const fitting = action.payload;
       if(fitting.includes('SpikeDrive')) {
         let oldDrive = state.equippedFittings.match(/SpikeDrive\d/);

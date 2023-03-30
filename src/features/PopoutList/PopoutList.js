@@ -1,6 +1,5 @@
 import React from "react";
 import { getFittingObj } from "../../app/resources/genFunctions";
-import { hulls, weapons, defenses, fittings } from '../../app/resources/tables'
 import './PopoutListStyles.css';
 
 

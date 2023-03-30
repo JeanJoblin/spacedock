@@ -1,9 +1,9 @@
 import { getHullObj, crewQuals } from './genFunctions';
-import { hulls, weapons, defenses, fittings, hullsArray, weaponsArray, defensesArray, fittingsArray, fighterWeapons, civWeapons, flakWeapons, hunterDefenses, civDefenses, miltaryDefenses, hunterWeapons, militaryWeapons, } from './tables'
+import { hulls, weapons, defenses, fittings, hullsArray, weaponsArray, fighterWeapons, civWeapons, flakWeapons, hunterDefenses, civDefenses, miltaryDefenses, hunterWeapons, militaryWeapons, } from './tables'
 
-const todo = [
-'Cargo',
-];
+// const todo = [
+// 'Cargo',
+// ];
 
 export const shipRoles = {
   pirate: {

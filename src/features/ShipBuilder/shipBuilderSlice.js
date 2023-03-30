@@ -1,10 +1,6 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { shipRoles } from '../../app/resources/shipRoles';
-import { hulls, weapons, fittings, defenses, drives } from '../../app/resources/tables';
-import { getFittingObj, getHullObj } from '../../app/resources/genFunctions.js';
-
-const costMulitpliers = [1, 10, 25, 100];
-const massMulitpliers = [1, 2, 3, 4];
+import { hulls, drives } from '../../app/resources/tables';
 
 //I don't think I need this function anymore, just use .type key
 // export const getFittingList = (imp) => {

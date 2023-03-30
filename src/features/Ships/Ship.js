@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ship.css';
-import { useDispatch, useSelector } from 'react-redux';
-import {  selectHull, changeShipName, clearAll } from './shipSlice';
-import { hulls, fittings } from '../../app/resources/tables';
-import { getFittingObj, genCrewAmount } from '../../app/resources/genFunctions.js';
+import { useDispatch } from 'react-redux';
+import { changeShipName } from './shipSlice';
+import { hulls } from '../../app/resources/tables';
+import { getFittingObj } from '../../app/resources/genFunctions.js';
 import { deleteShip, toggleEdit } from '../Hanger/hangerSlice';
 
 const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP', 'Hull Class', 'Crew Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
@@ -33,9 +33,9 @@ export function Ship(props) {
     allFittings = passedFittings;
   };
   let cargoSpaceAmount = allFittings.filter(fit => fit === 'CargoSpace' || fit?.name === 'Cargo Space').length;
-  const toggleEditThis = () => {
-    dispatch(toggleEdit(id));
-  };
+  // const toggleEditThis = () => {
+  //   dispatch(toggleEdit(id));
+  // };
   let currentHull = hull ? hull : hulls.FreeMerchant;
   let currentDefenses = [];
   let currentWeapons = [];
