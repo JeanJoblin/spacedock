@@ -27,11 +27,15 @@ export function Ship(props) {
   } = props;
 
   const dispatch = useDispatch();
-  let cargoSpaceAmount = passedFittings.filter(fit => fit === 'CargoSpace' || fit?.name === 'Cargo Space').length;
+  
+  let allFittings = [];
+  if(passedFittings?.length) {
+    allFittings = passedFittings;
+  };
+  let cargoSpaceAmount = allFittings.filter(fit => fit === 'CargoSpace' || fit?.name === 'Cargo Space').length;
   const toggleEditThis = () => {
     dispatch(toggleEdit(id));
-  }
-  let allFittings = [];
+  };
   let currentHull = hull ? hull : hulls.FreeMerchant;
   let currentDefenses = [];
   let currentWeapons = [];
@@ -74,8 +78,9 @@ export function Ship(props) {
       }
     }
   }
-
+if(passedFittings) {
   allFittings = passedFittings.slice();
+};
   console.log('allFittings:', allFittings);
   console.log(cargoHandler.tonnage);
   cargoHandler.pushCargoSpace();
@@ -239,7 +244,7 @@ allFittings.forEach((input) => {
         {displayShipName()}
         <span className='Hull'>{currentHull.name}</span>
         <button onClick={removeShip} value={id}>delete</button>
-        <button onClick={toggleEditThis}>edit</button>
+        {/* <button onClick={toggleEditThis}>edit</button> */}
       </div>
       <hr/>
       <div className='ShipBody'>

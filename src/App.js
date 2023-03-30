@@ -7,6 +7,7 @@ import { DryDock } from './features/DryDockConfig/DryDock';
 import { Hanger } from './features/Hanger/Hanger';
 import './app/resources/fonts/RoboGirls.ttf';
 import { PopoutList } from './features/PopoutList/PopoutList';
+import { Intro } from './features/Intro/Intro';
 // PopoutList function component is for mouseover adding fittings to shoppinglist 
 function App() {
 
@@ -16,8 +17,11 @@ function App() {
       </header>
       <h1>SPACEDOCK ....,,..,,.,..</h1>
         {/* <PopoutList/> */}
-        <ShipBuilder />
-        <DryDock />
+        <Intro/>
+        <div className="Build">
+          <DryDock />
+          <ShipBuilder />
+        </div>
         <Hanger />
     </div>
   );

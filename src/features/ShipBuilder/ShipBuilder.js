@@ -79,8 +79,7 @@ export function ShipBuilder() {
   }
 
   return (
-    <div className="ShipBuilder">
-      <h2>ShipBuilder</h2>
+    <div className="ShipBuilder Floater">
       <div className="Param Container">
         <div className="Param Names">
           <div>Role: </div>

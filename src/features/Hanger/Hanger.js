@@ -30,8 +30,8 @@ export function Hanger() {
   });
 
   return (
-    <div className='Hanger'>
-      <div className='Hanger Title'>
+    <div className='Hanger Floater' id="Hanger">
+      <div className='Title'>
         <span>Hanger</span>
       </div>
       {renderShips}

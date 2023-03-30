@@ -6,7 +6,9 @@
 > This component renders the ships that have been built.
 
 * ~~Add functionality to delete ships from the list.~~ ``(DONE) Feb 24 2023``
+* Add tooltip for explaining fittings on hover.
 * Add functionality to edit ships on this list.
+* Anchor List of ships
   
 ## Drydock section
 
@@ -50,7 +52,7 @@
 ## Bugs to work out
 
 * ~~Params not being passed properly~~ `(DONE) Mar 27 2023`
-* Cargo space reading incorrectly
+* ~~Cargo space reading incorrectly~~ `(DONE) Mar 28 2023`
 * Generator Params can force an invalid ship
 
 ## New sections to be made

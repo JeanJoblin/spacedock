@@ -1,0 +1,13 @@
+.Yorkshire {
+  background-color: #000000;
+  color: white;
+  border: 3px ridge black;
+  border-radius: 6px;
+  width: 90%;
+  margin: auto;
+  padding: 1vmin;
+}
+
+.Hidden {
+  display: none;
+}

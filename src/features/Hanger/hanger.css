@@ -1,6 +1,10 @@
 .Title {
   font-family: 'OrbitronBlack';
-  text-shadow:
+  /* text-shadow:
              cyan 0.75px -0.75px 2px,
-             magenta -0.75px 0.75px 2px;
+             magenta -0.75px 0.75px 2px; */
+  margin: auto;
+}
+#Hanger {
+  width: 98vmin;
 }

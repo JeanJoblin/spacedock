@@ -62,3 +62,15 @@ h1 {
               cyan 0.75px -0.75px,
               magenta -0.75px 0.75px;
 }
+
+.Build {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 860px) {
+  .Build {
+    flex-direction: row;
+  }
+}

@@ -200,7 +200,7 @@ export function DryDock() {
 
   //actual React function return
   return (
-    <div className='DryDock'>
+    <div className='DryDock Floater'>
       <div className='Options'>
         <div className='Frame'>
           <div className="Inputs">

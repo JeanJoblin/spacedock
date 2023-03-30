@@ -1,56 +1,8 @@
 
-Welcome to the Space Dock!
+# Welcome to the Space Dock!
 
-The goal of this webpage is to provide a utility for managing Stars Without Number spaceships. It is not even remotely finished.
-It should have capabilities for managing a parties ship sheet, including a character sheet for the ship, as well as running cost calculators.
+The goal of this webpage is to provide a utility for generating Stars Without Number spaceships. I have personally found building spaceships from the rule book to be fun, but time consuming. Build a spaceship with all the fittings you want, without manually adjusting them for your chosen hull class, or, choose from a few parameters to have the webpage generate a ship for you!
 
-It should also have a random ship generator, with filters for generating ships of specific hull weights or following a theme, like free traders, pirates, yachts, or governmental cutters.
+This is still a work in progress. Some ships don't exactly fulfill their roles, and the generator can be forced to build invalid ship combinations (like putting a spike drive level 6 on a strike fighter). I hope to change these things in the future, and add a bunch more functionality! Editing and saving ships are a few items next on my list. 
 
-Maybe it will eventually have an ship map editor, even more ambitiously it will have a map generator for different kinds of ships.
-
-# Getting Started with Create React App and Redux
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+*Built with Create React App and Redux.*
