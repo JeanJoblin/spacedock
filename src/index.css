@@ -23,7 +23,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: darkgrey;
+  background: url(../public/Orion-Nebula.jpg) fixed;
+  /* 
+  background-image: url(../public/milky-way-full-stars-space.jpg);
+  background-size: cover; */
+  background-size: cover;
   /* text-shadow: cyan .5px -.5px, magenta -0.5px 0.5px;
   color: black; */
 }
@@ -32,3 +36,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Floater {
+  border-radius: 6px;
+  border-top: 3px ridge darkgray;
+  background: rgba(255, 255, 255, 0.8);
+  margin: 1vmin auto;
+  padding: 1vmin;
+  width: 325px;
+}
+ @media screen and (max-width: 324px) {
+  .Floater {
+    width: 100%;
+    overflow: hidden;
+  }
+ }

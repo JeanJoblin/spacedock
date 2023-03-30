@@ -15,7 +15,7 @@ export const getHullObj = (inputHullStr) => {
   return hulls[inputHullStr];
 }
 
-export const genCrewAmount = (inputHull, qualifier = 'fullRange') => {
+export const genCrewAmount = (inputHull, qualifier = 'Full Range') => {
   //This function grabs the min and max crew from a given hull and generate a number in between. Us it for generating amount of crew for a ship. Add extra functionality later for running with a lean, medium, or higher crew amount.
   console.log(`Generating crew for ${inputHull.name} with param: ${qualifier}`);
   if(inputHull.name === 'Strike Fighter') {
@@ -30,19 +30,19 @@ export const genCrewAmount = (inputHull, qualifier = 'fullRange') => {
   let crew = Math.round(Math.random() * dif) + min;
   //console.log(`generated: ${crew} as base`)
   switch(qualifier) {
-    case 'low':
+    case 'Low':
       //console.log(`low range should be: ${min} - ${dif / 2}`);
       while(crew > dif / 3 + min) {
         crew -= Math.round( dif / 4 );
       }
       break;
-    case 'high':
+    case 'High':
       //console.log(`high range should be: ${0.66 * dif + min} - ${max}`);
       while(crew < 0.66 * dif + min) {
         crew += Math.round(0.25 * dif);
       };
       break;
-    case 'med':
+    case 'Med':
       //console.log(`med range should be: ${0.25 * dif + min} - ${0.75 * dif + min}`);
       if( crew > ( 0.75 * dif ) + min ) {
         crew -= Math.round( dif / 4 );
@@ -50,20 +50,20 @@ export const genCrewAmount = (inputHull, qualifier = 'fullRange') => {
         crew += Math.round( dif / 4 );
       }
       break;
-    case 'skeleton':
+    case 'Skeleton':
       //console.log(`skeleton range should be: ${min} - ${(dif / 4) + min}`);
       if( crew > Math.floor( dif / 4 ) + min ) {
         crew = Math.floor( crew * 0.185 + min);
       };
       break;
-    case 'belowMin':
+    case 'Below Min':
       while(crew > min) {
         crew = Math.round(crew * (min / dif));
       };
       break;
-    case 'fullRange':
+    case 'Full Range':
       break;
-    case 'packed':
+    case 'Packed':
       //console.log(`packed range should be: ${(dif * 0.75) + min} - ${max}`);
       if( crew < ( dif * 0.75 ) + min ) {
         crew = Math.ceil(Math.random() * dif * 0.2) + min + Math.round(0.8 * dif);
@@ -84,7 +84,7 @@ export const genCrewAmount = (inputHull, qualifier = 'fullRange') => {
 export const correctCostsForClass = (fitting, hull) => {
   const costMulitpliers = [1, 10, 25, 100];
   const massMulitpliers = [1, 2, 3, 4];
-  console.log(`correcting cost of fitting`, fitting);
+  // console.log(`correcting cost of fitting`, fitting);
   let curFitting = fitting;
   if(typeof(fitting) === 'string') {
     curFitting = getFittingObj(fitting);
@@ -176,7 +176,7 @@ export const parseStringCost = (inputItem) => {
   return cost;
 }
 
-export const crewQuals = ['fullRange', 'belowMin', 'skeleton', 'low', 'med', 'high', 'packed',  'fullRange'];
+export const crewQuals = ['Full Range', 'Below Min', 'Skeleton', 'Low', 'Med', 'High', 'Packed',  'Full Range'];
 
 // Object.keys(hulls).forEach((hull) => {
 //   crewQuals.forEach((qual) => {

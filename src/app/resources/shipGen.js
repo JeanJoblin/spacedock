@@ -14,18 +14,24 @@ export const getRandom = (array) => {
   return array[ind];
 };
 
-export const genShip = (role, params) => {
+export const genShip = (params = {}) => {
   //add params later
+  let role;
+  let { roleParam, hullParam, crewParam, driveParam } = params;
+  console.table(params);
+  console.log('Role Param: ', roleParam);
   const cargoLevels = {
     Fighter: 2,
     Frigate: 20,
     Cruiser: 200,
     Capital: 2000,
   };
-  let hullParam;
-  let crewParam;
-  if(!role) {
-    role = getRandom(shipRoles);
+  console.log('Role Param: ', roleParam);
+  if(!roleParam) {
+    role = shipRoles[getRandom(Object.keys(shipRoles))];
+    console.log('Set role param to: ' );
+  } else {
+    role = roleParam;
   };
   if(!hullParam) {
     hullParam = getRandom(role.hulls);
@@ -51,16 +57,16 @@ export const genShip = (role, params) => {
   let finalDrive = null;
   let cor = {};
   //Roll under driveUp (d100). Success: keep rolling, Fail: Stop rolling.
-  if(!hull.name.includes('Station')) {
+  if(!hull.name.includes('Station') && !driveParam) {
     do {
       if(Math.random() < role.driveUp) {
         driveLevel++;
-        console.log('upgrading drive to level: ', driveLevel);
+        // console.log('upgrading drive to level: ', driveLevel);
       } else if(driveLevel === role.driveMax) {
-        console.log('Hit drive limit. Drive Level: ', driveLevel);
+        // console.log('Hit drive limit. Drive Level: ', driveLevel);
         finalDrive = drives[driveLevel];
       } else {
-        console.log('assigning final drive of level: ', driveLevel);
+        // console.log('assigning final drive of level: ', driveLevel);
         finalDrive = drives[driveLevel];
       }
     } while ( finalDrive === null && driveLevel < role.driveMax);
@@ -70,30 +76,32 @@ export const genShip = (role, params) => {
     power -= cor.power;
     cost += cor.cost;
     allFittings.push(finalDrive);
+  } else if(driveParam) {
+    allFittings.push(driveParam);
   };
   let cargoLighter = false;
   //Drive has been selected. Outfit the ship with weapons defenses and fittings.
   const canDupe = [...weaponsArray, defenses.FoxerDrones, fittings.AutotargetingSystem, fittings.CargoLighter, fittings.CargoSpace, fittings.ColdSleepPods, fittings.DropPod, fittings.ExodusBay, fittings.ExtendedStores, fittings.HydroponicProduction, fittings.ShipBayFighter, fittings.ShipBayFrigate, fittings.ShiptenderMount, fittings.SmugglersHold,  ];
-  console.table('mountable: ', mountable);
-  console.log('role.freq: ', role.freq);
+  // console.table('mountable: ', mountable);
+  // console.log('role.freq: ', role.freq);
   let toAdd = null;
   function filterValidFittings(imp, hull) {
     const validFittings = imp.filter(fitting => {
       let dupe = false;
       if(allFittings.includes(fitting)) {
         if(!canDupe.includes(fitting)) {
-          console.log(`${fitting.name} is already on allFittings list`);
+          // console.log(`${fitting.name} is already on allFittings list`);
           dupe = true;
         }};
       if(
         (fitting.name === 'Atmospheric Configuration' && allFittings.includes(fittings.AmphibiousOperation)) ||
         (fitting.name === 'Amphibious Operation' && allFittings.includes(fittings.AtmosphericConfiguration))) {
-          console.log('A planetary interface fitting is already equipped');
+          // console.log('A planetary interface fitting is already equipped');
           dupe = true;
       };
       const req = correctCostsForClass(fitting, hull);
-      console.log('classes mountable by hull class: ', mountable[hull.class]);
-      console.log('fitting class', fitting.class);
+      // console.log('classes mountable by hull class: ', mountable[hull.class]);
+      // console.log('fitting class', fitting.class);
       const validCheck = {
         name: fitting.name,
         power: req.power <= power,
@@ -103,7 +111,7 @@ export const genShip = (role, params) => {
         noDupe: !dupe,
         enoughCargo: fitting.name === 'Cargo Lighter' ? cargoLighter : true,
       }
-      console.table(validCheck);
+      // console.table(validCheck);
       return req.power <= power &&
       req.mass <= mass &&
       mountable[hull.class].includes(fitting.class) &&
@@ -111,15 +119,15 @@ export const genShip = (role, params) => {
       (fitting.hardpoints ? fitting.hardpoints <= hardpoints : true)&&
       (fitting.name === 'Cargo Lighter' ? cargoLighter : true);
     });
-    console.log('Returning these as valid: ', validFittings);
+    // console.log('Returning these as valid: ', validFittings);
     return validFittings;
   }
   let retry = 0;
   do {
-    console.log('ENTERED THE DO WHILE');
+    // console.log('ENTERED THE DO WHILE');
     let fitting;
     if(Math.random() < role.freq.weapon) {
-        console.log('chosing a weapon');
+        // console.log('chosing a weapon');
         fitting = filterValidFittings(role.weapons, hull);
     } else if(Math.random() < role.freq.defense) {
       // fitting = role.defenses.filter(defense => {
@@ -130,7 +138,7 @@ export const genShip = (role, params) => {
         // req.mass <= mass &&
         // mountable[hull.class].includes(defense.class);
       // });
-      console.log('Chosing a defense');
+      // console.log('Chosing a defense');
       fitting = filterValidFittings(role.defenses, hull);
     } else {
       // fitting = role.fittings.filter(fitting => {
@@ -140,18 +148,18 @@ export const genShip = (role, params) => {
       //   req.mass <= mass &&
       //   mountable[hull.class].includes(fitting.class);
       // });
-      console.log('Choosing a fitting');
+      // console.log('Choosing a fitting');
       fitting = filterValidFittings(role.fittings, hull);
     };
-    console.log('fitting array ', fitting);
+    // console.log('fitting array ', fitting);
     toAdd = getRandom(fitting);
     if(toAdd !== undefined) {
-      console.log('toAdd:', toAdd);
+      // console.log('toAdd:', toAdd);
       cor = correctCostsForClass(toAdd, hull);
       mass -= cor.mass;
       power -= cor.power;
-      console.log('cost: ', cost);
-      console.log('corrected fitting cost: ', cor.cost);
+      // console.log('cost: ', cost);
+      // console.log('corrected fitting cost: ', cor.cost);
       cost += cor.cost;
       if(toAdd.hardpoints !== undefined) {
         hardpoints -= toAdd.hardpoints;

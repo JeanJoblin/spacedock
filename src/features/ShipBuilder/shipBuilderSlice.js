@@ -1,6 +1,6 @@
 import { createSlice, current } from '@reduxjs/toolkit';
-
-import { hulls, weapons, fittings, defenses } from '../../app/resources/tables';
+import { shipRoles } from '../../app/resources/shipRoles';
+import { hulls, weapons, fittings, defenses, drives } from '../../app/resources/tables';
 import { getFittingObj, getHullObj } from '../../app/resources/genFunctions.js';
 
 const costMulitpliers = [1, 10, 25, 100];
@@ -23,12 +23,20 @@ const massMulitpliers = [1, 2, 3, 4];
 //   }
 // };
 
+
 const initialState = {
-  hull: hulls.FreeMerchant,
-  equippedFittings: ['SpikeDrive1'],
-  isInvalid: false,
-  freePower: 10,
-  freeMass: 15,
+  params: {
+    role: shipRoles.pirate,
+    hull: hulls.StrikeFighter,
+    crew: 'Full Range',
+    drive: drives[1],
+  },
+  required: {
+    role: false,
+    hull: false,
+    crew: false,
+    drive: false,
+  }
 };
 
 
@@ -36,33 +44,23 @@ export const shipBuilderSlice = createSlice({
   name: 'shipBuilder',
   initialState,
   reducers: {
-    addFitting: (state, action) => {
-      const fitting = action.payload;
-      let fittingObj;
-      if(typeof fitting === 'string') {
-        fittingObj = getFittingObj(fitting);
+    changeParam: (state, action) => {
+      console.log(`Changing param ${action.payload.target} to ${action.payload.value}`);
+      state.params[action.payload.target] = action.payload.value;
+    },
+    toggleRequired: (state, action) => {
+      if(state.required[action.payload] === false){
+        state.required[action.payload] = true;
       } else {
-        fittingObj = fitting;
+        state.required[action.payload] = false;
       }
-      state.equippedFittings = [...state.equippedFittings, fitting];
     },
-    changeHull: (state, action) => {
-      let newHull = action.payload;
-      if(typeof(newHull) === 'string') {
-        newHull = getHullObj(newHull);
-      }
-      state.hull = newHull;
-    },
-
   } 
 });
 
-export const {addFitting, addFittingArr} = shipBuilderSlice.actions;
-export const selectFittings = (state) => state.shipBuilder.fittings;
-export const selectWeapons = (state) => state.shipBuilder.weapons;
-export const selectDefenses = (state) => state.shipBuilder.defenses;
-export const selectHulls = (state) => state.shipBuilder.hulls;
-export const selectEquippedFittings = (state) => state.shipBuilder.equippedFittings;
+export const { changeParam, toggleRequired} = shipBuilderSlice.actions;
+export const selectReqs = (state) => state.shipBuilder.required;
+export const selectParams = (state) => state.shipBuilder.params;
 export default shipBuilderSlice.reducer;
 
 

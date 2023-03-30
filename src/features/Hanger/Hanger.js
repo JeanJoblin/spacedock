@@ -9,8 +9,6 @@ export function Hanger() {
   const ships = useSelector(selectShips);
  
   const renderShips = ships.map((ship, ind) => {
-    console.log('pushing ship with ind:', ind);
-    
     return (
       <Ship 
         passedFittings={ship.fittings}
@@ -32,8 +30,8 @@ export function Hanger() {
   });
 
   return (
-    <div className='Hanger'>
-      <div className='Hanger Title'>
+    <div className='Hanger Floater' id="Hanger">
+      <div className='Title'>
         <span>Hanger</span>
       </div>
       {renderShips}

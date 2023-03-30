@@ -1,7 +1,6 @@
 
 .DryDock {
   display: flex;
-  max-width: 90%;
   flex-wrap: nowrap;
   flex-flow: column;
   justify-content: space-evenly;
@@ -32,7 +31,6 @@ label {
   margin-right: 0.5em;
 }
 
-@media (max-width: 555px) {
   .Options {
     flex-direction: column;
   }
@@ -44,7 +42,6 @@ label {
     width: 285px;
     margin-bottom: 3px;
   }
-}
 
 @media (max-width: 300px) {
   .DryDock, option, button, select{

@@ -143,7 +143,7 @@ export function DryDock() {
 
   //Crew size selector mini-component
   const crewSelector = () => {
-    const paramsWithNames = [crewQuals, ['Crew Size', 'Below Minimum', 'Skeleton', 'Small', 'Medium', 'Large', 'Packed', 'Any']]
+    const paramsWithNames = [crewQuals, ['Crew Size', 'Below Minimum', 'Skeleton', 'Low', 'Medium', 'High', 'Packed', 'Any']]
 
     const handleCrewChange = (e) => {
       dispatch(changeCrewParam(e.target.value));
@@ -200,7 +200,7 @@ export function DryDock() {
 
   //actual React function return
   return (
-    <div className='DryDock'>
+    <div className='DryDock Floater'>
       <div className='Options'>
         <div className='Frame'>
           <div className="Inputs">
