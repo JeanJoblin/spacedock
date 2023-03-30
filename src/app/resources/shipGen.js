@@ -1,4 +1,4 @@
-import { hulls, weapons, defenses, fittings} from './tables'
+import { weapons, defenses, fittings} from './tables'
 import { parseStringCost, correctCostsForClass } from './genFunctions';
 import { shipRoles } from './shipRoles';
 import { mountable } from '../../features/DryDockConfig/dryDockSlice';
@@ -102,15 +102,15 @@ export const genShip = (params = {}) => {
       const req = correctCostsForClass(fitting, hull);
       // console.log('classes mountable by hull class: ', mountable[hull.class]);
       // console.log('fitting class', fitting.class);
-      const validCheck = {
-        name: fitting.name,
-        power: req.power <= power,
-        mass: req.mass <= mass,
-        mountable: mountable[hull.class].includes(fitting.class),
-        hardpoints: fitting.hardpoints ? fitting.hardpoints <= hardpoints : 'fitting reqs none',
-        noDupe: !dupe,
-        enoughCargo: fitting.name === 'Cargo Lighter' ? cargoLighter : true,
-      }
+      // const validCheck = {
+      //   name: fitting.name,
+      //   power: req.power <= power,
+      //   mass: req.mass <= mass,
+      //   mountable: mountable[hull.class].includes(fitting.class),
+      //   hardpoints: fitting.hardpoints ? fitting.hardpoints <= hardpoints : 'fitting reqs none',
+      //   noDupe: !dupe,
+      //   enoughCargo: fitting.name === 'Cargo Lighter' ? cargoLighter : true,
+      // }
       // console.table(validCheck);
       return req.power <= power &&
       req.mass <= mass &&

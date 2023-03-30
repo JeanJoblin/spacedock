@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { genCrewAmount, getFittingObj, getHullObj } from '../../app/resources/genFunctions';
-import { hulls, weapons, fittings, defenses } from '../../app/resources/tables';
+import { genCrewAmount, getHullObj } from '../../app/resources/genFunctions';
 
 const initialState = {
   ships: [],
@@ -62,7 +61,7 @@ export const hangerSlice = createSlice({
       state.ships = [...state.ships, ship];
     },
     deleteShip: (state, action) => {
-      state.ships = state.ships.filter((ship, ind) => ind != action.payload);
+      state.ships = state.ships.filter((ship, ind) => ind !== action.payload);
     },
     toggleEdit: (state, action) => {
       let id = action.payload;

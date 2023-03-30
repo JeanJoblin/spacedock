@@ -2,17 +2,15 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
-import { installFitting, rehull } from '../Ships/shipSlice';
 import { changeHull, changeSelectedItem,
   selectShoppingList, addSelectedToShoppingList,
   selectHull, selectMassReq,
   selectPowerReq, selectTotalCost,
   removeFromShoppingList, selectMountableDefenses,
-  selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName, selectCrewParam, changeCrewParam, addSpikeDrive } from './dryDockSlice';
+  selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName, selectCrewParam, changeCrewParam} from './dryDockSlice';
 import { getHullObj, getFittingObj, crewQuals, } from '../../app/resources/genFunctions.js';
 import { addShip } from '../Hanger/hangerSlice';
 import { genShip } from '../../app/resources/shipGen';
-import { PopoutList } from '../PopoutList/PopoutList';
 
 export function DryDock() {
 
@@ -67,9 +65,9 @@ export function DryDock() {
     }
   }
   
-  useEffect(() => {
-    dispatch(addShip(genShip()))
-  }, [])
+  // useEffect(() => {
+  //   dispatch(addShip(genShip()))
+  // }, [])
   
   const passShip = () => {
     console.log('crewParam in passShip: ', crewParam);
@@ -177,11 +175,9 @@ export function DryDock() {
     let sortedList = newList.sort((a, b) => {
       if(a[1] === true && b[1] === false) {
         return 1;
-      };
-      if(a[1] === false && b[1] === true) {
+      } else if(a[1] === false && b[1] === true) {
         return -1;
-      };
-      if(a[1] === b[1]) {
+      } else {
         return 0;
       };
     });

@@ -1,12 +1,10 @@
 import './shipBuilder.css';
-import { addFitting, selectEquippedFittings } from './shipBuilderSlice';
 import React from 'react';
-import { Ship } from '../Ships/Ship';
 import { useDispatch, useSelector, } from 'react-redux';
 import { shipRoles } from '../../app/resources/shipRoles';
 import { changeParam, selectReqs, toggleRequired, selectParams } from './shipBuilderSlice';
-import { hullsArray, drives, hulls } from '../../app/resources/tables';
-import { crewQuals, getFittingObj } from '../../app/resources/genFunctions';
+import { drives, hulls } from '../../app/resources/tables';
+import { crewQuals } from '../../app/resources/genFunctions';
 import { genShip } from '../../app/resources/shipGen';
 import { addShip } from '../Hanger/hangerSlice';
 

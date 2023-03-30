@@ -1,6 +1,6 @@
 import { createSlice, } from '@reduxjs/toolkit';
 import { hulls, weapons, fittings, defenses } from '../../app/resources/tables';
-import { getFittingObj, getHullObj, correctCostsForClass, crewQuals } from '../../app/resources/genFunctions.js';
+import { getFittingObj, getHullObj, correctCostsForClass } from '../../app/resources/genFunctions.js';
 
 //This slice is to handle selecting and adding fittings, weapons and defenses to a ship. It may be the slice that deals with generating new ships, but that might got to a spaceport slice or smth.
 const fighterMountable = ['Fighter'];
