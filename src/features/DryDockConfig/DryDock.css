@@ -24,6 +24,10 @@
   margin-left: 3px;
 }
 
+.SelectContainer {
+  overflow: hidden;
+}
+
 .Frame {
   flex: 1 1 auto;
   display: flex;

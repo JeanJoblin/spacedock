@@ -230,7 +230,7 @@ export function DryDock() {
           <label htmlFor='defenses'>Defenses: </label>
           <label htmlFor='fittings'>Fittings: </label>
         </div>
-        <div>
+        <div className="SelectContainer">
         {fittingSelector(weapons)}
         {fittingSelector(defenses)}
         {fittingSelector(fittings)}

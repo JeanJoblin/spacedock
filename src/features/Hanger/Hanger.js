@@ -35,7 +35,9 @@ export function Hanger() {
         <div className='Title'>
           <span>Hanger</span>
         </div>
-        {renderShips}
+        <div className='Hanger Grid'>
+          {renderShips}
+        </div>
       </div>
     )
   };
