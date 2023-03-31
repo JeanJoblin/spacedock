@@ -48,8 +48,8 @@ export function DryDock() {
 
   const isOverpower = () => {
     if(powerReq > getHullObj(hull).power) {
-      console.log('hull power: ', hull.power);
-      console.log('powerReq: ', powerReq);
+      // console.log('hull power: ', hull.power);
+      // console.log('powerReq: ', powerReq);
       return true;
     } else {
       return false;
@@ -69,8 +69,8 @@ export function DryDock() {
   // }, [])
   
   const passShip = () => {
-    console.log('crewParam in passShip: ', crewParam);
-    console.log('Shopping list to be passed: ', shoppingList);
+    // console.log('crewParam in passShip: ', crewParam);
+    // console.log('Shopping list to be passed: ', shoppingList);
     // let drive = false;
     // shoppingList.forEach(fitting => {
     //   if(fitting.includes('SpikeDrive')) {
@@ -82,7 +82,7 @@ export function DryDock() {
     //   console.log('I should be pushing a drive');
     //   dispatch(addSpikeDrive());
     // };
-    console.log('Here is the shoppingList to be fittings: ', shoppingList);
+    // console.log('Here is the shoppingList to be fittings: ', shoppingList);
     dispatch(addShip({
         name: name,
         hull: hull,
@@ -106,12 +106,12 @@ export function DryDock() {
   };
   const deleteItem = (e) => {
     e.preventDefault();
-    console.log('event', e);
-    console.log('event.target', e.target);
-    console.log('event.target.key', e.target.value);
+    // console.log('event', e);
+    // console.log('event.target', e.target);
+    // console.log('event.target.key', e.target.value);
     dispatch(removeFromShoppingList(e.target.value));
   };
-  console.log('shoppingList: ', shoppingList);
+  // console.log('shoppingList: ', shoppingList);
 
   const clearShopping = (e) => {
     e.preventDefault();
@@ -166,7 +166,7 @@ export function DryDock() {
   const fittingSelector = (list) => {
     const keys = Object.keys(list);
     const type = list[keys[0]].type;
-    console.log('type: ', type);
+    // console.log('type: ', type);
     let newList = keys.map((item, ind) => {
       let disabled = (mountable[type][ind] ? (hull.includes('Station') && item.includes('SpikeDrive')) : true )
       return [item, disabled];

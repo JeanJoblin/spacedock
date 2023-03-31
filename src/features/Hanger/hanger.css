@@ -6,5 +6,12 @@
   margin: auto;
 }
 #Hanger {
-  width: 98vmin;
+  width: 100%;
+}
+
+@media (min-width: 300px) {
+    #Hanger {
+    width: 94vw;
+    padding: 1vmin;
+}
 }

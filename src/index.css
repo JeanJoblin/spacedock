@@ -42,10 +42,19 @@ code {
   border-top: 3px ridge darkgray;
   background: rgba(255, 255, 255, 0.8);
   margin: 1vmin auto;
-  padding: 1vmin;
-  width: 325px;
+  padding: 1vmin 0;
+  width: 400px;
 }
- @media screen and (max-width: 324px) {
+
+select, span, div, input, button {
+  font-size: 16px;
+}
+
+.Available {
+  margin: 3px 0 0 0;
+}
+
+ @media screen and (max-width: 400px) {
   .Floater {
     width: 100%;
     overflow: hidden;

@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { genCrewAmount, getHullObj } from '../../app/resources/genFunctions';
 
 const initialState = {
   ships: [],
+  idCounter: 0,
 }
 
 export const hangerSlice = createSlice({
@@ -10,11 +11,12 @@ export const hangerSlice = createSlice({
   initialState,
   reducers: {
     addShip: (state, action) => {
+      state.idCounter++;
       let crewParam;
-      console.log('passed ship: ', action.payload)
+      // console.log('passed ship: ', action.payload)
       let drive = false;
       let passedFittings = action.payload.fittings;
-      console.log(passedFittings);
+      // console.log(passedFittings);
       if(!action.payload.crewParam) {
         crewParam = 'fullRange';
       } else {
@@ -25,7 +27,7 @@ export const hangerSlice = createSlice({
         hull = getHullObj(action.payload.hull);
       }
       let crew = genCrewAmount(hull, crewParam);
-      console.log('crew generator returned: ', crew);
+      // console.log('crew generator returned: ', crew);
       let ship = {};
       ship.name = action.payload.name;
       ship.cost = action.payload.totalCost;
@@ -54,29 +56,17 @@ export const hangerSlice = createSlice({
       //let this be passed in to configure auto mass to cargo
       ship.cargoSetting = true;
       ship.editable = false;
-      console.log('ship: ', ship);
+      ship.id = state.idCounter;
+      // console.log('ship: ', ship);
       if(action.payload.role) {
         ship.role = action.payload.role;
       }
       state.ships = [...state.ships, ship];
     },
-    deleteShip: (state, action) => {
-      state.ships = state.ships.filter((ship, ind) => ind !== action.payload);
+    deleteShip: (state, { payload }) => {
+      const num = +payload;
+      state.ships = state.ships.filter((ship) => ship.id !== num);
     },
-    toggleEdit: (state, action) => {
-      let id = action.payload;
-      let target = state.ships[id];
-      if(target.editable === false) {
-        state.ships.forEach((ship, ind) => {
-          if(ind !== target) {
-            ship.editable = false;
-          }
-        });
-        target.editable = true;
-      } else {
-        target.editable = false;
-      }
-    }
   }
 });
 

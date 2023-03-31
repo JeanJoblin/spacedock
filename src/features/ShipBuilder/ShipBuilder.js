@@ -78,26 +78,18 @@ export function ShipBuilder() {
 
   return (
     <div className="ShipBuilder Floater">
-      <div className="Param Container">
-        <div className="Param Names">
           <div>Role: </div>
-          <div>Hull: </div>
-          <div>Crew: </div>
-          <div>Drive: </div>
-        </div>
-        <div className="Param Values">
           {paramSelector(Object.keys(shipRoles), 'role')}
-          {paramSelector(Object.keys(hulls), 'hull')}
-          {paramSelector(crewQuals, 'crew')}
-          {paramSelector(Object.keys(drives), 'drive')}
-        </div>
-        <div className="Param Checks">
           {requiredCheck('role')}
+          <div>Hull: </div>
+          {paramSelector(Object.keys(hulls), 'hull')}
           {requiredCheck('hull')}
+          <div>Crew: </div>
+          {paramSelector(crewQuals, 'crew')}
           {requiredCheck('crew')}
+          <div>Drive: </div>
+          {paramSelector(Object.keys(drives), 'drive')}
           {requiredCheck('drive')}
-        </div>
-      </div>
       <button onClick={handleGenShip}>Generate Ship</button>
     </div>
   )

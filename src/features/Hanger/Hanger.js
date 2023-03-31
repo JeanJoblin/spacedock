@@ -8,7 +8,7 @@ import './hanger.css';
 export function Hanger() {
   const ships = useSelector(selectShips);
  
-  const renderShips = ships.map((ship, ind) => {
+  const renderShips = ships.map((ship) => {
     return (
       <Ship 
         passedFittings={ship.fittings}
@@ -18,8 +18,8 @@ export function Hanger() {
         cost={ship.cost}
         maint={ship.maint}
         pay={ship.pay}
-        key={ind}
-        id={ind}
+        key={ship.id}
+        id={ship.id}
         freeMass={ship.freeMass}
         freePower={ship.freePower}
         cargoSetting={ship.cargoSetting}
@@ -29,14 +29,16 @@ export function Hanger() {
     )
   });
 
-  return (
-    <div className='Hanger Floater' id="Hanger">
-      <div className='Title'>
-        <span>Hanger</span>
+  if(ships?.length) {
+    return (
+      <div className='Hanger Floater' id="Hanger">
+        <div className='Title'>
+          <span>Hanger</span>
+        </div>
+        {renderShips}
       </div>
-      {renderShips}
-    </div>
-  )
+    )
+  };
 }
 
 

@@ -18,13 +18,18 @@
   justify-content: space-evenly;
 }
 
+
+.Options select, .Options button, .Options input {
+  margin-top: 3px;
+  margin-left: 3px;
+}
+
 .Frame {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   max-width: 270px;
-  margin-right: 5px;
 }
 
 label {
@@ -43,18 +48,6 @@ label {
     margin-bottom: 3px;
   }
 
-@media (max-width: 300px) {
-  .DryDock, option, button, select{
-    font-size:  3.75vmin;
-    font-weight: 600;
-  }
-  .Available {
-    width: 80vmin;
-  }
-  select, button, input {
-    margin-bottom: 3px;
-  }
-}
 
 
 
