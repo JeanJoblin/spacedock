@@ -1,5 +1,8 @@
 .ShipBuilder {
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  height: 200px;
 }
 .Container {
   display: flex;
@@ -18,3 +21,25 @@
   text-align: right;
   margin-right: 0.5em;
 }
+
+div {
+  grid-column: 1;
+}
+
+select {
+  grid-column: 2/6;
+  height: 20px;
+}
+
+input {
+  grid-column: 6;
+}
+
+button {
+  grid-column: 3 / 5;
+}
+
+.ShipBuilder div, .ShipBuilder select, .ShipBuilder button, .ShipBuilder input {
+  align-self: center;
+}
+
