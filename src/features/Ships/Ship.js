@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { changeShipName } from './shipSlice';
 import { hulls } from '../../app/resources/tables';
 import { getFittingObj } from '../../app/resources/genFunctions.js';
-import { deleteShip, toggleEdit } from '../Hanger/hangerSlice';
+import { deleteShip } from '../Hanger/hangerSlice';
 
 const stats = [['HP', 'Power', 'AC', 'Mass', 'Armor', 'Crew', 'Speed', 'NPC CP', 'Hull Class', 'Crew Skill',], ['HP', 'power', 'AC', 'mass', 'armor', 'crew', 'speed', 'CP', 'class', 'skill']];
 

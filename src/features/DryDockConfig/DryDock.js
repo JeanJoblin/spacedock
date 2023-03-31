@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './DryDock.css';
 import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
@@ -10,7 +10,6 @@ import { changeHull, changeSelectedItem,
   selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName, selectCrewParam, changeCrewParam} from './dryDockSlice';
 import { getHullObj, getFittingObj, crewQuals, } from '../../app/resources/genFunctions.js';
 import { addShip } from '../Hanger/hangerSlice';
-import { genShip } from '../../app/resources/shipGen';
 
 export function DryDock() {
 
@@ -201,9 +200,9 @@ export function DryDock() {
         <div className='Frame'>
           <div className="Inputs">
             <div>
-              <label for="Name">Name: </label>
-              <label for="Crew">Crew: </label>
-              <label for="Hulls">Hull: </label>
+              <label htmlFor="Name">Name: </label>
+              <label htmlFor="Crew">Crew: </label>
+              <label htmlFor="Hulls">Hull: </label>
             </div>
             <div>
               {nameInput()}
@@ -227,9 +226,9 @@ export function DryDock() {
         </div>
       <div className='Outfit'>
         <div>
-          <label for='weapons'>Weapons: </label>
-          <label for='defenses'>Defenses: </label>
-          <label for='fittings'>Fittings: </label>
+          <label htmlFor='weapons'>Weapons: </label>
+          <label htmlFor='defenses'>Defenses: </label>
+          <label htmlFor='fittings'>Fittings: </label>
         </div>
         <div>
         {fittingSelector(weapons)}

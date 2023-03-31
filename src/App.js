@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <header>
       </header>
-      <h1>SPACEDOCK ....,,..,,.,..</h1>
+      <h1>SPACEDOCK</h1>
         {/* <PopoutList/> */}
         <Intro/>
         <div className="Build">
