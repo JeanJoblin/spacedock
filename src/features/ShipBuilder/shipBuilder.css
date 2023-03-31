@@ -22,10 +22,6 @@
   margin-right: 0.5em;
 }
 
-div {
-  grid-column: 1;
-}
-
 select {
   grid-column: 2/6;
   height: 20px;

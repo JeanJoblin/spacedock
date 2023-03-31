@@ -10,8 +10,17 @@
 }
 
 @media (min-width: 300px) {
-    #Hanger {
+  #Hanger {
     width: 94vw;
     padding: 1vmin;
-}
+  }
+  .Grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 0.5vw;
+    justify-content: center;
+  }
+  .Ship {
+    grid-column: 1fr;
+  }
 }
