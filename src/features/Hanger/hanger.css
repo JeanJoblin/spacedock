@@ -9,7 +9,7 @@
   width: 100%;
 }
 
-@media (min-width: 300px) {
+@media (min-width: 425px) {
   #Hanger {
     width: 94vw;
     padding: 1vmin;
@@ -22,5 +22,6 @@
   }
   .Ship {
     grid-column: 1fr;
+    box-sizing: border-box;
   }
 }

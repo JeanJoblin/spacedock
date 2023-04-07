@@ -200,9 +200,9 @@ export function DryDock() {
         <div className='Frame'>
           <div className="Inputs">
             <div>
-              <label htmlFor="Name">Name: </label>
-              <label htmlFor="Crew">Crew: </label>
-              <label htmlFor="Hulls">Hull: </label>
+              <label htmlFor="Name" >Name: </label>
+              <label htmlFor="Crew" >Crew: </label>
+              <label htmlFor="Hulls" >Hull: </label>
             </div>
             <div>
               {nameInput()}
@@ -226,9 +226,9 @@ export function DryDock() {
         </div>
       <div className='Outfit'>
         <div>
-          <label htmlFor='weapons'>Weapons: </label>
-          <label htmlFor='defenses'>Defenses: </label>
-          <label htmlFor='fittings'>Fittings: </label>
+          <label htmlFor='weapons' className="HideLabel">Weapons: </label>
+          <label htmlFor='defenses' className="HideLabel">Defenses: </label>
+          <label htmlFor='fittings' className="HideLabel">Fittings: </label>
         </div>
         <div className="SelectContainer">
         {fittingSelector(weapons)}

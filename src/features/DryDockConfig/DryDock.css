@@ -49,17 +49,13 @@ label {
   }
   .Available{
     width: 285px;
-    margin-bottom: 3px;
+    margin: 6px 0px 3px;
   }
-
-
-
-
 
 .Frame .Inputs, .Frame .Available {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   text-align: right;
 }
 
@@ -128,4 +124,14 @@ label {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+@media screen and (max-width: 330px) {
+  .HideLabel {
+    display: none;
+  }
+
+  .SelectContainer select {
+    width: 14rem;
+  }
 }

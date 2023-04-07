@@ -50,9 +50,6 @@ select, span, div, input, button {
   font-size: 16px;
 }
 
-.Available {
-  margin: 3px 0 0 0;
-}
 
  @media screen and (max-width: 400px) {
   .Floater {

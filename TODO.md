@@ -8,7 +8,7 @@
 * ~~Add functionality to delete ships from the list.~~ ``(DONE) Feb 24 2023``
 * Add tooltip for explaining fittings on hover.
 * Add functionality to edit ships on this list.
-* Anchor List of ships
+* List of ships, each is a button that jumps to that ship
   
 ## Drydock section
 
@@ -34,10 +34,11 @@
 
 * Rework crew generator to use ratio of min to max rather than hard fractions (e.g. min / max rather than dif / 4)  
 * Clean up CSS and make it more general. i.e. put selector css in a more general file and just use class names
+* 
 
 ## Shipbuilder Section
 
-> This component is sort of obsolete as it is now. Rework it to make the semirandom ship generator.
+> ~~This component is sort of obsolete as it is now. Rework it to make the semirandom ship generator.~~ `(DONE) Mar 27 2023`
 
 ## Ship Generator Logic
 
@@ -54,6 +55,7 @@
 * ~~Params not being passed properly~~ `(DONE) Mar 27 2023`
 * ~~Cargo space reading incorrectly~~ `(DONE) Mar 28 2023`
 * Generator Params can force an invalid ship
+* select elements display differently on Firefox, and Safari. Implement react select?
 
 ## New sections to be made
 
