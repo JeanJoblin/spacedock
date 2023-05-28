@@ -2,7 +2,7 @@ import './shipBuilder.css';
 import React from 'react';
 import { useDispatch, useSelector, } from 'react-redux';
 import { shipRoles } from '../../app/resources/shipRoles';
-import { changeParam, selectReqs, toggleRequired, selectParams, clearAll } from './shipBuilderSlice';
+import { changeParam, selectReqs, selectParams, clearAll } from './shipBuilderSlice';
 import { drives, hulls } from '../../app/resources/tables';
 import { crewQuals } from '../../app/resources/genFunctions';
 import { genShip } from '../../app/resources/shipGen';
@@ -44,8 +44,6 @@ export function ShipBuilder() {
       dispatch(changeParam(action));
     };
 
-    console.log('checking state-held value', params[paramName]?.name ?? params[paramName]);
-    console.log('checking required: ', required[paramName]);
     //for each entry in the list, create a selector element with that entry's name (if it has one) or the entry if it's a string
     return (
       <select className={paramName + 'Select'} onInput={handleParamChange} >

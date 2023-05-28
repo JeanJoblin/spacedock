@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { shipRoles } from '../../app/resources/shipRoles';
-import { hulls, drives } from '../../app/resources/tables';
 
 //I don't think I need this function anymore, just use .type key
 // export const getFittingList = (imp) => {
