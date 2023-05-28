@@ -140,11 +140,10 @@ export function DryDock() {
 
   //Crew size selector mini-component
   const crewSelector = () => {
-    const paramsWithNames = [crewQuals, ['Crew Size', 'Below Minimum', 'Skeleton', 'Low', 'Medium', 'High', 'Packed', 'Any']]
+    const paramsWithNames = [crewQuals.toReversed(), ['Random', 'Packed', 'High', 'Medium', 'Low', 'Skeleton', 'Below Minimum',]];
 
     const handleCrewChange = (e) => {
       dispatch(changeCrewParam(e.target.value));
-      console.log(crewParam);
     }
     //label used to be here, but that made styling much harder
     return (
