@@ -18,8 +18,9 @@
 }
 
 .Names {
+  grid-column: 1;
   text-align: right;
-  margin-right: 0.5em;
+  margin-right: 0.5rem;
 }
 
 select {
@@ -27,12 +28,21 @@ select {
   height: 20px;
 }
 
-input {
-  grid-column: 6;
+button.GenShip {
+  grid-column: 1 / 4;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
-button {
-  grid-column: 3 / 5;
+button.ClearAll {
+  grid-column: 4 / 7;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.ShipBuilder h3 {
+  grid-column: 1 / 7;
+  margin: 0;
 }
 
 .ShipBuilder div, .ShipBuilder select, .ShipBuilder button, .ShipBuilder input {

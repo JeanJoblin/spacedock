@@ -175,7 +175,7 @@ export const parseStringCost = (inputItem) => {
   return cost;
 }
 
-export const crewQuals = ['Full Range', 'Below Min', 'Skeleton', 'Low', 'Med', 'High', 'Packed',  'Full Range'];
+export const crewQuals = [ 'Below Min', 'Skeleton', 'Low', 'Med', 'High', 'Packed',  'Full Range'];
 
 // Object.keys(hulls).forEach((hull) => {
 //   crewQuals.forEach((qual) => {

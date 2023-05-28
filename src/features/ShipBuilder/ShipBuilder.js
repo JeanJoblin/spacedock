@@ -2,7 +2,7 @@ import './shipBuilder.css';
 import React from 'react';
 import { useDispatch, useSelector, } from 'react-redux';
 import { shipRoles } from '../../app/resources/shipRoles';
-import { changeParam, selectReqs, toggleRequired, selectParams } from './shipBuilderSlice';
+import { changeParam, selectReqs, toggleRequired, selectParams, clearAll } from './shipBuilderSlice';
 import { drives, hulls } from '../../app/resources/tables';
 import { crewQuals } from '../../app/resources/genFunctions';
 import { genShip } from '../../app/resources/shipGen';
@@ -15,6 +15,7 @@ export function ShipBuilder() {
   const params = useSelector(selectParams);
 
   const paramSelector = (paramsList, paramName) => {
+    //Load object if there is one
     let obj;
     switch(paramName) {
       case 'role':
@@ -31,21 +32,33 @@ export function ShipBuilder() {
       default:
         throw new Error('Param is not assignable');
     };
+    //Send currently selected option to state. This action is attached to each selector
     function handleParamChange(e) {
+      console.log(e);
+      e.preventDefault();
       let action = {
         target: paramName,
-        value: obj ? obj[e.target.value] : e.target.value,
+        //Changed from obj ? obj[e.target.value] : e.target.value
+        value: obj?.[e.target.value] ?? e.target.value
       }
       dispatch(changeParam(action));
-    }
+    };
+
+    console.log('checking state-held value', params[paramName]?.name ?? params[paramName]);
+    console.log('checking required: ', required[paramName]);
+    //for each entry in the list, create a selector element with that entry's name (if it has one) or the entry if it's a string
     return (
-      <select onInput={handleParamChange} >
-        {paramsList.map((param, id) => {
+      <select className={paramName + 'Select'} onInput={handleParamChange} >
+        {paramsList.map((param) => {
+          // console.log('param:', param)
+          // console.log('obj', obj ?? 'no object');
+          // console.log("obj[param]?.name or param", obj ? obj[param]?.name ?? param : false);
+          //Key and text of option check for obj, if it exists, check if param consists in obj. If no obj or, param is not in obj, use param.
           return (
             <option
-            key = {(param?.name ? param.name : param) + id}
+            key = { 'opt' + (obj ? ( obj[param]?.name ?? param ) : param)}
             value = {param}
-            >{obj ? obj[param].name : param}</option>
+            >{obj ? ( obj[param]?.name ?? param ) : param}</option>
           );
         })}
       </select>
@@ -53,16 +66,12 @@ export function ShipBuilder() {
   };
   //End Param Selector
 
-  const requiredCheck = (role) => {
-    function handleToggleReq(e) {
-      dispatch(toggleRequired(e.target.value))
-    }
-    return (
-      <input type="checkbox" value={role} onChange={handleToggleReq}>
-      </input>
-    )
+  const handleClearAll = () => {
+    ['role', 'hull', 'crew', 'drive'].forEach(type => {
+      document.querySelector(`.${type}Select`).value = 'Random';
+    });
+    dispatch(clearAll());
   }
-  //End requiredCheck
 
   const handleGenShip = () => {
     console.log('Clicked');
@@ -75,22 +84,21 @@ export function ShipBuilder() {
     });
     dispatch(addShip(genShip(setParams)));
   }
+  //End Generate Ship function
 
   return (
     <div className="ShipBuilder Floater">
-          <div>Role: </div>
-          {paramSelector(Object.keys(shipRoles), 'role')}
-          {requiredCheck('role')}
-          <div>Hull: </div>
-          {paramSelector(Object.keys(hulls), 'hull')}
-          {requiredCheck('hull')}
-          <div>Crew: </div>
-          {paramSelector(crewQuals, 'crew')}
-          {requiredCheck('crew')}
-          <div>Drive: </div>
-          {paramSelector(Object.keys(drives), 'drive')}
-          {requiredCheck('drive')}
-      <button onClick={handleGenShip}>Generate Ship</button>
+      <h3 className="title">Generate Random Ship</h3>
+          <div className="Names">Role: </div>
+          {paramSelector(['Random', ...Object.keys(shipRoles)], 'role')}
+          <div className="Names">Hull: </div>
+          {paramSelector(['Random', ...Object.keys(hulls)], 'hull')}
+          <div className="Names">Crew: </div>
+          {paramSelector(['Random', ...crewQuals], 'crew')}
+          <div className="Names">Drive: </div>
+          {paramSelector(['Random', ...Object.keys(drives)], 'drive')}
+      <button className="GenShip" onClick={handleGenShip}>Generate Ship</button>
+      <button className="ClearAll" onClick={handleClearAll}>Clear All</button>
     </div>
   )
 }

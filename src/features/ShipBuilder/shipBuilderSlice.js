@@ -22,10 +22,10 @@ import { hulls, drives } from '../../app/resources/tables';
 
 const initialState = {
   params: {
-    role: shipRoles.pirate,
-    hull: hulls.StrikeFighter,
-    crew: 'Full Range',
-    drive: drives[1],
+    role: 'Random',
+    hull: 'Random',
+    crew: 'Random',
+    drive: 'Random',
   },
   required: {
     role: false,
@@ -43,6 +43,11 @@ export const shipBuilderSlice = createSlice({
     changeParam: (state, action) => {
       console.log(`Changing param ${action.payload.target} to ${action.payload.value}`);
       state.params[action.payload.target] = action.payload.value;
+      if(action.payload.value !== 'Random') {
+        state.required[action.payload.target] = true;
+      } else {
+        state.required[action.payload.target] = false;
+      }
     },
     toggleRequired: (state, action) => {
       if(state.required[action.payload] === false){
@@ -51,10 +56,18 @@ export const shipBuilderSlice = createSlice({
         state.required[action.payload] = false;
       }
     },
+    clearAll: (state, action) => {
+      Object.keys(state.required).forEach(key => {
+        state.required[key] = false;
+      });
+      Object.keys(state.params).forEach(key => {
+        state.params[key] = 'Random';
+      });
+    }
   } 
 });
 
-export const { changeParam, toggleRequired} = shipBuilderSlice.actions;
+export const { changeParam, toggleRequired, clearAll} = shipBuilderSlice.actions;
 export const selectReqs = (state) => state.shipBuilder.required;
 export const selectParams = (state) => state.shipBuilder.params;
 export default shipBuilderSlice.reducer;

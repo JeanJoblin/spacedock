@@ -196,6 +196,7 @@ export function DryDock() {
   //actual React function return
   return (
     <div className='DryDock Floater'>
+      <h3>Create Custom Ship</h3>
       <div className='Options'>
         <div className='Frame'>
           <div className="Inputs">
@@ -273,14 +274,12 @@ export function DryDock() {
           <br/>
         </div>
       : null}
-      {shoppingList.length > 0 ? 
           <div className='ListButtons'>
             <button className='BuildShip' onClick={passShip}>Build This Ship
             </button>
             <button className='ClearShopping' onClick={clearShopping}>Clear List
             </button>
           </div>
-        : null}
     </div>
   )
 }
