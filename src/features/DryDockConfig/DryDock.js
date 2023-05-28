@@ -140,11 +140,10 @@ export function DryDock() {
 
   //Crew size selector mini-component
   const crewSelector = () => {
-    const paramsWithNames = [crewQuals, ['Crew Size', 'Below Minimum', 'Skeleton', 'Low', 'Medium', 'High', 'Packed', 'Any']]
+    const paramsWithNames = [crewQuals.toReversed(), ['Random', 'Packed', 'High', 'Medium', 'Low', 'Skeleton', 'Below Minimum',]];
 
     const handleCrewChange = (e) => {
       dispatch(changeCrewParam(e.target.value));
-      console.log(crewParam);
     }
     //label used to be here, but that made styling much harder
     return (
@@ -196,6 +195,7 @@ export function DryDock() {
   //actual React function return
   return (
     <div className='DryDock Floater'>
+      <h3>Create Custom Ship</h3>
       <div className='Options'>
         <div className='Frame'>
           <div className="Inputs">
@@ -273,14 +273,12 @@ export function DryDock() {
           <br/>
         </div>
       : null}
-      {shoppingList.length > 0 ? 
           <div className='ListButtons'>
             <button className='BuildShip' onClick={passShip}>Build This Ship
             </button>
             <button className='ClearShopping' onClick={clearShopping}>Clear List
             </button>
           </div>
-        : null}
     </div>
   )
 }
