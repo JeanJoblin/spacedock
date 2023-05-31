@@ -9,6 +9,8 @@
 * Add tooltip for explaining fittings on hover.
 * Add functionality to edit ships on this list.
 * List of ships, each is a button that jumps to that ship
+* ~~Ships persist over reloads and between sessions.~~ ``(DONE) May 31 2023``
+* Make toast when new ship is generated.  
   
 ## Drydock section
 
@@ -33,8 +35,8 @@
 ## General Stuff
 
 * Rework crew generator to use ratio of min to max rather than hard fractions (e.g. min / max rather than dif / 4)  
-* Clean up CSS and make it more general. i.e. put selector css in a more general file and just use class names
-* 
+* Clean up CSS and make it more general. i.e. put selector css in a more general file and just use class names.
+* Let intro reappear.
 
 ## Shipbuilder Section
 
