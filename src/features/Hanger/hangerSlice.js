@@ -12,6 +12,9 @@ export const hangerSlice = createSlice({
   reducers: {
     addShip: (state, action) => {
       state.idCounter++;
+      if(state.idCounter > 100) {
+        state.idCounter = 0;
+      }
       let crewParam;
       // console.log('passed ship: ', action.payload)
       let drive = false;
@@ -62,10 +65,12 @@ export const hangerSlice = createSlice({
         ship.role = action.payload.role;
       }
       state.ships = [...state.ships, ship];
+      localStorage.setItem('Hanger', JSON.stringify(state));
     },
     deleteShip: (state, { payload }) => {
       const num = +payload;
       state.ships = state.ships.filter((ship) => ship.id !== num);
+      localStorage.setItem('Hanger', JSON.stringify(state));
     },
   }
 });
