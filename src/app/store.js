@@ -4,7 +4,7 @@ import shipReducer from '../features/Ships/shipSlice';
 import dryDockReducer from '../features/DryDockConfig/dryDockSlice';
 import hangerReducer from '../features/Hanger/hangerSlice';
 
-const preloadedHanger = localStorage.getItem('Hanger');
+const preloadedHanger = JSON.parse(localStorage.getItem('Hanger'));
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +13,8 @@ export const store = configureStore({
     dryDock: dryDockReducer,
     hanger: hangerReducer,
   },
+  preloadedState: {
+    hanger: preloadedHanger,
+  }
 
 });
