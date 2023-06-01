@@ -208,5 +208,5 @@ export const genShip = (params = {}) => {
 //   let type = Math.floor(Math.random() * 2);
 //   if(type = 0) {
 
-  }
-}
+//   }
+// }
