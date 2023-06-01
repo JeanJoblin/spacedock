@@ -15,7 +15,7 @@ export const getHullObj = (inputHullStr) => {
 }
 
 export const genCrewAmount = (inputHull, qualifier = 'Full Range') => {
-  //This function grabs the min and max crew from a given hull and generate a number in between. Us it for generating amount of crew for a ship. Add extra functionality later for running with a lean, medium, or higher crew amount.
+  //This function grabs the min and max crew from a given hull and generate a number in between. Use it for generating amount of crew for a ship.
   // console.log(`Generating crew for ${inputHull.name} with param: ${qualifier}`);
   if(inputHull.name === 'Strike Fighter') {
     return 1;
@@ -164,6 +164,7 @@ export const getFittingObj = (input) => {
 };
 
 export const parseStringCost = (inputItem) => {
+  //Turn a string cost like 10m into raw int like 10000000
   let cost = inputItem.cost;
   let costDig = cost.match(/^\d+/)
   //console.log('digit of cost is: ', costDig);
@@ -175,7 +176,8 @@ export const parseStringCost = (inputItem) => {
   return cost;
 }
 
-export const crewQuals = [ 'Below Min', 'Skeleton', 'Low', 'Med', 'High', 'Packed',  'Full Range'];
+export const crewQuals = ['Full Range', 'Packed', 'High', 'Med', 'Low', 'Skeleton', 'Below Min'];
+
 
 // Object.keys(hulls).forEach((hull) => {
 //   crewQuals.forEach((qual) => {
