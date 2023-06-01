@@ -186,28 +186,27 @@ export const genShip = (params = {}) => {
     crewParam: crewParam,
     role: role.name,
   };
-  console.log('This is the generated ship: ', ship);
   return ship;
 };
 
-export const genName = (imp = null) => {
-  const role = imp ?? getRandom(Object.keys(shipRoles));
-  let genericNames = {
-    oneOffs: [
-      'A Likely Story', 'Never Say Never', `Yes, Sir, That's My Baby`, `No, Sir, I Don't Mean Maybe`, 'Tell Me Another One', 'The Princess Is In Another Castle', 'Rose Coloured Glasses', 'A Measured Response', 'Rocinante', 'Fat Albert'
-    ],
-    colours: [
-      'Blue', 'Pink', 'Golden', 'Jade', 'Ivory', 'Silver', 'White'
-    ],
-    animals: [
-      'Dog', 'Tiger', 'Heron', 'Stork', 'Dolphin', 'Ibex', 'Dragon', 'Elephant',
-    ],
-    plants: [
-      'Orchid', 'Oak', 'Lily', 'Thistle', 'Nettle',
-    ],
-  };
-  let type = Math.floor(Math.random() * 2);
-  if(type = 0) {
-    
+// export const genName = (imp = null) => {
+//   const role = imp ?? getRandom(Object.keys(shipRoles));
+//   let genericNames = {
+//     oneOffs: [
+//       'A Likely Story', 'Never Say Never', `Yes, Sir, That's My Baby`, `No, Sir, I Don't Mean Maybe`, 'Tell Me Another One', 'The Princess Is In Another Castle', 'Rose Coloured Glasses', 'A Measured Response', 'Rocinante', 'Fat Albert'
+//     ],
+//     colours: [
+//       'Blue', 'Pink', 'Golden', 'Jade', 'Ivory', 'Silver', 'White'
+//     ],
+//     animals: [
+//       'Dog', 'Tiger', 'Heron', 'Stork', 'Dolphin', 'Ibex', 'Dragon', 'Elephant',
+//     ],
+//     plants: [
+//       'Orchid', 'Oak', 'Lily', 'Thistle', 'Nettle',
+//     ],
+//   };
+//   let type = Math.floor(Math.random() * 2);
+//   if(type = 0) {
+
   }
 }
