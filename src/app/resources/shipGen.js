@@ -190,7 +190,7 @@ export const genShip = (params = {}) => {
 export const genName = () => {
   let nameType = Math.floor(Math.random() * 3);
   console.log('Name Type ', nameType);
-  const phraseName = [ 'A Likely Story', 'Never Say Never', `Yes, Sir, That's My Baby`, `No, Sir, I Don't Mean Maybe`, 'Tell Me Another One', 'The Princess Is In Another Castle', 'Rose Coloured Glasses', 'A Measured Response', 'Able Seaman'];
+  const phraseName = [ 'A Likely Story', 'Never Say Never', `Yes, Sir, That's My Baby`, `No, Sir, I Don't Mean Maybe`, 'Tell Me Another One', 'The Princess Is In Another Castle', 'Rose Coloured Glasses', 'A Measured Response', 'Able Seaman', `It's Lupus`, `It's Never Lupus`, 'Expository Monologue', 'New Math', 'I Expect You To Die', 'Weatherlight'];
   const singleName = {
     cons: ['Orion', 'Ursa', 'Aquarius', 'Aries', 'Casseopia', 'Canis', 'Leo', 'Sagittarius', 'Andromeda', 'Pisces', 'Draco', 'Lupus', 'Perseus', 'Gemini', 'Crux', 'Sculptor', 'Vulpecula', ],
     bird: ['Hummingbird', 'Eagle', 'Falcon', 'Hawk', 'Vulture', 'Osprey', 'Pidgeon', 'Sparrow', 'Nightingale', 'Tern', 'Pelican', 'Harrier', 'Heron'],
