@@ -175,9 +175,7 @@ export const genShip = (params = {}) => {
   } while ( mass > 0 && power > 0 && hardpoints > 0 && retry < 3);
 
   const ship = {
-    name:  getRandom([
-      'A Likely Story', 'Never Say Never', `Yes, Sir, That's My Baby`, `No, Sir, I Don't Mean Maybe`, 'Tell Me Another One', 'The Princess Is In Another Castle', 'Rose Coloured Glasses', 'A Measured Response', 'Rocinante',
-    ]),
+    name:  genName(),
     hull: hull,
     fittings: allFittings,
     freeMass: mass,
@@ -189,24 +187,34 @@ export const genShip = (params = {}) => {
   return ship;
 };
 
-// export const genName = (imp = null) => {
-//   const role = imp ?? getRandom(Object.keys(shipRoles));
-//   let genericNames = {
-//     oneOffs: [
-//       'A Likely Story', 'Never Say Never', `Yes, Sir, That's My Baby`, `No, Sir, I Don't Mean Maybe`, 'Tell Me Another One', 'The Princess Is In Another Castle', 'Rose Coloured Glasses', 'A Measured Response', 'Rocinante', 'Fat Albert'
-//     ],
-//     colours: [
-//       'Blue', 'Pink', 'Golden', 'Jade', 'Ivory', 'Silver', 'White'
-//     ],
-//     animals: [
-//       'Dog', 'Tiger', 'Heron', 'Stork', 'Dolphin', 'Ibex', 'Dragon', 'Elephant',
-//     ],
-//     plants: [
-//       'Orchid', 'Oak', 'Lily', 'Thistle', 'Nettle',
-//     ],
-//   };
-//   let type = Math.floor(Math.random() * 2);
-//   if(type = 0) {
-
-//   }
-// }
+export const genName = () => {
+  let nameType = Math.floor(Math.random() * 3);
+  console.log('Name Type ', nameType);
+  const phraseName = [ 'A Likely Story', 'Never Say Never', `Yes, Sir, That's My Baby`, `No, Sir, I Don't Mean Maybe`, 'Tell Me Another One', 'The Princess Is In Another Castle', 'Rose Coloured Glasses', 'A Measured Response', 'Able Seaman'];
+  const singleName = {
+    cons: ['Orion', 'Ursa', 'Aquarius', 'Aries', 'Casseopia', 'Canis', 'Leo', 'Sagittarius', 'Andromeda', 'Pisces', 'Draco', 'Lupus', 'Perseus', 'Gemini', 'Crux', 'Sculptor', 'Vulpecula', ],
+    bird: ['Hummingbird', 'Eagle', 'Falcon', 'Hawk', 'Vulture', 'Osprey', 'Pidgeon', 'Sparrow', 'Nightingale', 'Tern', 'Pelican', 'Harrier', 'Heron'],
+    fish: ['Barracuda', 'Sawshark', 'Tuna', 'Swordfish', 'Stingray', 'Dolphin', 'Orca', 'Manta', 'Piranha', 'Arowana', 'Trout', 'Pike'],
+    prof: ['Brigand', 'Bandit', 'Runner', 'Avenger', 'Firebrand', 'Adherent', 'Beggar', 'Astrologer', 'Dragoon', 'Envoy', 'Guttersnipe', 'Believer', 'Pilgrim', 'Jailor', 'Preacher', 'Juggernaut', 'Geisha', ],
+    hum: ['Aisha', 'Mina', 'Fatimah', 'Jingfei', 'Liling', 'Abigail', 'Harriet', 'Victoria', 'Alexandra', 'Dorothea', 'Phoebe', 'Valeria', 'Chikaze', 'Mayumi', 'Nuanae', 'Ludmilla', 'Natalya', 'Carmela', 'Albert' ],
+    qual: ['Serenity', 'Perserverance', 'Terror', 'Wrath', 'Envy', 'Courage', 'Wisdom', 'Persistence', 'Hatred', 'Curiosity', 'Ambition', 'Determination', 'Hope', 'Devotion', ],
+  };
+  const compName = {
+    colour: ['Dark', 'Bright', 'Blue', 'Red', 'Shining', 'Black', 'Green', 'Oily', 'Dry', ],
+    size: ['Big', 'Small', 'Vast', 'Fat', 'Tiny', 'Little', ],
+    virt: ['Serene', 'Hopeful', 'Reliable', 'Brave', 'Calm', 'Loyal', 'Wise', 'Thrifty', 'Adventurous', 'Modest', 'Bold' ],
+    flaw: ['Doomed', 'Covetous', 'Foolish', 'Clumsy', 'Gullible', 'Lazy', 'Bitter', 'Spiteful', 'Vengeful', 'Cruel', 'Paranoid', ],
+  };
+  if(nameType === 0) {
+    return getRandom(phraseName);
+  };
+  let singleCat = singleName[getRandom(Object.keys(singleName))];
+  if(nameType === 1) {
+    return getRandom(singleCat);
+  };
+  if(nameType === 2) {
+    let singleAdd = compName[getRandom(Object.keys(compName))];
+    return getRandom(singleAdd) + ' ' + getRandom(singleCat);
+  };
+  return 'Ship Has Not Been Named';
+}
