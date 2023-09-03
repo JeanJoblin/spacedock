@@ -8,6 +8,7 @@ const crewQuals = genFuncs.crewQuals;
 
 
 //Extended range test for generate crew function. Runs each combination 10 times to check if the crew amount generated is within expected range
+['Full Range', 'Packed', 'High', 'Med', 'Low', 'Skeleton', 'Below Min']
 for(let i = 0; i < 100; i++ ) {
   hullList.forEach((hull) => {
     const min = + hulls[hull].crew.match(/^\d*/)[0];
@@ -17,27 +18,27 @@ for(let i = 0; i < 100; i++ ) {
       let rangeMin;
       let rangeMax;
       switch(qual) {
-        case 'low':
+        case 'Low':
           rangeMin = min;
           rangeMax = (0.5 * dif) + min;
           break;
-        case 'med':
+        case 'Med':
           rangeMin = min + Math.floor( 0.25 * dif );
           rangeMax = min + Math.ceil( 0.75 * dif );
           break;
-        case 'high':
+        case 'High':
           rangeMin = min + ( 0.66 * dif);
           rangeMax = max;
           break;
-        case 'skeleton':
+        case 'Skeleton':
           rangeMin = min;
           rangeMax = min + Math.floor(0.25 * dif);
           break;
-        case 'belowMin':
+        case 'Below Min':
           rangeMin = 1;
           rangeMax = min;
           break;
-        case 'packed':
+        case 'Packed':
           rangeMin = min + (0.75 * dif);
           rangeMax = max;
           break;

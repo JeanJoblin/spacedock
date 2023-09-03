@@ -52,6 +52,8 @@ export const hangerSlice = createSlice({
         } else {
           ship.fittings = action.payload.fittings;
         };
+      } else {
+        ship.fittings = action.payload.fittings;
       }
       ship.freeMass = action.payload.freeMass;
       ship.freePower = action.payload.freePower;
