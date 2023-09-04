@@ -8,9 +8,9 @@ const weaponsArray = Object.keys(weapons).map(weapon => weapons[weapon]);
 
 //Ship Generator functions
 export const getRandom = (array) => {
-  console.log('getting random from ', array);
+  // console.log('getting random from ', array);
   let ind = Math.floor(Math.random() * array.length);
-  console.log(`Chosen randomly: `, array[ind]);
+  // console.log(`Chosen randomly: `, array[ind]);
   return array[ind];
 };
 
@@ -18,18 +18,18 @@ export const genShip = (params = {}) => {
   //add params later
   let role;
   let { roleParam, hullParam, crewParam, driveParam } = params;
-  console.table(params);
-  console.log('Role Param: ', roleParam);
+  // console.table(params);
+  // console.log('Role Param: ', roleParam);
   const cargoLevels = {
     Fighter: 2,
     Frigate: 20,
     Cruiser: 200,
     Capital: 2000,
   };
-  console.log('Role Param: ', roleParam);
+  // console.log('Role Param: ', roleParam);
   if(!roleParam) {
     role = shipRoles[getRandom(Object.keys(shipRoles))];
-    console.log('Set role param to: ' );
+    // console.log('Set role param to: ' );
   } else {
     role = roleParam;
   };
@@ -189,7 +189,7 @@ export const genShip = (params = {}) => {
 
 export const genName = () => {
   let nameType = Math.floor(Math.random() * 3);
-  console.log('Name Type ', nameType);
+  // console.log('Name Type ', nameType);
   const phraseName = [ 'A Likely Story', 'Never Say Never', `Yes, Sir, That's My Baby`, `No, Sir, I Don't Mean Maybe`, 'Tell Me Another One', 'The Princess Is In Another Castle', 'Rose Coloured Glasses', 'A Measured Response', 'Able Seaman', `It's Lupus`, `It's Never Lupus`, 'Expository Monologue', 'New Math', 'I Expect You To Die', 'Weatherlight'];
   const singleName = {
     cons: ['Orion', 'Ursa', 'Aquarius', 'Aries', 'Casseopia', 'Canis', 'Leo', 'Sagittarius', 'Andromeda', 'Pisces', 'Draco', 'Lupus', 'Perseus', 'Gemini', 'Crux', 'Sculptor', 'Vulpecula', ],
