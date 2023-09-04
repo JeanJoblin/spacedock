@@ -5,6 +5,5 @@ The goal of this webpage is to provide a utility for generating Stars Without Nu
 
 This is still a work in progress. Some ships don't exactly fulfill their roles, and the generator can be forced to build invalid ship combinations (like putting a spike drive level 6 on a strike fighter). I hope to change these things in the future, and add a bunch more functionality!
 
->Space station generation has been temporarily disabled as I do some bugfixing
 
 *Built with Create React App and Redux.*
