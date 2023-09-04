@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './DryDock.css';
-import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
+import { hulls, fittings, weapons, defenses, stationHulls } from '../../app/resources/tables';
 import { changeHull, changeSelectedItem,
   selectShoppingList, addSelectedToShoppingList,
   selectHull, selectMassReq,
