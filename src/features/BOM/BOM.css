@@ -1,0 +1,32 @@
+.BillOfMaterials {
+  display: grid;
+  grid-template-columns: (auto repeat 7);
+  margin: 0 .5rem;
+}
+
+.typeList {
+  grid-column: span 7,
+}
+
+.BOMHeading {
+  grid-column: span 7;
+}
+.SubGrid {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-template-rows: 1;
+  grid-column: span 7;
+}
+
+.SubGrid div {
+  column-span: 1;
+  text-align: left;
+}
+
+.SubGrid button {
+  margin: 0 1px 1px 0;
+}
+
+.BillOfMaterials div {
+  text-align: left;
+}

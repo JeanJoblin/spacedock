@@ -70,8 +70,8 @@ export const dryDockSlice = createSlice({
     changeHull: (state, action) => {
       state.selected.hull = action.payload;
       const hullObj = getHullObj(action.payload);
-      console.log('hull to change to: ', action.payload);
-      console.log('hull class', getHullObj(action.payload).class);
+      //console.log('hull to change to: ', action.payload);
+      //console.log('hull class', getHullObj(action.payload).class);
       switch(hullObj.class) {
         case 'Frigate':
           state.mountable.weapon = frigateWeapons;
@@ -109,28 +109,28 @@ export const dryDockSlice = createSlice({
     },
     changeSelectedItem: (state, action) => {
       const item = getFittingObj(action.payload);
-      console.log(item);
+      //console.log(item);
       state.selected[item.type] = action.payload;
     },
     addSelectedToShoppingList: (state, action) => {
-      console.log(action.payload)
+      //console.log(action.payload)
       const item = state.selected[action.payload];
-      console.log('item to add: ', item);
+      //console.log('item to add: ', item);
       state.shoppingList = [...state.shoppingList, item];
-      console.log(state.selected.hull)
+      //console.log(state.selected.hull)
       const {mass, power, cost} = correctCostsForClass(item, state.selected.hull);
-      console.log(mass, power, cost);
+      //console.log(mass, power, cost);
       state.massReq = state.massReq + mass;
       state.powerReq += power;
       state.totalCost += cost;
       state.available.power -= power;
       state.available.mass -= mass;
       const itemObj = getFittingObj(item);
-      console.log('hardpoints', itemObj.hardpoints);
+      //console.log('hardpoints', itemObj.hardpoints);
       if(itemObj.hardpoints) {
-        console.log(typeof(itemObj.hardpoints));
+        //console.log(typeof(itemObj.hardpoints));
         const hardNum = + itemObj.hardpoints;
-        console.log('state has: ', state.available.hard, 'item has: ', hardNum);
+        //console.log('state has: ', state.available.hard, 'item has: ', hardNum);
         state.hardReq += hardNum;
         state.available.hard -= hardNum;
       }
@@ -138,8 +138,8 @@ export const dryDockSlice = createSlice({
     removeFromShoppingList: (state, action) => {
       const snippy = + action.payload;
       const removedItem = state.shoppingList[snippy];
-      console.log(snippy);
-      console.log(removedItem);
+      //console.log(snippy);
+      //console.log(removedItem);
       state.shoppingList = state.shoppingList.filter((item, ind) => ind !== snippy);
       const {mass, power, cost} = correctCostsForClass(removedItem, state.selected.hull);
       state.massReq -= mass;
