@@ -71,6 +71,6 @@
 
 # Future Functionality
 
-* NPC genrator
+* NPC generator
 * Mech builder and generator
 * Lore/Flavour generator for ships. e.g. a ship's weapon has tic marks scractched into it for secuity, bounty hunter or military ships
