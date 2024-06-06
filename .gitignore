@@ -24,3 +24,8 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+
+# Text Files, Old Stuff and TODO
+/Old Stuff
+TODO.md
+*.txt

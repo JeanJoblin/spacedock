@@ -10,6 +10,7 @@ import { changeHull, changeSelectedItem,
   selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName, selectCrewParam, changeCrewParam} from './dryDockSlice';
 import { getHullObj, getFittingObj, crewQuals, } from '../../app/resources/genFunctions.js';
 import { addShip } from '../Hanger/hangerSlice';
+import BillOfMaterials from '../BOM/BOM.js';
 
 export function DryDock() {
 
@@ -243,7 +244,7 @@ export function DryDock() {
       </div>
      
       </div>
-      {shoppingList.length > 0 ?
+      {/* {shoppingList.length > 0 ?
         <div className='Shopping'>
           <div className='List'>
           {shoppingList.map((item, ind) => {
@@ -272,7 +273,8 @@ export function DryDock() {
           </div>
           <br/>
         </div>
-      : null}
+      : null} */}
+        {shoppingList.length > 0 ? <BillOfMaterials props={{shoppingList, powerReq, hardReq, massReq, totalCost}} /> : null}
           <div className='ListButtons'>
             <button className='BuildShip' onClick={passShip}>Build This Ship
             </button>
