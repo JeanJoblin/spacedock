@@ -5,10 +5,9 @@ import { hulls, fittings, weapons, defenses } from '../../app/resources/tables';
 import { changeHull, changeSelectedItem,
   selectShoppingList, addSelectedToShoppingList,
   selectHull, selectMassReq,
-  selectPowerReq, selectTotalCost,
-  removeFromShoppingList, selectMountableDefenses,
+  selectPowerReq, selectTotalCost, selectMountableDefenses,
   selectMountableFittings, selectMountableWeapons, selectAvPower, selectAvMass, selectAvHard, selectHardReq, clearShoppingList, changeName, selectName, clearName, selectCrewParam, changeCrewParam} from './dryDockSlice';
-import { getHullObj, getFittingObj, crewQuals, } from '../../app/resources/genFunctions.js';
+import { crewQuals, } from '../../app/resources/genFunctions.js';
 import { addShip } from '../Hanger/hangerSlice';
 import BillOfMaterials from '../BOM/BOM.js';
 
@@ -37,32 +36,6 @@ export function DryDock() {
     weapon: mountableWeapons,
     defense: mountableDefenses,
     fitting: mountableFittings,
-  }
-
-  const isOverweight = () => {
-    if(massReq > getHullObj(hull).mass) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  const isOverpower = () => {
-    if(powerReq > getHullObj(hull).power) {
-      // console.log('hull power: ', hull.power);
-      // console.log('powerReq: ', powerReq);
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  const isOverhard = () => {
-    if(hardReq > getHullObj(hull).hardpoints) {
-      return true;
-    } else {
-      return false;
-    }
   }
   
   // useEffect(() => {
@@ -105,14 +78,6 @@ export function DryDock() {
     e.preventDefault();
     dispatch(addSelectedToShoppingList(e.target.value));
   };
-  const deleteItem = (e) => {
-    e.preventDefault();
-    // console.log('event', e);
-    // console.log('event.target', e.target);
-    // console.log('event.target.key', e.target.value);
-    dispatch(removeFromShoppingList(e.target.value));
-  };
-  // console.log('shoppingList: ', shoppingList);
 
   const clearShopping = (e) => {
     e.preventDefault();
@@ -244,36 +209,6 @@ export function DryDock() {
       </div>
      
       </div>
-      {/* {shoppingList.length > 0 ?
-        <div className='Shopping'>
-          <div className='List'>
-          {shoppingList.map((item, ind) => {
-            return (
-              <div key={item+ind}>
-                <span>{ind + 1 < shoppingList.length ? getFittingObj(item).name + ', ' : getFittingObj(item).name }
-                  <button value={ind} onClick={deleteItem} className='RemoveButton'>x</button>
-                </span>
-                <br/>
-              </div>
-              
-            )
-          })}
-          </div>
-          <div className="Receipt">
-            <div>Costs:</div>
-            <span>Credits: {totalCost}</span><br />
-            <span>Mass: </span>
-            <span className={isOverweight() ? 'Disallowed' : null}>{massReq}</span>
-            <br />
-            <span>Power: </span>
-            <span className={isOverpower() ? 'Disallowed' : null}>{powerReq} </span>
-            <br />
-            <span>Hardpoint: </span>
-            <span className={isOverhard() ? 'Disallowed' : null}>{hardReq}</span>
-          </div>
-          <br/>
-        </div>
-      : null} */}
         {shoppingList.length > 0 ? <BillOfMaterials props={{shoppingList, powerReq, hardReq, massReq, totalCost}} /> : null}
           <div className='ListButtons'>
             <button className='BuildShip' onClick={passShip}>Build This Ship
